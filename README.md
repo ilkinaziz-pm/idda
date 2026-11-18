@@ -2,5 +2,9 @@
 
 Şəxsi hazırlıq paneli: https://ilkinaziz-pm.github.io/idda/
 
-PDF-lər `pdf/` qovluğundadır: hər həftə üçün bir fayl (`hefte-01.pdf` … `hefte-13.pdf`)
-və bütün plan bir kitabçada (`90-gun-plani.pdf`). İngilis versiyaları: `week-NN.pdf`, `90-day-plan.pdf`.
+- `pdf/` — həftəlik PDF-lər (`hefte-01.pdf` … `hefte-13.pdf`), tam kitabça (`90-gun-plani.pdf`),
+  cib vərəqi (`cib-vereqi.pdf`) və görüş vərəqləri (`gorus-vereqleri.pdf`).
+- `tpl/` — iş şablonları: `portfel-is-defteri.xlsx`, `layihe-pasportu.docx`,
+  `ayliq-status-hesabati.docx`, `portfel-icmali.docx`.
+
+Hər faylın ingiliscə versiyası da var (`week-NN.pdf`, `portfolio-workbook.xlsx` və s.).
