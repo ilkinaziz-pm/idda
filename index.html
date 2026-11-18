@@ -1478,6 +1478,7 @@ details[open] > summary .chev{transform:rotate(180deg)}
   }
   function wDays(n) { return T('gün ', 'days ') + ((n - 1) * 7 + 1) + '–' + (n * 7); }
   function wLabel(n) { return T('Həftə ', 'Week ') + n; }
+  function nowWord() { return dayNo() < 1 ? T('növbəti', 'next') : T('indi', 'now'); }
   function wStat(W) {
     var d = W.todo.filter(function (x) { return x.done; }).length, r = W.topics.filter(isRead).length;
     return { done: d, all: W.todo.length, read: r, topics: W.topics.length, full: W.todo.length > 0 && d === W.todo.length && r === W.topics.length };
@@ -1537,7 +1538,7 @@ details[open] > summary .chev{transform:rotate(180deg)}
   function weekChip(i, cur, live) {
     var W = wk(i), s = wStat(W), now = live && i === cur;
     return '<a class="wkc ph-' + W.m + (now ? ' is-now' : '') + (s.full ? ' is-done' : '') + '" href="#h' + i + '"><span class="wkc__n">' + i + '</span><span class="wkc__d">' + esc(wRange(W, true)) + '</span><b>' + esc(W.title) + '</b>' +
-      '<span class="wkc__m">' + (now ? '<span class="pill">' + T('indi', 'now') + '</span>' : s.full ? ic('circle-check', 16) : s.done + ' / ' + s.all + T(' iş', ' tasks')) + '</span></a>';
+      '<span class="wkc__m">' + (now ? '<span class="pill">' + nowWord() + '</span>' : s.full ? ic('circle-check', 16) : s.done + ' / ' + s.all + T(' iş', ' tasks')) + '</span></a>';
   }
   function homeView() {
     var d = dayNo(), n = curWeek(), W = wk(n), over = d > NW * 7, live = inPlan();
@@ -1580,7 +1581,7 @@ details[open] > summary .chev{transform:rotate(180deg)}
   /* the 13-week plan: months → week cards */
   function weekCard(i, cur, live) {
     var W = wk(i), s = wStat(W), now = live && i === cur, pct = s.all ? Math.round(s.done / s.all * 100) : 0;
-    return '<article class="wk ph-' + W.m + (now ? ' is-now' : '') + '"><a class="wk__h" href="#h' + i + '"><span class="wk__n">' + i + '</span><span class="wk__tt"><small>' + esc(wRange(W)) + (now ? '<span class="pill">' + T('indi', 'now') + '</span>' : '') + '</small><b>' + esc(W.title) + '</b></span>' + ic('chevron-right', 18) + '</a>' +
+    return '<article class="wk ph-' + W.m + (now ? ' is-now' : '') + '"><a class="wk__h" href="#h' + i + '"><span class="wk__n">' + i + '</span><span class="wk__tt"><small>' + esc(wRange(W)) + (now ? '<span class="pill">' + nowWord() + '</span>' : '') + '</small><b>' + esc(W.title) + '</b></span>' + ic('chevron-right', 18) + '</a>' +
       '<p class="wk__g">' + esc(W.goal) + '</p>' +
       '<div class="wk__t">' + W.topics.map(function (id) { var r = isRead(id); return '<a class="tchip' + (r ? ' is-read' : '') + '" href="#' + id + '">' + ic(ticon(id), 15) + '<span>' + esc(tname(id)) + '</span>' + (r ? ic('check', 13, 'ok') : '') + '</a>'; }).join('') + '</div>' +
       '<div class="wk__f"><span class="wk__p"><span class="bar3"><i style="width:' + pct + '%"></i></span><em>' + s.done + ' / ' + s.all + T(' iş', ' tasks') + '</em></span>' + pdfBtn(i, 'PDF') + '</div></article>';
@@ -1738,7 +1739,7 @@ details[open] > summary .chev{transform:rotate(180deg)}
     if (tab === 'todo') {
       body = '<div class="accs">' + WK.weeks.map(function (b) {
         var W = wk(b.n), s = wStat(W), now = live && b.n === cw;
-        return '<details class="acc acc--wk ph-' + W.m + '"' + (now ? ' open' : '') + '><summary><span class="bd bd--sm">' + b.n + '</span><span class="acc__t">' + esc(W.title) + '<small>' + esc(wRange(W, true)) + (now ? ' · ' + T('indi', 'now') : '') + '</small></span>' +
+        return '<details class="acc acc--wk ph-' + W.m + '"' + (now ? ' open' : '') + '><summary><span class="bd bd--sm">' + b.n + '</span><span class="acc__t">' + esc(W.title) + '<small>' + esc(wRange(W, true)) + (now ? ' · ' + nowWord() : '') + '</small></span>' +
           '<span class="acc__m">' + s.done + ' / ' + s.all + '</span>' + ic('chevron-down', 18, 'chev') + '</summary><div class="acc__b"><div class="tasklist">' + W.todo.map(taskHTML).join('') + '</div>' +
           '<a class="wklink" href="#h' + b.n + '">' + esc(wLabel(b.n)) + T(': mövzular, tarixlər, PDF', ': topics, dates, PDF') + ic('arrow-right', 14) + '</a></div></details>';
       }).join('') + '</div>';
