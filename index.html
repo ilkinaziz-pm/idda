@@ -2009,6 +2009,15 @@ details[open] > summary .chev{transform:rotate(180deg)}
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
   }
   function saveFile(name, text) {
+    // inside the Claude viewer a page may not download directly: it asks through the `downloads` capability and the viewer confirms
+    if (window.claude && typeof window.claude.use === 'function') {
+      window.claude.use('downloads').then(function (dl) {
+        if (!dl) { copyText(text, T('Bu görünüşdə fayl yüklənmir; məzmun kopyalandı, mətn faylına yapışdırıb saxlayın.', 'Files cannot be saved in this view; the content was copied — paste it into a text file.')); return; }
+        dl.save({ filename: name, data: text }).then(function () { toast(T('Fayl saxlanıldı.', 'File saved.')); },
+          function (e) { if (!e || e.code !== 'declined') toast(T('Fayl saxlanılmadı.', 'The file was not saved.')); });
+      });
+      return;
+    }
     try {
       var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'application/json' })); a.download = name; document.body.appendChild(a); a.click();
       setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
