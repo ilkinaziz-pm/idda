@@ -694,6 +694,33 @@ details[open] > summary .chev{transform:rotate(180deg)}
 .vthumb small{font-size:11.5px;color:var(--muted)}
 .vthumb:hover b{color:var(--accent-ink)}
 
+/* ── my area (home) ──────────────────────────────────── */
+.focus{background:var(--pb);border-radius:26px;padding:20px 22px 22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.focus__h{display:flex;align-items:center;gap:14px;min-width:0}
+.focus__t{flex:1;min-width:0}
+.focus__t small{font:700 11.5px/1.2 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--pf)}
+.focus__t h2{font-size:clamp(22px,3vw,28px);font-weight:700;margin-top:2px}
+.focus__sel{position:relative;display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:var(--surface);box-shadow:var(--card);color:var(--pf);font:600 13px/1 var(--font-body);flex:none;cursor:pointer}
+.focus__sel select{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:16px}
+.focus__sel::after{content:"";width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);margin-left:2px}
+.focus__one{font-size:15.5px;line-height:1.5;color:var(--text-soft);max-width:80ch}
+.focus__note{display:flex;gap:8px;align-items:flex-start;font:600 13.5px/1.4 var(--font-body);color:var(--pf);background:var(--surface);border-radius:var(--r-sm);padding:10px 12px}
+.focus__note .ic{margin-top:1px}
+.focus__stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.focus__stats div{background:var(--surface);border-radius:16px;padding:12px 14px;min-width:0}
+.focus__stats b{display:block;font:700 22px/1.1 var(--font-display);color:var(--pf);font-variant-numeric:tabular-nums}
+.focus__stats span{display:block;font-size:12.5px;line-height:1.35;color:var(--muted);margin-top:5px}
+.focus__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.focus__col{display:flex;flex-direction:column;gap:10px;min-width:0}
+.focus__col h3{display:flex;align-items:center;gap:7px;font:700 13px/1.2 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--pf);margin-top:4px}
+.focus__col h3 em{margin-left:auto;font-style:normal;color:var(--muted);letter-spacing:0}
+.focus__nums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.focus__nums div{background:var(--hero);color:var(--hero-text);border-radius:14px;padding:11px 12px;min-width:0}
+.focus__nums b{display:block;font:700 16.5px/1.2 var(--font-display);color:var(--accent-2);overflow-wrap:anywhere}
+.focus__nums span{display:block;font-size:12px;line-height:1.35;color:var(--hero-soft);margin-top:4px}
+.focus__a{display:flex;flex-wrap:wrap;gap:8px}
+.focus__a .btn{height:40px;padding:0 15px;font-size:13.5px}
+
 /* ── responsive ──────────────────────────────────────── */
 @media (max-width: 899px){
   .frame{display:block}
@@ -709,6 +736,9 @@ details[open] > summary .chev{transform:rotate(180deg)}
   .strip,.chips--scroll{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;scroll-padding-left:14px}
   .home__top{grid-template-columns:minmax(0,1fr)}
   .home__mid{grid-template-columns:minmax(0,1fr)}
+  .focus__grid{grid-template-columns:minmax(0,1fr)}
+  .focus{padding:16px 16px 18px;border-radius:22px}
+  .focus__a .btn{flex:1 1 auto;justify-content:center}
   .mycard{margin-top:0}
   .brand__name span,.search kbd{display:none}
   .search{display:none;max-width:none;margin-left:0}
@@ -1716,7 +1746,7 @@ details[open] > summary .chev{transform:rotate(180deg)}
     var foot = '<div class="foot"><span>' + T('Şəxsi hazırlıq materialıdır, rəsmi sənəd deyil. Yenilənib: ', 'A personal preparation guide, not an official document. Updated: ') + esc(fmtDate((D.meta || {}).updated || '')) + '.</span>' +
       '<span class="syncst syncst--' + sync.state + '" id="sync-st">' + syncLabel() + '</span></div>';
     var vids = '<section class="sec"><div class="sec__h"><h2>' + T('Qısa videolar', 'Short videos') + '</h2><a href="#videos">' + T('Hamısı', 'All') + ic('chevron-right', 14) + '</a></div><div class="strip strip--vid">' + videosFrom(d < 1 ? 1 : n).slice(0, 6).map(videoThumb).join('') + '</div></section>';
-    return '<div class="col col--wide home"><div class="home__top"><div class="home__l">' + hero + topics + '</div>' + today + '</div>' + vids + installCard() +
+    return '<div class="col col--wide home"><div class="home__top"><div class="home__l">' + hero + topics + '</div>' + today + '</div>' + focusCard() + vids + installCard() +
       '<div class="home__mid">' + dailyCard() + myCard() + '</div>' + weeks + dates + facts + refs + foot + '</div>';
   }
 
@@ -2148,6 +2178,73 @@ details[open] > summary .chev{transform:rotate(180deg)}
       '<button type="button" class="iconbtn" data-pwa-hide aria-label="' + T('Bağla', 'Dismiss') + '">' + ic('x', 16) + '</button></section>';
   }
 
+  /* ── my area: one topic the user owns, pinned to the home page (default: innovation) ── */
+  var FOCUS_DIR = { innovation: '8.2', ai: '8.3', security: '8.4', platforms: '8.1', services: '8.1', rhythm: '8.5', toolkit: '8.5' };
+  var FOCUS_ACTS = { innovation: 'innovasiya', ai: 'ai', security: 'kiber', finance: 'maliyye-satinalma', strategy: 'strategiya', iria: 'iria', services: 'xidmetler', platforms: 'e-hokumet', lifecycle: 'e-hokumet', ecosystem: 'idareetme', legal: 'umumi-huquq', rhythm: 'idareetme', toolkit: 'idareetme' };
+  function focusId() { var f = store.get('focus', 'innovation'); return sections[f] ? f : 'innovation'; }
+  function periodEnd(p) {   // "2026, dekabr" → last day of that month; null for "mütəmadi" or ranges
+    var m = /^(\d{4}),\s*(\S+)$/.exec(String(p || '').trim());
+    if (!m) return null;
+    var mo = L10N.MONTHS_AZ.indexOf(m[2].toLowerCase());
+    return mo < 0 ? null : new Date(+m[1], mo + 1, 0, 23, 59, 59);
+  }
+  function focusPlan(dir) {
+    var ms = ((plan && plan.measures) || []).filter(function (m) { return !m.parent && m.no.indexOf(dir + '.') === 0; });
+    var now = new Date(), dec = 0, late = 0, open = 0, ongoing = 0, next = null;
+    ms.forEach(function (m) {
+      var p = m.periodAz || m.period, e = periodEnd(p);
+      if (/2026, dekabr/.test(p)) dec++;
+      if (/mütəmadi/.test(p)) ongoing++;
+      if (e && e < now) late++;
+      if (e && e >= now) { open++; if (!next || e < next.e) next = { e: e, p: m.period }; }
+    });
+    return { all: ms.length, dec: dec, late: late, open: open, ongoing: ongoing, next: next, top: ((plan && plan.measures) || []).filter(function (m) { return !m.parent; }).length };
+  }
+  function focusDates(id, limit) {
+    var now = new Date(), out = [];
+    now.setHours(0, 0, 0, 0);
+    (sections[id].blocks || []).forEach(function (b, bi) {
+      if (b.type !== 'timeline') return;
+      b.items.forEach(function (it) { var r = dateRange(it.date); if (r && r.end >= now) out.push({ date: it.date, end: r.end, start: r.start, title: it.title, bi: bi }); });
+    });
+    out.sort(function (a, b) { return (a.end - b.end) || (b.start - a.start); });
+    return out.slice(0, limit);
+  }
+  function focusCard() {
+    var id = focusId(), p = PL[id] || {}, sec = sections[id], dir = FOCUS_DIR[id] || '', at = FOCUS_ACTS[id] || '';
+    var wn = weekOf(id), cw = curWeek(), read = isRead(id), ac = askCount(id);
+    var stats = [];
+    if (dir) { var fp = focusPlan(dir); stats.push([fp.all + ' / ' + fp.top, T('Plan tədbiri: istiqamət ', 'Plan measures: direction ') + dir]); if (fp.dec) stats.push([fp.dec, T('tədbirin müddəti dekabr 2026', 'measures due December 2026')]); if (fp.late) stats.push([fp.late, T('tədbirin müddəti keçib', 'measures overdue')]); }
+    stats.push([ac.done + ' / ' + ac.all, T('daxildə soruşulacaq sual', 'questions to ask inside')]);
+    if (at) stats.push([acts.filter(function (a) { return a.topic === at; }).length, T('hüquqi akt kataloqda', 'legal acts in the catalogue')]);
+    var dates = focusDates(id, 4);
+    var todo = (p.todo || []).map(function (t, i) { var az = ((D.plain || {})[id] || {}).todo || []; var k = 'focus:' + id + ':' + hash(az[i] || t); return { t: t, key: k, done: !!store.get(k, false) }; });
+    var nDone = todo.filter(function (x) { return x.done; }).length;
+    var vid = videosFor([id])[0];
+    var opts = topicIds().map(function (x) { return '<option value="' + x + '"' + (x === id ? ' selected' : '') + '>' + esc(tname(x)) + '</option>'; }).join('');
+    var later = wn && wn > cw && !read;
+    return '<section class="focus ph-' + phaseOf(id) + '" id="focus">' +
+      '<div class="focus__h"><span class="bd bd--lg">' + ic(ticon(id), 26) + '</span><div class="focus__t"><small>' + T('Mənim sahəm', 'My area') + '</small><h2>' + esc(tname(id)) + '</h2></div>' +
+      '<label class="focus__sel"><span class="vh">' + T('Sahəni dəyiş', 'Change area') + '</span>' + ic('pencil-line', 14) + '<span aria-hidden="true">' + T('dəyiş', 'change') + '</span><select id="focus-sel">' + opts + '</select></label></div>' +
+      '<p class="focus__one">' + esc(p.one || stripInline(sec.lede || '')) + '</p>' +
+      (later ? '<p class="focus__note">' + ic('info', 15) + T('13 həftəlik planda bu mövzunun vaxtı: ' + wLabel(wn) + ', ' + wRange(wk(wn)) + '. Sizin sahəniz olduğu üçün onu indi oxuyun.', 'In the 13-week plan this topic falls in ' + wLabel(wn) + ', ' + wRange(wk(wn)) + '. As it is your area, read it now.') + '</p>' : '') +
+      '<div class="focus__stats">' + stats.map(function (x) { return '<div><b>' + esc(String(x[0])) + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('') + '</div>' +
+      '<div class="focus__grid">' +
+        '<div class="focus__col"><h3>' + ic('calendar-clock', 16) + T('Yaxın tarixlər', 'Upcoming dates') + '</h3>' +
+          (dates.length ? '<div class="drows">' + dates.map(function (u) { return '<a class="drow" href="#' + id + '" data-tab="detail" data-bi="' + u.bi + '">' + leaf(u.date) + '<b>' + esc(stripInline(u.title)) + '</b><span>' + esc(fmtDate(u.date)) + '</span></a>'; }).join('') + '</div>' : '<p class="hint">' + T('Bu mövzuda qarşıda tarix yoxdur.', 'No dates ahead in this topic.') + '</p>') +
+          ((p.numbers || []).length ? '<h3>' + ic('hash', 16) + T('Yadda saxlanmalı rəqəmlər', 'Numbers to remember') + '</h3><div class="focus__nums">' + p.numbers.map(function (n) { return '<div><b>' + esc(n.v) + '</b><span>' + esc(n.k) + '</span></div>'; }).join('') + '</div>' : '') +
+        '</div>' +
+        '<div class="focus__col"><h3>' + ic('list-checks', 16) + T('Sahə üzrə işlər', 'Tasks for this area') + '<em>' + nDone + ' / ' + todo.length + '</em></h3><div class="tasklist">' + todo.map(taskHTML).join('') + '</div></div>' +
+      '</div>' +
+      '<div class="focus__a">' +
+        '<a class="btn btn--pri" href="#' + id + '">' + ic('book-open', 16) + (read ? T('Mövzuya qayıt', 'Back to the topic') : T('Mövzunu oxu', 'Read the topic')) + '</a>' +
+        (vid ? '<a class="btn" href="#videos" data-vid="' + vid.id + '">' + ic('circle-play', 16) + T('Video', 'Video') + ' · ' + vid.s + T(' san', ' s') + '</a>' : '') +
+        (dir ? '<a class="btn" href="#plantable" data-pdir="' + dir + '">' + ic('table-2', 16) + T('Plan: ', 'Plan: ') + dir + '</a>' : '') +
+        (at ? '<a class="btn" href="#acts" data-atopic="' + at + '">' + ic('scale', 16) + T('Aktlar', 'Acts') + '</a>' : '') +
+        '<a class="btn" href="#' + id + '" data-tab="ask">' + ic('message-circle-question', 16) + T('Suallar', 'Questions') + '</a>' +
+      '</div></section>';
+  }
+
   /* my tasks: to-dos, questions, notes, dates */
   function tasksView() {
     var tab = ui.tasksTab || 'todo', d = dayNo(), cw = curWeek(), live = inPlan() || d < 1;
@@ -2464,6 +2561,14 @@ details[open] > summary .chev{transform:rotate(180deg)}
       if (lk.dataset.ttab) ui.tasksTab = lk.dataset.ttab;
       if (lk.dataset.askby) { ui.askBy = lk.dataset.askby; ui.askParty = lk.dataset.party || ''; }
       if (lk.dataset.mytab) ui.myTab = lk.dataset.mytab;
+      if (lk.dataset.pdir !== undefined) {
+        var pdir = lk.dataset.pdir; planState = { q: '', dir: pdir, who: '', year: '' };
+        pending = function () { var g = document.getElementById('plan-dirs'), c = g && g.querySelector('[data-v="' + pdir + '"]'); if (c) press(g, c); paintPlan(); };
+      }
+      if (lk.dataset.atopic !== undefined) {
+        var atp = lk.dataset.atopic; actsState.topic = atp;
+        pending = function () { var g = document.getElementById('acts-topics'), c = g && g.querySelector('[data-v="' + atp + '"]'); if (c) press(g, c); paintActs(); };
+      }
       if (lk.dataset.vid) { var vidId = lk.dataset.vid; pending = function () { var ve = document.getElementById('vid-' + vidId); if (ve) flash(ve); }; }
       if (lk.dataset.phase !== undefined) ui.topicsPhase = PHASES.some(function (p) { return p.id === lk.dataset.phase; }) ? lk.dataset.phase : '';
       if (lk.dataset.tab) {
@@ -2521,6 +2626,7 @@ details[open] > summary .chev{transform:rotate(180deg)}
       if (pm) { pm.m = t.checked; pm.d = t.checked ? today() : ''; pm.u = Date.now(); store.set('ppl:' + pm.id, pm); paint({ keepScroll: true }); }
       return;
     }
+    if (t.id === 'focus-sel') { store.set('focus', t.value); paint({ keepScroll: true }); return; }
     if (t.id === 'restore-file' && t.files && t.files[0]) {
       var fr = new FileReader();
       fr.onload = function () { try { restoreData(String(fr.result)); paint({ keepScroll: true }); toast(T('Bərpa olundu.', 'Restored.')); } catch (e) { toast(T('Bu fayl oxunmadı.', 'This file could not be read.')); } };
