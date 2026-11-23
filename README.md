@@ -6,6 +6,6 @@
   cib vərəqi (`cib-vereqi.pdf`) və görüş vərəqləri (`gorus-vereqleri.pdf`).
 - `tpl/` — iş şablonları: `portfel-is-defteri.xlsx`, `layihe-pasportu.docx`,
   `ayliq-status-hesabati.docx`, `portfel-icmali.docx`.
-- `video/` — altı qısa animasiyalı izah videosu (`az/` və `en/`).
+- `video/` — 17 qısa animasiyalı izah videosu, hər mövzuya bir (`az/` və `en/`).
 
 Hər faylın ingiliscə versiyası da var (`week-NN.pdf`, `portfolio-workbook.xlsx` və s.).
