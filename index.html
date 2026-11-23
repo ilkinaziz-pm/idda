@@ -739,6 +739,54 @@ details[open] > summary .chev{transform:rotate(180deg)}
 .sug li.is-on{opacity:.75}
 .again{display:inline-flex;align-items:center;gap:4px;font:700 10.5px/1 var(--font-body);font-style:normal;letter-spacing:.04em;text-transform:uppercase;color:var(--pf);background:var(--pb);border-radius:99px;padding:4px 7px;align-self:flex-start}
 
+/* ── Plan measures table, portfolio table ─────────────── */
+.col--plan{max-width:1440px}
+.mt table{min-width:980px;font-size:13.5px}
+.mt--compact table{min-width:820px}
+.mt th{position:sticky;top:0;z-index:1}
+.mt td{line-height:1.45}
+.mt__no{font:700 13px/1.4 var(--font-display);color:var(--accent-ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+td.mt__no,th.mt__no{width:64px}
+td.mt__title{min-width:260px}
+.mt__t{display:block;color:var(--text);font-weight:600}
+.mt__note{display:block;font-size:11.5px;color:var(--muted);margin-top:4px}
+td.mt__who{min-width:110px}
+td.mt__period{white-space:nowrap}
+.mt__p.is-late{color:var(--warn);font-weight:600}
+.mt__late{display:block;font:600 11px/1.3 var(--font-body);color:var(--warn);margin-top:2px}
+td.mt__initial,td.mt__interim,td.mt__final{min-width:150px}
+.mt__o{color:var(--muted);font-size:12.5px}
+.mt__none{color:var(--muted);font-size:12px}
+td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-space:nowrap}
+.mt__chk{position:relative;display:inline-grid;cursor:pointer}
+.mt__chk input{position:absolute;opacity:0;width:1px;height:1px}
+.mt__chk input:checked + .task__box{background:var(--accent);border-color:var(--accent);color:#fff}
+.mt__chk input:focus-visible + .task__box{outline:2px solid var(--accent);outline-offset:2px}
+.mt tr.is-area td{background:var(--accent-soft)}
+.mt tr.is-sub td{background:var(--bg)}
+.mt tr.is-sub td.mt__no .mt__no{padding-left:14px;color:var(--muted)}
+.mt__add.iconbtn{width:34px;height:34px;background:var(--accent);color:#fff;box-shadow:none;margin:0 auto}
+.mt__in{font:600 12px/1 var(--font-body);font-style:normal;color:var(--ok);display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.mt tr.flashhit td{background:var(--mark)}
+.chip .ic{display:inline-block;vertical-align:-2px;margin-right:4px}
+.chip--area[aria-pressed="false"]{color:var(--accent-ink)}
+.focus__plan{background:var(--surface);border-radius:var(--r);padding:4px 4px 10px;min-width:0}
+.focus__plan > summary{list-style:none;cursor:pointer;display:flex;align-items:center;padding:10px 12px}
+.focus__plan > summary::-webkit-details-marker{display:none}
+.focus__plan > summary h3{flex:1;display:flex;align-items:center;gap:7px;font:700 13px/1.2 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--pf)}
+.focus__plan > summary h3 em{font-style:normal;color:var(--muted);letter-spacing:0}
+.focus__plan .tblwrap{border-radius:12px;margin:0 6px}
+.focus__plan .hint{margin:8px 12px 0}
+.sugt td:first-child{min-width:200px}
+.sugt tr.is-on td{opacity:.7}
+.pjt table{min-width:980px;font-size:13.5px}
+.pjt tr td:first-child{border-left:4px solid var(--rc,transparent)}
+.pjt__n{display:inline-flex;align-items:center;gap:8px;text-align:left;font:600 14px/1.35 var(--font-body);color:var(--text)}
+.pjt__n .ic{color:var(--muted);flex:none}
+.pjt__n:hover{color:var(--accent-ink)}
+.pjt td.is-late{color:var(--warn);font-weight:600}
+.pjt__t{max-width:260px;font-size:12.5px;color:var(--muted)}
+
 /* ── responsive ──────────────────────────────────────── */
 @media (max-width: 899px){
   .frame{display:block}
@@ -789,6 +837,11 @@ details[open] > summary .chev{transform:rotate(180deg)}
   .tblscroll tr:last-child{border-bottom:0}
   .tblscroll td{padding:0 0 8px;border:0}
   .tblscroll td:last-child{padding-bottom:0}
+  .mt table,.mt--compact table,.pjt table{min-width:0}
+  td.mt__title,td.mt__initial,td.mt__interim,td.mt__final,.sugt td:first-child{min-width:0}
+  td.mt__area,td.mt__add{text-align:left;width:auto}
+  .mt__add.iconbtn{margin:0}
+  .pjt__t{max-width:none}
   .tblscroll td[data-label]::before{content:attr(data-label);display:block;font:600 10.5px/1.5 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
   .tblscroll td:first-child{font:600 15.5px/1.35 var(--font-display)}
   .tblscroll td:first-child::before{display:none}
@@ -875,7 +928,7 @@ details[open] > summary .chev{transform:rotate(180deg)}
   /* ── storage (per viewer, may be unavailable) ───────── */
   // Progress lives in localStorage; inside claude.ai it is also mirrored to the viewer's private
   // db document, so phone and laptop show the same ticks, read marks and notes.
-  var LOCAL_ONLY = { theme: 1, lang: 1, simple: 1, ts: 1, 'pwa:hide': 1 };
+  var LOCAL_ONLY = { theme: 1, lang: 1, simple: 1, ts: 1, 'pwa:hide': 1, 'my:view': 1, 'plan:view': 1 };
   var ts = {};
   try { ts = JSON.parse(localStorage.getItem('iria:ts') || '{}') || {}; } catch (e) { ts = {}; }
   var sync = { ref: null, state: 'off', timer: null, writing: false, again: false, onRemote: null };
@@ -1386,6 +1439,7 @@ details[open] > summary .chev{transform:rotate(180deg)}
 
   /* ── plan explorer ──────────────────────────────────── */
   var planState = { q: '', dir: '', who: '', year: '' };
+  function planView() { return store.get('plan:view', 'table') === 'cards' ? 'cards' : 'table'; }
   function planTree() {
     var ms = (plan && plan.measures) || [];
     var byNo = {}, tops = [];
@@ -1426,6 +1480,47 @@ details[open] > summary .chev{transform:rotate(180deg)}
       (kids ? '<div class="ms__sub">' + kids + '</div>' : '') +
       (!res && !kids && !m.note ? '<div class="act__title">' + T('Nəticə indikatorları ana tədbirdə göstərilib.', 'Result indicators are given in the parent measure.') + '</div>' : '') + '</div></details>';
   }
+  /* Plan measures as a full table: every column of the Plan, sub-measures indented under their parent.
+     opts.area: a «my area» tick per row; opts.add: a «+ portfolio» button; opts.compact: fewer columns (home panel). */
+  function areaList() {
+    var id = focusId(), v = store.get('area:' + id, null);
+    if (v && v.length !== undefined) return v;
+    var dir = FOCUS_DIR[id], out = [];
+    if (dir) ((plan && plan.measures) || []).forEach(function (m) { if (!m.parent && m.no.indexOf(dir + '.') === 0) out.push(m.no); });
+    if (id === 'innovation') out.push('8.3.4');
+    return out;
+  }
+  function inArea(no) { return areaList().indexOf(no) >= 0; }
+  function measureRows(tops) { var out = []; tops.forEach(function (m) { out.push(m); (m.kids || []).forEach(function (k) { out.push(k); }); }); return out; }
+  function mtable(list, opts) {
+    opts = opts || {};
+    var have = {}; if (opts.add) projects().forEach(function (p) { if (p.src) have[p.src] = 1; });
+    var cols = opts.compact
+      ? [['no', '№'], ['title', T('Tədbir', 'Measure')], ['who', T('İcraçılar', 'Executors')], ['period', T('Müddət', 'Deadline')], ['final', T('Yekun nəticə', 'Final result')]]
+      : [['no', '№'], ['title', T('Tədbir', 'Measure')], ['who', T('İcraçılar: əsas, digər', 'Executors: lead, others')], ['period', T('Müddət', 'Deadline')],
+         ['initial', T('İlkin nəticə', 'Initial result')], ['interim', T('Aralıq nəticə', 'Interim result')], ['final', T('Yekun nəticə', 'Final result')]];
+    if (opts.area) cols.push(['area', T('Sahəmdə', 'My area')]);
+    if (opts.add) cols.push(['add', T('Portfel', 'Portfolio')]);
+    var now = new Date();
+    var body = list.map(function (m) {
+      var sub = !!m.parent, e = periodEnd(m.periodAz || m.period), late = e && e < now, key = 'sug:plan:' + m.no;
+      var cell = function (k) {
+        if (k === 'no') return '<span class="mt__no">' + esc(m.no) + '</span>';
+        if (k === 'title') return '<span class="mt__t">' + plain(m.title) + '</span>';
+        if (k === 'main' || k === 'others') return (m[k] || []).map(acr).join(', ') || '—';
+        if (k === 'who') return '<b>' + (m.main || []).map(acr).join(', ') + '</b>' + ((m.others || []).length ? '<br><span class="mt__o">' + (m.others || []).map(acr).join(', ') + '</span>' : '');
+        if (k === 'period') return '<span class="mt__p' + (late ? ' is-late' : '') + '">' + esc(m.period || '—') + '</span>' + (late ? '<span class="mt__late">' + T('müddət bitib', 'past due') + '</span>' : '');
+        if (k === 'area') return '<label class="mt__chk"><input type="checkbox" data-area="' + esc(m.no) + '"' + (inArea(m.no) ? ' checked' : '') + '><span class="task__box">' + ic('check', 14) + '</span><span class="vh">' + T('Sahəmdə', 'In my area') + '</span></label>';
+        if (k === 'add') return have[key] ? '<em class="mt__in">' + ic('check', 14) + T('portfeldə', 'added') + '</em>' : '<button type="button" class="iconbtn mt__add" data-sug="' + esc(key) + '" aria-label="' + T('Portfelə əlavə et', 'Add to portfolio') + '">' + ic('plus', 16) + '</button>';
+        return m[k] ? plain(m[k]) : '<span class="mt__none">' + (sub ? T('ana tədbirdə', 'in parent') : '—') + '</span>';
+      };
+      return '<tr class="mt__r' + (sub ? ' is-sub' : '') + (opts.area && inArea(m.no) ? ' is-area' : '') + '" data-no="' + esc(m.no) + '" data-top="' + (sub ? 0 : 1) + '">' +
+        cols.map(function (c) { return '<td class="mt__' + c[0] + '" data-label="' + esc(c[1]) + '">' + cell(c[0]) + '</td>'; }).join('') + '</tr>';
+    }).join('');
+    return '<div class="tblwrap mt' + (opts.compact ? ' mt--compact' : '') + '"><div class="tblscroll"><table><thead><tr>' + cols.map(function (c) { return '<th class="mt__' + c[0] + '">' + esc(c[1]) + '</th>'; }).join('') + '</tr></thead><tbody>' + body + '</tbody></table></div></div>';
+  }
+  function areaMeasures() { var a = areaList(); return ((plan && plan.measures) || []).filter(function (m) { return a.indexOf(m.no) >= 0; }); }
+
   function planExplorer() {
     if (!plan || !plan.measures || !plan.measures.length) return '';
     var dirs = plan.tableSections || [];
@@ -1434,11 +1529,13 @@ details[open] > summary .chev{transform:rotate(180deg)}
     var whos = Object.keys(whoSet).sort(function (a, b) { return a.localeCompare(b, 'az'); });
     var src = plan.meta && plan.meta.pdfUrl ? ' <a href="' + esc(plan.meta.pdfUrl) + '" target="_blank" rel="noopener">' + T('Rəsmi PDF', 'Official PDF') + '</a>' : '';
     return '<section class="stack" data-plan>' +
-      '<p class="hint">' + T('Sətri açanda nəticə indikatorları və alt-tədbirlər görünür. Mətn rəsmi sənəddən köçürülüb.', 'Open a row to see result indicators and sub-measures. The English text is an unofficial translation of the official document.') + src + '</p>' +
+      '<p class="hint">' + T('Cədvəldə hər tədbirin icraçıları, müddəti və üç nəticə indikatoru görünür; alt-tədbirlər ana tədbirin altındadır. «Sahəmdə» qutusu tədbiri ana səhifədəki sahə panelinə əlavə edir. Mətn rəsmi sənəddən köçürülüb.', 'Open a row to see result indicators and sub-measures. The English text is an unofficial translation of the official document.') + src + '</p>' +
       '<div class="tools"><input class="field field--grow" type="search" id="plan-q" placeholder="' + T('Tədbirin adında və nəticələrdə axtar…', 'Search measure names and results…') + '" aria-label="Tədbirlərdə axtar">' +
       '<select class="field" id="plan-who" aria-label="İcraçı"><option value="">' + T('Bütün icraçılar', 'All executors') + '</option>' + whos.map(function (w) { return '<option>' + esc(w) + '</option>'; }).join('') + '</select></div>' +
-      '<div class="chips" id="plan-dirs"><button type="button" class="chip" aria-pressed="true" data-v="">' + T('Bütün istiqamətlər', 'All directions') + '</button>' +
-      dirs.map(function (d) { return '<button type="button" class="chip" aria-pressed="false" data-v="' + esc(d.no) + '">' + esc(d.no) + ' ' + esc(d.short || d.title) + '</button>'; }).join('') + '</div>' +
+      '<div class="chips" id="plan-view"><button type="button" class="chip" aria-pressed="' + (planView() === 'table') + '" data-v="table">' + ic('table-2', 14) + T('Cədvəl', 'Table') + '</button><button type="button" class="chip" aria-pressed="' + (planView() === 'cards') + '" data-v="cards">' + ic('layers', 14) + T('Kartlar', 'Cards') + '</button></div>' +
+      '<div class="chips" id="plan-dirs"><button type="button" class="chip" aria-pressed="' + (planState.dir === '' ? 'true' : 'false') + '" data-v="">' + T('Bütün istiqamətlər', 'All directions') + '</button>' +
+      '<button type="button" class="chip chip--area" aria-pressed="' + (planState.dir === 'area' ? 'true' : 'false') + '" data-v="area">' + ic('star', 14) + T('Mənim sahəm', 'My area') + ' <span class="n">' + areaList().length + '</span></button>' +
+      dirs.map(function (d) { return '<button type="button" class="chip" aria-pressed="' + (planState.dir === d.no ? 'true' : 'false') + '" data-v="' + esc(d.no) + '">' + esc(d.no) + ' ' + esc(d.short || d.title) + '</button>'; }).join('') + '</div>' +
       '<div class="chips" id="plan-years"><button type="button" class="chip" aria-pressed="true" data-v="">' + T('Bütün müddətlər', 'All deadlines') + '</button>' +
       ['2026', '2027', '2028', 'mütəmadi'].map(function (y) { return '<button type="button" class="chip" aria-pressed="false" data-v="' + y + '">' + (y === 'mütəmadi' ? T('mütəmadi', 'ongoing') : y) + '</button>'; }).join('') + '</div>' +
       '<div class="count" id="plan-count"></div><div class="stack" id="plan-list"></div></section>';
@@ -1452,7 +1549,8 @@ details[open] > summary .chev{transform:rotate(180deg)}
     if (!list) return;
     var q = fold(planState.q), tops = planTree(), dirs = plan.tableSections || [];
     var rows = tops.filter(function (m) {
-      if (planState.dir && m.no.indexOf(planState.dir + '.') !== 0) return false;
+      if (planState.dir === 'area') { if (!measureHas(m, function (x) { return inArea(x.no); })) return false; }
+      else if (planState.dir && m.no.indexOf(planState.dir + '.') !== 0) return false;
       if (q && fold(measureText(m)).indexOf(q) < 0) return false;
       if (planState.who && !measureHas(m, function (x) { return (x.main || []).concat(x.others || []).map(whoKey).indexOf(planState.who) >= 0; })) return false;
       if (planState.year && !measureHas(m, function (x) { return periodHas(x.periodAz || x.period, planState.year); })) return false;
@@ -1461,15 +1559,16 @@ details[open] > summary .chev{transform:rotate(180deg)}
     var subs = 0;
     rows.forEach(function (m) { subs += (m.kids || []).length; });
     document.getElementById('plan-count').textContent = rows.length + T(' tədbir', ' measures') + (subs ? ', ' + subs + T(' alt-tədbir', ' sub-measures') : '');
-    var html = '', cur = '';
+    var html = '', table = planView() === 'table', groups = [];
     rows.forEach(function (m) {
       var d = m.no.split('.').slice(0, 2).join('.');
-      if (d !== cur) {
-        cur = d;
-        var meta = dirs.filter(function (x) { return x.no === d; })[0];
-        html += '<h3 class="dirh">' + esc(d) + '. ' + esc(meta ? meta.title : '') + '</h3>';
-      }
-      html += measureHTML(m, false);
+      if (!groups.length || groups[groups.length - 1].d !== d) groups.push({ d: d, rows: [] });
+      groups[groups.length - 1].rows.push(m);
+    });
+    groups.forEach(function (g) {
+      var meta = dirs.filter(function (x) { return x.no === g.d; })[0];
+      html += '<h3 class="dirh">' + esc(g.d) + '. ' + esc(meta ? meta.title : '') + '</h3>';
+      html += table ? mtable(measureRows(g.rows), { area: true }) : g.rows.map(function (m) { return measureHTML(m, false); }).join('');
     });
     list.innerHTML = html || '<div class="empty">' + T('Uyğun tədbir tapılmadı.', 'No matching measure.') + '</div>';
   }
@@ -2020,6 +2119,22 @@ details[open] > summary .chev{transform:rotate(180deg)}
       '<button type="button" class="pp__b" data-ppl-edit="' + esc(x.id) + '"><b>' + esc(x.n) + '</b>' + (x.r ? '<small>' + esc(x.r) + '</small>' : '') + (x.c ? '<small>' + esc(x.c) + '</small>' : '') +
       (x.m && x.d ? '<small class="ok">' + T('Görüşdük: ', 'Met: ') + esc(fmtDate(x.d)) + '</small>' : '') + (x.t ? '<span>' + esc(x.t) + '</span>' : '') + '</button></article>';
   }
+  function myView_() { return store.get('my:view', 'table') === 'cards' ? 'cards' : 'table'; }
+  function prjTable(pj) {
+    var st = stageNames(), t0 = today();
+    var cols = [T('Layihə', 'Project'), T('Plan sətri', 'Plan row'), T('Mərhələ', 'Stage'), T('Status', 'Status'), T('Sahib', 'Owner'), T('Nəzarət tarixi', 'Checkpoint'), T('Qeyd', 'Note')];
+    return '<div class="tblwrap pjt"><div class="tblscroll"><table><thead><tr>' + cols.map(function (c) { return '<th>' + esc(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      pj.map(function (p) {
+        var row = p.p ? planRow(p.p) : null, late = p.d && p.d < t0 && p.r !== 'b';
+        return '<tr class="' + (p.r ? 'rag-' + p.r : '') + '"><td data-label="' + esc(cols[0]) + '"><button type="button" class="pjt__n" data-prj-edit="' + esc(p.id) + '"><span class="ragdot"></span>' + esc(p.n) + ic('pencil-line', 13) + '</button></td>' +
+          '<td data-label="' + esc(cols[1]) + '">' + (p.p ? (row ? '<button type="button" class="mchip mchip--plan" data-go-measure="' + esc(row.no) + '" data-parent="' + esc(row.parent || '') + '">' + esc(p.p) + '</button>' : esc(p.p)) : '<span class="mchip mchip--warn">' + T('yoxdur', 'none') + '</span>') + '</td>' +
+          '<td data-label="' + esc(cols[2]) + '">' + (p.s >= 0 && st[p.s] ? esc(st[p.s]) : '—') + '</td>' +
+          '<td data-label="' + esc(cols[3]) + '">' + (p.r ? esc(ragName(p.r)) : '—') + '</td>' +
+          '<td data-label="' + esc(cols[4]) + '">' + (p.o ? esc(p.o) : '—') + '</td>' +
+          '<td data-label="' + esc(cols[5]) + '"' + (late ? ' class="is-late"' : '') + '>' + (p.d ? esc(fmtDate(p.d)) : '—') + '</td>' +
+          '<td data-label="' + esc(cols[6]) + '" class="pjt__t">' + (p.t ? esc(p.t) : '—') + '</td></tr>';
+      }).join('') + '</tbody></table></div></div>';
+  }
   function myView() {
     var tab = ui.myTab === 'ppl' ? 'ppl' : 'prj', pj = projects(), pp = people(), s = prjStats(pj), parties = D.parties || [];
     var seg = '<div class="seg" role="tablist" data-seg="my">' + [['prj', T('Layihələr', 'Projects'), pj.length], ['ppl', T('Adamlar', 'People'), pp.length]].map(function (t) {
@@ -2032,7 +2147,8 @@ details[open] > summary .chev{transform:rotate(180deg)}
         (pj.length ? '<div class="ragbar">' + RAGS.map(function (r) { return '<span class="ragbar__i rag-' + r[0] + '"><span class="ragdot"></span><b>' + s[r[0]] + '</b>' + esc(T(r[1], r[2])) + '</span>'; }).join('') + '</div>' : '') +
         ((s.noPlan || s.late) ? '<div class="warnrow">' + (s.noPlan ? '<span>' + ic('triangle-alert', 15) + s.noPlan + T(' layihənin Plan sətri yoxdur', ' without a Plan row') + '</span>' : '') + (s.late ? '<span>' + ic('calendar-clock', 15) + s.late + T(' layihənin nəzarət tarixi keçib', ' with an overdue checkpoint') + '</span>' : '') + '</div>' : '') +
         sugBlock(!pj.length) +
-        (pj.length ? '<div class="pjlist">' + pj.map(prjCard).join('') + '</div>'
+        (pj.length ? '<div class="chips" id="my-view"><button type="button" class="chip" aria-pressed="' + (myView_() === 'table') + '" data-v="table">' + ic('table-2', 14) + T('Cədvəl', 'Table') + '</button><button type="button" class="chip" aria-pressed="' + (myView_() === 'cards') + '" data-v="cards">' + ic('layers', 14) + T('Kartlar', 'Cards') + '</button></div>' +
+          (myView_() === 'table' ? prjTable(pj) : '<div class="pjlist">' + pj.map(prjCard).join('') + '</div>')
                    : '<div class="emptybox">' + ic('folder-kanban', 26) + T('Hələ layihə yoxdur. Yuxarıdakı təkliflərdən sizə aid olanları əlavə edin və ya cari layihələrin siyahısını alan kimi özünüz qeyd edin.', 'No projects yet. Add the suggestions above that are yours, or record the current projects yourself as soon as you get the list.') + '</div>') +
         '<details class="acc acc--help"><summary><span class="bd bd--sm ph-rf">' + ic('circle-help', 16) + '</span><span class="acc__t">' + T('Rənglər nə deməkdir', 'What the colours mean') + '</span>' + ic('chevron-down', 18, 'chev') + '</summary><div class="acc__b"><ul class="raglegend">' +
         RAGS.map(function (r, i) { return '<li class="rag-' + r[0] + '"><span class="ragdot"></span><b>' + esc(T(r[1], r[2])) + '</b><span>' + esc(ragMeaning(i)) + '</span></li>'; }).join('') + '</ul><a class="wklink" href="#toolkit">' + T('Ətraflı: «Alətlər dəsti» mövzusu', 'More: the “Toolkit” topic') + ic('arrow-right', 14) + '</a></div></details>';
@@ -2235,7 +2351,14 @@ details[open] > summary .chev{transform:rotate(180deg)}
     var id = focusId(), p = PL[id] || {}, sec = sections[id], dir = FOCUS_DIR[id] || '', at = FOCUS_ACTS[id] || '';
     var wn = weekOf(id), cw = curWeek(), read = isRead(id), ac = askCount(id);
     var stats = [];
-    if (dir) { var fp = focusPlan(dir); stats.push([fp.all + ' / ' + fp.top, T('Plan tədbiri: istiqamət ', 'Plan measures: direction ') + dir]); if (fp.dec) stats.push([fp.dec, T('tədbirin müddəti dekabr 2026', 'measures due December 2026')]); if (fp.late) stats.push([fp.late, T('tədbirin müddəti keçib', 'measures overdue')]); }
+    var am = areaMeasures(), now0 = new Date();
+    if (am.length) {
+      var aDec = am.filter(function (m) { return /2026, dekabr/.test(m.periodAz || m.period); }).length;
+      var aLate = am.filter(function (m) { var e = periodEnd(m.periodAz || m.period); return e && e < now0; }).length;
+      stats.push([am.length, T('Plan tədbiri sahənizdə', 'Plan measures in your area')]);
+      if (aDec) stats.push([aDec, T('tədbirin müddəti dekabr 2026', 'measures due December 2026')]);
+      if (aLate) stats.push([aLate, T('tədbirin müddəti bitib: statusu dəqiqləşdirin', 'measures past due: check their status')]);
+    }
     stats.push([ac.done + ' / ' + ac.all, T('daxildə soruşulacaq sual', 'questions to ask inside')]);
     if (at) stats.push([acts.filter(function (a) { return a.topic === at; }).length, T('hüquqi akt kataloqda', 'legal acts in the catalogue')]);
     var dates = focusDates(id, 4);
@@ -2257,10 +2380,12 @@ details[open] > summary .chev{transform:rotate(180deg)}
         '</div>' +
         '<div class="focus__col"><h3>' + ic('list-checks', 16) + T('Sahə üzrə işlər', 'Tasks for this area') + '<em>' + nDone + ' / ' + todo.length + '</em></h3><div class="tasklist">' + todo.map(taskHTML).join('') + '</div></div>' +
       '</div>' +
+      (am.length ? '<details class="focus__plan" open><summary><h3>' + ic('table-2', 16) + T('Sahənizin Plan tədbirləri', 'Plan measures in your area') + '<em>' + am.length + '</em></h3>' + ic('chevron-down', 18, 'chev') + '</summary>' +
+        mtable(am, { compact: true, add: true }) + '<p class="hint">' + T('Tədbiri sahəyə əlavə etmək və ya çıxarmaq üçün Plan cədvəlində «Sahəmdə» qutusunu işarələyin.', 'To add a measure to your area or remove one, tick «My area» in the Plan table.') + '</p></details>' : '') +
       '<div class="focus__a">' +
         '<a class="btn btn--pri" href="#' + id + '">' + ic('book-open', 16) + (read ? T('Mövzuya qayıt', 'Back to the topic') : T('Mövzunu oxu', 'Read the topic')) + '</a>' +
         (vid ? '<a class="btn" href="#videos" data-vid="' + vid.id + '">' + ic('circle-play', 16) + T('Video', 'Video') + ' · ' + vid.s + T(' san', ' s') + '</a>' : '') +
-        (dir ? '<a class="btn" href="#plantable" data-pdir="' + dir + '">' + ic('table-2', 16) + T('Plan: ', 'Plan: ') + dir + '</a>' : '') +
+        (am.length ? '<a class="btn" href="#plantable" data-pdir="area">' + ic('table-2', 16) + T('Plan: mənim sahəm', 'Plan: my area') + '</a>' : '') +
         (at ? '<a class="btn" href="#acts" data-atopic="' + at + '">' + ic('scale', 16) + T('Aktlar', 'Acts') + '</a>' : '') +
         '<a class="btn" href="#' + id + '" data-tab="ask">' + ic('message-circle-question', 16) + T('Suallar', 'Questions') + '</a>' +
       '</div></section>';
@@ -2286,11 +2411,11 @@ details[open] > summary .chev{transform:rotate(180deg)}
       });
       if (items.length) groups.push({ id: 'prog', title: T('Agentliyin proqramları və təşəbbüsləri', 'The Agency’s programmes and initiatives'), items: items });
     }
-    if (dir && plan && plan.measures) {
-      var ms = plan.measures.filter(function (m) { return !m.parent && m.no.indexOf(dir + '.') === 0; });
-      if (ms.length) groups.push({ id: 'plan', title: T('Planın ' + dir + ' istiqamətinin tədbirləri', 'Plan measures, direction ' + dir), items: ms.map(function (m) {
-        return { key: 'sug:plan:' + m.no, n: m.no + ' — ' + shortTitle(m.title, 80), meta: (m.main || []).join(', ') + ' · ' + m.period, p: m.no, d: isoEnd(m.periodAz || m.period),
-          t: T('Planın tədbiri. Əsas icraçı: ', 'Plan measure. Lead implementer: ') + (m.main || []).join(', ') + '. ' + T('İRİA-ya aid olub-olmadığını rəhbərinizlə dəqiqləşdirin.', 'Check with your manager whether it falls to İRİA.') };
+    if (plan && plan.measures) {
+      var ms = areaMeasures();
+      if (ms.length) groups.push({ id: 'plan', title: T('Sahənizin Plan tədbirləri', 'Plan measures in your area'), table: true, items: ms.map(function (m) {
+        return { key: 'sug:plan:' + m.no, n: m.no + ' — ' + shortTitle(m.title, 130), meta: (m.main || []).join(', ') + ' · ' + m.period, p: m.no, d: isoEnd(m.periodAz || m.period),
+          t: T('Əsas icraçı: ', 'Lead: ') + (m.main || []).join(', ') + '. ' + T('İRİA-ya aidliyini dəqiqləşdirin.', 'Confirm it falls to İRİA.') };
       }) });
     }
     return groups;
@@ -2310,7 +2435,13 @@ details[open] > summary .chev{transform:rotate(180deg)}
         'These lists were collected from public sources. The Plan does not name İRİA: confirm with your manager which ones are in your portfolio and add only those. After adding, open a project to set its stage, status and owner.') + '</p>' +
       groups.map(function (g) {
         var left = g.items.filter(function (x) { return !have[x.key]; }).length;
-        return '<div class="sug"><div class="sug__h"><b>' + esc(g.title) + '</b><span>' + g.items.length + '</span>' + (left ? '<button type="button" class="readbtn" data-sug-all="' + g.id + '">' + ic('plus', 14) + T('Hamısını əlavə et', 'Add all') + ' (' + left + ')</button>' : '') + '</div><ul>' +
+        var head = '<div class="sug__h"><b>' + esc(g.title) + '</b><span>' + g.items.length + '</span>' + (left ? '<button type="button" class="readbtn" data-sug-all="' + g.id + '">' + ic('plus', 14) + T('Hamısını əlavə et', 'Add all') + ' (' + left + ')</button>' : '') + '</div>';
+        if (g.table) return '<div class="sug">' + head + mtable(areaMeasures(), { compact: true, add: true }) + '</div>';
+        return '<div class="sug">' + head + '<div class="tblwrap"><div class="tblscroll"><table class="sugt"><thead><tr><th>' + T('Ad', 'Name') + '</th><th>' + T('Nədir', 'What it is') + '</th><th>' + T('Portfel', 'Portfolio') + '</th></tr></thead><tbody>' +
+          g.items.map(function (x) { var on = !!have[x.key];
+            return '<tr' + (on ? ' class="is-on"' : '') + '><td data-label="' + T('Ad', 'Name') + '"><b>' + esc(x.n) + '</b></td><td data-label="' + T('Nədir', 'What it is') + '">' + esc(x.meta || '—') + '</td><td class="mt__add" data-label="' + T('Portfel', 'Portfolio') + '">' +
+              (on ? '<em class="mt__in">' + ic('check', 14) + T('portfeldə', 'added') + '</em>' : '<button type="button" class="iconbtn mt__add" data-sug="' + esc(x.key) + '" aria-label="' + T('Portfelə əlavə et', 'Add to portfolio') + '">' + ic('plus', 16) + '</button>') + '</td></tr>'; }).join('') + '</tbody></table></div></div></div>';
+        return '<div class="sug">' + head + '<ul>' +
           g.items.map(function (x) { var on = !!have[x.key];
             return '<li' + (on ? ' class="is-on"' : '') + '><div><b>' + esc(x.n) + '</b>' + (x.meta ? '<span>' + esc(x.meta) + '</span>' : '') + '</div>' +
               (on ? '<em>' + ic('check', 14) + T('əlavə olunub', 'added') + '</em>' : '<button type="button" class="iconbtn" data-sug="' + esc(x.key) + '" aria-label="' + T('Portfelə əlavə et', 'Add to portfolio') + '">' + ic('plus', 16) + '</button>') + '</li>'; }).join('') + '</ul></div>';
@@ -2393,7 +2524,7 @@ details[open] > summary .chev{transform:rotate(180deg)}
     else if (id === 'quiz') body = quizView();
     else if (id === 'sources') body = sourcesExtra();
     var wide = id === 'plantable' || id === 'acts' || id === 'glossary';
-    return '<div class="col' + (wide ? ' col--wide' : '') + '">' + pageHead(ticon(id), s.title, s.lede) + body + '</div>';
+    return '<div class="col' + (wide ? ' col--wide' : '') + (id === 'plantable' ? ' col--plan' : '') + '">' + pageHead(ticon(id), s.title, s.lede) + body + '</div>';
   }
 
   /* ── search ─────────────────────────────────────────── */
@@ -2509,9 +2640,9 @@ details[open] > summary .chev{transform:rotate(180deg)}
   function openMeasure(no, par) {
     go('plantable', function () {
       planState = { q: '', dir: '', who: '', year: '' }; paintPlan();
-      var sel = function (n) { return document.querySelector('.ms[data-no="' + String(n).replace(/"/g, '') + '"]'); };
-      var p = par ? sel(par) : null; if (p) p.open = true;
-      var el = sel(no); if (el) { el.open = true; flash(el); }
+      var sel = function (n) { return document.querySelector('#plan-list [data-no="' + String(n).replace(/"/g, '') + '"]'); };
+      var p = par ? sel(par) : null; if (p && p.tagName === 'DETAILS') p.open = true;
+      var el = sel(no); if (el) { if (el.tagName === 'DETAILS') el.open = true; flash(el); }
     });
   }
   var pending = null;
@@ -2672,6 +2803,8 @@ details[open] > summary .chev{transform:rotate(180deg)}
       if (grp.hasAttribute('data-askby')) { ui.askBy = chip.dataset.v; ui.askParty = ''; paint({ keepScroll: true }); return; }
       if (grp.id === 'acts-topics') { press(grp, chip); actsState.topic = chip.dataset.v; paintActs(); return; }
       if (grp.id === 'plan-dirs') { press(grp, chip); planState.dir = chip.dataset.v; paintPlan(); return; }
+      if (grp.id === 'my-view') { store.set('my:view', chip.dataset.v); paint({ keepScroll: true }); return; }
+      if (grp.id === 'plan-view') { press(grp, chip); store.set('plan:view', chip.dataset.v); paintPlan(); return; }
       if (grp.id === 'plan-years') { press(grp, chip); planState.year = chip.dataset.v; paintPlan(); return; }
       if (grp.id === 'gl-groups') { press(grp, chip); glState.group = chip.dataset.v; paintGlossary(); return; }
       if (chip.id === 'quiz-new') { quizState.onlyNew = !quizState.onlyNew; chip.setAttribute('aria-pressed', quizState.onlyNew ? 'true' : 'false'); quizState.i = 0; quizState.shown = false; paintQuiz(); return; }
@@ -2704,6 +2837,15 @@ details[open] > summary .chev{transform:rotate(180deg)}
     if (t.matches && t.matches('input[data-met]')) {
       var pm = store.get('ppl:' + t.dataset.met, null);
       if (pm) { pm.m = t.checked; pm.d = t.checked ? today() : ''; pm.u = Date.now(); store.set('ppl:' + pm.id, pm); paint({ keepScroll: true }); }
+      return;
+    }
+    if (t.matches && t.matches('input[data-area]')) {
+      var al = areaList().slice(), no = t.dataset.area, ix = al.indexOf(no);
+      if (t.checked && ix < 0) al.push(no); if (!t.checked && ix >= 0) al.splice(ix, 1);
+      store.set('area:' + focusId(), al);
+      var tr = t.closest('tr'); if (tr) tr.classList.toggle('is-area', t.checked);
+      var cn = document.querySelector('#plan-dirs [data-v="area"] .n'); if (cn) cn.textContent = al.length;
+      if (current === 'home' || current === 'my') paint({ keepScroll: true });
       return;
     }
     if (t.id === 'focus-sel') { store.set('focus', t.value); paint({ keepScroll: true }); return; }
