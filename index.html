@@ -969,6 +969,386 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   body{background:#fff;color:#000}
 }
 
+/* ── Charters ───────────────────────────────────────── */
+.chpage{display:flex;flex-direction:column;gap:22px}
+.chpage .rag-g{--rc:#1f9d61}.chpage .rag-y{--rc:#e3a008}.chpage .rag-r{--rc:#e02d1b}.chpage .rag-x{--rc:#9a9aa6}.chpage .rag-b{--rc:#2f6fed}
+.btn--ghost{background:none;box-shadow:none;color:var(--muted)}
+.btn--ghost:hover{color:var(--accent-ink)}
+.chmuted{color:var(--muted)}
+
+/* empty state */
+.chempty{background:var(--surface);border-radius:24px;box-shadow:var(--card);padding:26px;display:flex;flex-direction:column;gap:20px}
+.chsteps{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.chsteps li{display:grid;grid-template-columns:40px 1fr;gap:14px}
+.chsteps__n{width:40px;height:40px;border-radius:14px;background:var(--hero);color:var(--hero-text);display:grid;place-items:center;font:700 18px/1 var(--font-display)}
+.chsteps b{font:700 17px/1.3 var(--font-display);display:block;margin:2px 0 4px}
+.chsteps p{color:var(--text-soft);font-size:14.5px;max-width:66ch}
+.chsteps__a{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.chempty__demo{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;padding:14px 16px;border-radius:16px;background:var(--m3-bg);color:var(--m3-fg);font-weight:600;font-size:14.5px}
+.chempty__demo .btn{margin-left:auto;height:40px}
+
+/* drop zone */
+.chdrop{display:flex;align-items:center;gap:12px;border:2px dashed var(--line);border-radius:18px;padding:14px 18px;cursor:pointer;color:var(--text-soft);background:var(--bg);transition:border-color .15s,background .15s}
+.chdrop:hover,.chdrop.is-over{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
+.chdrop span{display:flex;flex-direction:column;line-height:1.35}
+.chdrop small{color:var(--muted);font-size:13px}
+.chdrop--big{flex-direction:column;justify-content:center;text-align:center;padding:30px 18px;margin-top:12px}
+.chdrop--big span{align-items:center}
+.chdrop--big b{font-size:16px}
+
+/* import report */
+.chrep{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;padding:14px 16px;border-radius:16px;background:var(--ok-bg);color:var(--text)}
+.chrep>.ic{color:var(--ok);margin-top:2px}
+.chrep--err{background:var(--warn-bg)}.chrep--err>.ic{color:var(--warn)}
+.chrep p{font-size:13.5px;color:var(--text-soft);margin-top:2px}
+.chrep details{margin-top:8px;font-size:13.5px}
+.chrep summary{cursor:pointer;color:var(--accent-ink);font-weight:600}
+.chmap{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px}
+.chmap li{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.chmap li span{color:var(--muted)}
+.chmap li.is-x b{color:var(--warn)}
+.chwarn{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:4px;font-size:13px;color:var(--warn)}
+.chwarn li{display:flex;gap:6px;align-items:flex-start}
+.chwarn .ic{flex:none;margin-top:3px}
+
+/* summary */
+.chsum{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+.chsum__main{background:var(--hero);color:var(--hero-text);border-radius:24px;padding:22px 22px 18px;display:flex;flex-direction:column;gap:14px}
+.chsum__n{display:flex;align-items:baseline;gap:10px}
+.chsum__n b{font:700 54px/1 var(--font-display);letter-spacing:-.03em}
+.chsum__n span{color:var(--hero-soft);font-weight:600}
+.chstack{display:flex;height:14px;border-radius:99px;overflow:hidden;gap:3px;background:var(--hero-track)}
+.chstack span{background:var(--rc);min-width:6px}
+.chsum__leg{display:flex;flex-wrap:wrap;gap:6px}
+.chlg{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 12px;border-radius:99px;background:rgba(255,255,255,.08);color:var(--hero-soft);font-size:13px;font-weight:600}
+.chlg b{color:var(--hero-text)}
+.chlg[aria-pressed="true"]{background:var(--hero-text);color:var(--hero)}.chlg[aria-pressed="true"] b{color:var(--hero)}
+.chkpis{display:grid;grid-template-columns:1fr;gap:10px}
+.chk{display:grid;grid-template-columns:40px auto 1fr;align-items:center;gap:12px;background:var(--surface);border-radius:18px;box-shadow:var(--card);padding:12px 14px;text-align:left;width:100%}
+.chk__ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--bg-2);color:var(--text-soft)}
+.chk b{font:700 26px/1 var(--font-display)}
+.chk b small{font-size:15px;color:var(--muted);font-weight:600}
+.chk>span:last-child{font-size:13.5px;color:var(--text-soft);line-height:1.3}
+.chk em{font-style:normal;color:var(--warn);font-weight:700}
+.chk--btn:hover{box-shadow:var(--shadow)}
+.chk.is-hot .chk__ic{background:var(--warn-bg);color:var(--warn)}
+.chk[aria-pressed="true"]{outline:2px solid var(--accent)}
+.chsoon{grid-column:1/-1;background:var(--surface);border-radius:20px;box-shadow:var(--card);padding:14px 16px}
+.chsoon__h{display:flex;align-items:center;gap:8px;font:600 12px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:10px}
+.chsoon__l{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;scrollbar-width:thin}
+.chsoon__i{flex:0 0 220px;scroll-snap-align:start;display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:14px;background:var(--bg);text-decoration:none;color:var(--text)}
+.chsoon__i:hover{background:var(--bg-2)}
+.chsoon__d{font:700 13px/1 var(--font-display);color:var(--pro)}
+.chsoon__d.is-near{color:var(--accent-ink)}
+.chsoon__t{font-weight:600;font-size:14px;line-height:1.35}
+.chsoon__c{font-size:12px;color:var(--muted)}
+
+/* toolbar */
+.chtools{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.chsearch{flex:1 1 220px;display:flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:99px;background:var(--surface);box-shadow:var(--card);color:var(--muted)}
+.chsearch input{flex:1;border:0;background:none;outline:none;min-width:0;font-size:14.5px;color:var(--text)}
+.chtools .chips{display:flex;gap:6px;flex-wrap:wrap}
+.chtools .chip{height:36px;cursor:pointer}
+.chtools .chip[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.chip--x{color:var(--accent-ink)}
+
+/* cards */
+.chgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.chc{position:relative;display:flex;flex-direction:column;gap:10px;padding:18px 18px 14px;border-radius:22px;background:var(--surface);box-shadow:var(--card);color:var(--text);text-decoration:none;border-top:5px solid var(--rc);transition:transform .15s,box-shadow .15s}
+.chc:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.chc__top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.chc__code{font:700 12px/1 var(--font-display);letter-spacing:.06em;color:var(--muted);background:var(--bg-2);padding:5px 8px;border-radius:8px}
+.chc__t{font-size:19px;font-weight:700;line-height:1.25}
+.chc__o{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.chc__g{font-size:14px;color:var(--text-soft);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.chc__note{font-size:13.5px;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--rc) 12%,transparent);color:var(--text)}
+.chc__m{display:flex;align-items:center;gap:14px;padding:10px 0;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);margin-top:auto}
+.chc__ring{display:flex;align-items:center;gap:8px}
+.chc__ring span{display:flex;flex-direction:column;font-size:11.5px;color:var(--muted);line-height:1.2}
+.chc__ring b{font:700 15px/1.1 var(--font-display);color:var(--text)}
+.chc__cnt{margin-left:auto;display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:700;color:var(--muted)}
+.chc__cnt span{display:flex;align-items:center;gap:5px}
+.chc__cnt .is-hot{color:var(--warn)}
+.chc__nx{display:flex;align-items:baseline;gap:7px;font-size:13.5px;line-height:1.35}
+.chc__nx .ic{flex:none;align-self:center;color:var(--muted)}
+.chc__nx span{font-weight:700;color:var(--pro);white-space:nowrap}
+.chc__nx--s{color:var(--text-soft)}
+.chc__f{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted)}
+.chpill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:99px;font-size:12.5px;font-weight:700;background:color-mix(in srgb,var(--rc) 14%,transparent);color:var(--text);white-space:nowrap}
+.chpill--lg{height:32px;font-size:14px}
+
+/* rings and bars */
+.chring{flex:none}
+.chring__bg{fill:none;stroke:var(--bg-2);stroke-width:4}
+.chring__fg{fill:none;stroke:var(--ok);stroke-width:4;stroke-linecap:round}
+.chring--k .chring__fg{stroke:var(--pro)}
+.chbar{display:block;flex:1;height:8px;border-radius:99px;background:var(--bg-2);overflow:hidden;min-width:50px}
+.chbar>span{display:block;height:100%;border-radius:inherit;background:var(--ok)}
+.chbar--k>span,.chbar--lg>span{background:var(--pro)}
+.chbar--lg{height:12px}
+.chbar--lg.is-ok>span{background:var(--ok)}
+.chbar--thin{height:4px}
+.chbar--thin>span{background:var(--muted)}
+
+/* table */
+.chtbl-w{overflow-x:auto;border-radius:20px;background:var(--surface);box-shadow:var(--card)}
+.chtbl{width:100%;border-collapse:collapse;font-size:14px;min-width:960px}
+.chtbl th{position:sticky;top:0;text-align:left;font:600 11.5px/1.2 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:14px 12px;border-bottom:1px solid var(--line);background:var(--surface)}
+.chtbl td{padding:12px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.chtbl tr[data-chgo]{cursor:pointer}
+.chtbl tbody tr:hover td{background:var(--bg)}
+.chtbl small{display:block;color:var(--muted);font-size:12.5px;margin-top:3px;line-height:1.35}
+.chtbl__n{font-weight:700;color:var(--text);text-decoration:none;display:block;line-height:1.3}
+.chtbl__n span{display:inline-block;font:700 11px/1 var(--font-display);color:var(--muted);background:var(--bg-2);padding:4px 6px;border-radius:6px;margin-right:6px;vertical-align:2px}
+.chtbl__p{display:flex;align-items:center;gap:8px;min-width:130px}
+.chtbl__p span{font-size:12.5px;color:var(--text-soft);white-space:nowrap}
+.chtbl__p em,.chstat em{font-style:normal;color:var(--warn);font-weight:700}
+.chtbl__c{font:700 16px/1 var(--font-display);text-align:center}
+.chtbl__c.is-hot{color:var(--warn)}
+
+/* 2026 timeline */
+.chtl{background:var(--surface);border-radius:20px;box-shadow:var(--card);padding:14px 0 10px}
+.chtl--one{box-shadow:none;background:var(--bg);margin:4px 0 14px}
+.chtl__scroll{overflow-x:auto;padding:0 16px;scrollbar-width:thin}
+.chtl__in{min-width:760px;position:relative}
+.chtl__hd,.chtl__r{display:grid;grid-template-columns:150px 1fr;align-items:center}
+.chtl--one .chtl__hd,.chtl--one .chtl__r{grid-template-columns:1fr}
+.chtl__months{display:grid;grid-template-columns:repeat(12,1fr);font-size:11.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.chtl__months span{padding:0 0 8px 6px;border-left:1px solid var(--line-2)}
+.chtl__body{position:relative}
+.chtl__r{min-height:46px;border-top:1px solid var(--line-2)}
+.chtl--one .chtl__r{min-height:92px}
+.chtl__l{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13.5px;color:var(--text);text-decoration:none;padding-right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chtl__track{position:relative;height:100%;min-height:46px;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(100%/12 - 1px),var(--line-2) calc(100%/12 - 1px),var(--line-2) calc(100%/12))}
+.chtl__m{position:absolute;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;outline:none}
+.chtl--one .chtl__m{top:22px;transform:translateX(-50%)}
+.chtl__m i{width:16px;height:16px;transform:rotate(45deg);border-radius:4px;background:var(--surface);border:3px solid var(--pro);box-shadow:0 0 0 3px var(--surface)}
+.chtl__m.is-done i{background:var(--ok);border-color:var(--ok)}
+.chtl__m.is-risk i{border-color:#e3a008;background:#fff3cd}
+.chtl__m.is-late i{border-color:var(--warn);background:var(--warn)}
+.chtl__m em{font-style:normal;font-size:11.5px;line-height:1.25;color:var(--text-soft);margin-top:8px;max-width:110px;text-align:center}
+.chtl__m:hover i,.chtl__m:focus i{transform:rotate(45deg) scale(1.25)}
+.chtl__today{position:absolute;top:0;bottom:0;left:calc(150px + (100% - 150px) * var(--x) / 100);width:2px;background:var(--accent);pointer-events:none}
+.chtl--one .chtl__today{left:calc(100% * var(--x) / 100)}
+.chtl__today span{position:absolute;top:-22px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--on-accent);font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:6px;white-space:nowrap}
+.chtl__hd{margin-bottom:0;padding-top:16px}
+.chtl__leg{display:flex;flex-wrap:wrap;gap:6px 14px;padding:10px 16px 0;font-size:12px;color:var(--muted)}
+.chtl__leg span{display:inline-flex;align-items:center;gap:6px}
+.chtl__leg i{width:10px;height:10px;transform:rotate(45deg);border-radius:2px;border:2px solid var(--pro);display:inline-block}
+.chtl__leg .is-done i{background:var(--ok);border-color:var(--ok)}
+.chtl__leg .is-risk i{border-color:#e3a008;background:#fff3cd}
+.chtl__leg .is-late i{background:var(--warn);border-color:var(--warn)}
+
+/* update panel and guide */
+.chio{background:var(--surface);border-radius:22px;box-shadow:var(--card);padding:20px;display:flex;flex-direction:column;gap:14px}
+.chio__h h2{font-size:20px}
+.chio__h p{font-size:13.5px;color:var(--muted);margin-top:4px}
+.chio__a{display:flex;flex-wrap:wrap;gap:10px}
+.chio__a .btn{height:40px;font-size:13.5px;padding:0 16px}
+.chio__n{font-size:13px;color:var(--muted);max-width:80ch}
+.chdemo{color:var(--m3-fg);font-weight:700}
+.chguide__p{font-size:14px;color:var(--text-soft);margin-bottom:10px}
+.chguide__t{width:100%;border-collapse:collapse;font-size:13.5px}
+.chguide__t th{text-align:left;vertical-align:top;padding:8px 12px 8px 0;width:34%;font-weight:700;border-top:1px solid var(--line-2)}
+.chguide__t td{padding:8px 0;color:var(--text-soft);border-top:1px solid var(--line-2)}
+.chreq{display:inline-block;font-size:10.5px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);padding:2px 6px;border-radius:6px;text-transform:uppercase;letter-spacing:.04em}
+
+/* charter page */
+.chdetail{gap:18px}
+.chhero{background:var(--hero);color:var(--hero-text);border-radius:28px;padding:20px 24px 24px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.chhero::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--rc)}
+.chhero__top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.chback{display:inline-flex;align-items:center;gap:6px;color:var(--hero-soft);text-decoration:none;font-weight:600;font-size:14px}
+.chback:hover{color:var(--hero-text)}
+.chhero__pn{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--hero-soft)}
+.chhero__pn .iconbtn{color:var(--hero-text);width:36px;height:36px}
+.chhero__code{align-self:flex-start;font:700 12px/1 var(--font-display);letter-spacing:.08em;color:var(--accent-2);background:rgba(255,255,255,.08);padding:6px 9px;border-radius:8px}
+.chhero h1{font-size:clamp(26px,4vw,38px);font-weight:700;letter-spacing:-.02em}
+.chhero__o{display:flex;align-items:center;gap:7px;color:var(--hero-soft);font-size:14.5px}
+.chhero__st{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px}
+.chstsel{position:relative;display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 12px 0 14px;border-radius:99px;background:color-mix(in srgb,var(--rc) 30%,#16161d);color:#fff;font-weight:700}
+.chstsel select{appearance:none;-webkit-appearance:none;background:none;border:0;color:inherit;font:inherit;padding-right:4px;cursor:pointer;outline:none}
+.chstsel select option{color:#16161d}
+.chstsel .ragdot{border-color:#fff}
+.chhist{display:inline-flex;gap:4px;align-items:center;padding:6px 10px;border-radius:99px;background:rgba(255,255,255,.08)}
+.chhist .ragdot{width:9px;height:9px;border-color:transparent}
+.chhero__asof{font-size:13px;color:var(--hero-soft)}
+.chnote{width:100%;resize:vertical;min-height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--hero-text);padding:10px 12px;font-size:14.5px;line-height:1.45}
+.chnote::placeholder{color:var(--hero-soft)}
+.chnote:focus{outline:2px solid var(--accent-2);outline-offset:1px}
+.chgoal{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:14px 16px;border-radius:18px;background:rgba(255,210,63,.12);border:1px solid rgba(255,210,63,.3)}
+.chgoal>.ic{color:var(--accent-2);margin-top:2px}
+.chgoal span{font:600 11.5px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2)}
+.chgoal p{font:600 17px/1.45 var(--font-body);margin-top:6px}
+.chstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.chstat{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:rgba(255,255,255,.06)}
+.chstat b{font:700 24px/1 var(--font-display);display:block}
+.chstat b small{font-size:14px;color:var(--hero-soft)}
+.chstat span{font-size:12.5px;color:var(--hero-soft);line-height:1.3}
+.chstat .chring__bg{stroke:rgba(255,255,255,.12)}
+.chstat__ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);color:var(--hero-soft);flex:none}
+.chstat.is-hot .chstat__ic{background:rgba(255,77,46,.25);color:#ffb4a3}
+.chjump{display:flex;gap:8px;overflow-x:auto;position:sticky;top:calc(var(--bar) + 8px);z-index:15;padding:6px;margin:0 -6px;background:var(--bg);border-radius:16px;scrollbar-width:none}
+.chjump .chip{height:36px;cursor:pointer;flex:none;font-weight:600}
+.chpart{scroll-margin-top:calc(var(--bar) + 70px)}
+.chgrid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.chb{background:var(--surface);border-radius:22px;box-shadow:var(--card);padding:18px 20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.chb--soft{background:var(--rf-bg)}
+.chb__h{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700}
+.chb__h .ic{color:var(--accent-ink)}
+.chb__n{margin-left:auto;font:700 13px/1 var(--font-display);color:var(--muted);background:var(--bg-2);padding:5px 9px;border-radius:99px}
+.chtext{font-size:15px;color:var(--text-soft);line-height:1.6}
+.chteam{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.chp{display:flex;align-items:center;gap:10px;padding:8px;border-radius:14px;background:var(--bg)}
+.chp__a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--m1-bg);color:var(--m1-fg);font:700 13px/1 var(--font-display);flex:none}
+.chp b{display:block;font-size:14px;line-height:1.25}
+.chp span{font-size:12.5px;color:var(--muted)}
+.chkv{margin:0;display:grid;gap:8px}
+.chkv div{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:12px;background:var(--bg)}
+.chkv dt{color:var(--text-soft);font-size:14px}
+.chkv dd{margin:0;font:700 15px/1.3 var(--font-display);text-align:right}
+.chkpi{display:grid;gap:14px}
+.chkpi__r{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:end;padding-bottom:12px;border-bottom:1px solid var(--line-2)}
+.chkpi__r:last-child{border-bottom:0;padding-bottom:0}
+.chkpi__n{font-weight:600;font-size:14.5px;align-self:center}
+.chkpi__y{display:flex;gap:10px}
+.chkpi__c{display:flex;flex-direction:column;align-items:center;gap:4px;width:56px}
+.chkpi__yr{font-size:11px;color:var(--muted);font-weight:600}
+.chkpi__bar{display:flex;align-items:flex-end;width:26px;height:56px;border-radius:7px;background:var(--bg-2);overflow:hidden}
+.chkpi__bar span{width:100%;background:linear-gradient(180deg,var(--pro),color-mix(in srgb,var(--pro) 70%,#fff));border-radius:7px 7px 0 0}
+.chkpi__c:first-child .chkpi__bar span{background:var(--accent)}
+.chkpi__c b{font:700 13px/1.2 var(--font-display);text-align:center;word-break:break-word}
+.chtg{display:grid;gap:14px}
+.chtg__h{display:flex;justify-content:space-between;gap:10px;font-size:14.5px;font-weight:600;margin-bottom:6px}
+.chtg__h b{font:700 16px/1 var(--font-display);color:var(--pro)}
+.chtg__v{display:flex;gap:16px;font-size:12.5px;color:var(--muted);margin-top:6px}
+.chtg__v b{color:var(--text)}
+.chplan{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.chplan__c{padding:12px 14px;border-radius:16px;background:var(--bg)}
+.chplan__y{display:inline-block;font:700 13px/1 var(--font-display);color:var(--on-accent);background:var(--accent);padding:5px 9px;border-radius:8px;margin-bottom:8px}
+.chplan__c+.chplan__c .chplan__y{background:var(--pro)}
+.chul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:14.5px;color:var(--text-soft)}
+.chdeps{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.chdeps li{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px 12px;border-radius:12px;background:var(--bg)}
+.chdeps li b{display:block;font-size:14.5px;font-weight:600}
+.chdeps li span{font-size:12.5px;color:var(--muted)}
+.chdate{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--pro);white-space:nowrap}
+.chdeps .chdate{color:var(--pro);font-size:12.5px}
+.chdate.is-near{color:var(--mid)}
+.chdate.is-late{color:var(--warn)}
+.chinter{display:flex;flex-wrap:wrap;gap:8px}
+.chinter__i{padding:8px 12px;border-radius:12px;background:var(--bg);font-size:14px}
+.chlink{color:var(--accent-ink);font-weight:700;text-decoration:none;background:var(--accent-soft);padding:1px 6px;border-radius:6px;font-size:inherit}
+.chlink:hover{text-decoration:underline}
+.chms{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.chms li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--bg)}
+.chms__b{display:flex;flex-direction:column;gap:2px;min-width:0}
+.chms__d{font:700 12.5px/1.2 var(--font-display);color:var(--pro)}
+.chms__t{font-size:14.5px;font-weight:600}
+.chms__s{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
+.chms li.is-done .chms__t{text-decoration:line-through;color:var(--muted)}
+.chms li.is-done .chms__s{color:var(--ok)}
+.chms li.is-late .chms__s,.chms li.is-late .chms__d{color:var(--warn)}
+.chms li.is-risk .chms__s{color:var(--mid)}
+.chms__chk{position:relative;display:inline-flex;cursor:pointer}
+.chms__chk input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.chms__box{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;color:transparent;background:var(--surface);transition:all .12s}
+.chms__chk input:checked+.chms__box{background:var(--ok);border-color:var(--ok);color:#fff}
+.chms__chk input:focus-visible+.chms__box{outline:2px solid var(--accent);outline-offset:2px}
+.chboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.chcol{background:var(--surface);border-radius:22px;box-shadow:var(--card);padding:16px 16px 12px;border-top:4px solid var(--cc,var(--pro));display:flex;flex-direction:column;gap:10px}
+.chcol--block{--cc:var(--warn)}.chcol--dec{--cc:var(--m3-fg)}
+.chcol .chb__h .ic{color:var(--cc)}
+.chact{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.chact li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;padding:10px;border-radius:14px;background:var(--bg)}
+.chact p{font-size:14.5px;font-weight:600;line-height:1.4}
+.chact li.is-done p{text-decoration:line-through;color:var(--muted)}
+.chact__m{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:4px;font-size:12.5px;color:var(--muted)}
+.chact__m span{display:inline-flex;align-items:center;gap:4px}
+.chmiss{background:var(--surface);border-radius:18px;box-shadow:var(--card);padding:14px 16px;font-size:14px}
+.chmiss summary{cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--muted);font-weight:600}
+.chmiss ul{list-style:none;margin:12px 0 8px;padding:0;display:grid;gap:8px}
+.chmiss li{display:grid;grid-template-columns:minmax(140px,34%) 1fr;gap:10px}
+.chmiss li span{color:var(--text-soft)}
+.chmiss p{color:var(--muted);font-size:13px}
+
+@media (max-width:820px){
+  .chsum{grid-template-columns:1fr}
+  .chstats{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .chempty{padding:18px}
+  .chempty__demo .btn{margin-left:0;width:100%}
+  .chhero{padding:16px 16px 18px;border-radius:22px}
+  .chstat{padding:10px;gap:8px}
+  .chstat .chring{width:42px;height:42px}
+  .chstat__ic{width:42px;height:42px}
+  .chstat b{font-size:20px}
+  .chgrid{grid-template-columns:1fr;gap:12px}
+  .chgrid2,.chboard{grid-template-columns:1fr}
+  .chkpi__r{grid-template-columns:1fr}
+  .chkpi__y{justify-content:space-between}
+  .chsum__n b{font-size:44px}
+  .chtl__hd,.chtl__r{grid-template-columns:96px 1fr}
+  .chtl__today{left:calc(96px + (100% - 96px) * var(--x) / 100)}
+  .chtl__in{min-width:680px}
+  .chio__a .btn{flex:1 1 100%}
+  .chmiss li{grid-template-columns:1fr;gap:2px}
+  .chb{padding:16px}
+}
+
+/* charter tables */
+.chb--wide{grid-column:1/-1}
+.chtw{overflow-x:auto;border-radius:14px;border:1px solid var(--line-2)}
+.cht{width:100%;border-collapse:collapse;font-size:14px}
+.cht th,.cht td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-2)}
+.cht tbody tr:last-child th,.cht tbody tr:last-child td{border-bottom:0}
+.cht thead th{font:600 11.5px/1.2 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg);white-space:nowrap}
+.cht tbody th{font-weight:600;min-width:180px}
+.cht--kpi{min-width:560px}
+.cht--kpi td{width:20%}
+.chyv{display:flex;flex-direction:column;gap:6px}
+.chyv b{font:700 15px/1.2 var(--font-display)}
+.chyv__b{display:block;height:6px;border-radius:99px;background:var(--bg-2);overflow:hidden}
+.chyv__b>span{display:block;height:100%;background:var(--pro);border-radius:inherit}
+.chyv__b.is-now>span{background:var(--accent)}
+.cht--q{min-width:760px}
+.cht--q td{font:700 14px/1.3 var(--font-display);white-space:nowrap}
+.cht--q .is-now{background:var(--accent-soft)}
+.cht--q thead .is-now{color:var(--accent-ink)}
+.cht--q thead small{display:block;font-size:10px;letter-spacing:.04em;margin-top:2px}
+.cht--q td.is-past{color:var(--muted)}
+.cht--q td:last-child{min-width:170px;font-family:var(--font-body);font-weight:400}
+.chact-in{width:84px;height:36px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);padding:0 10px;font:700 14px/1 var(--font-display)}
+.chact-in:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.chact-in.is-behind{border-color:var(--warn);color:var(--warn)}
+.chbehind{display:block;font-size:11.5px;color:var(--warn);margin-top:4px;white-space:normal}
+.chfoot{font-size:12.5px;color:var(--muted)}
+.cht--plan{min-width:560px}
+.cht__no{width:44px;font:700 13px/1.4 var(--font-display);color:var(--muted)}
+.cht--plan td:nth-child(3){width:24%;color:var(--text-soft)}
+.cht--plan td:nth-child(4){width:18%;white-space:nowrap}
+.chdate.is-past{color:var(--muted)}
+.chplan{grid-template-columns:1fr}
+.chplan__c{padding:0;background:none}
+.chms__m{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:12.5px;color:var(--muted)}
+.chms__m span{display:inline-flex;align-items:center;gap:4px}
+.chms__m .chms__d{font:700 12.5px/1.3 var(--font-display);color:var(--pro)}
+
+/* fixes: grid children may shrink, so wide tables scroll inside their card */
+.chpage>*,.chpart,.chgrid2>*,.chboard>*,.chplan>*{min-width:0}
+.chgrid2{grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
+.chhero__pn .iconbtn{background:rgba(255,255,255,.1);border:0;box-shadow:none}
+.chhero__pn .iconbtn:hover{background:rgba(255,255,255,.2)}
+.cht tbody th{font:600 14px/1.4 var(--font-body);text-transform:none;letter-spacing:0;color:var(--text);background:none}
+@media (max-width:640px){
+  .chgrid2,.chboard{grid-template-columns:minmax(0,1fr)}
+  .chstat{flex-direction:column;align-items:flex-start}
+  .cht tbody th{min-width:140px}
+}
+.chsum>*{min-width:0}
+@media (max-width:820px){.chsum{grid-template-columns:minmax(0,1fr)}}
+
 </style>
 <header class="bar">
   <a class="brand" href="#home" aria-label="İRİA Bələdçisi, ana səhifə">
@@ -1031,7 +1411,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   /* ── storage (per viewer, may be unavailable) ───────── */
   // Progress lives in localStorage; inside claude.ai it is also mirrored to the viewer's private
   // db document, so phone and laptop show the same ticks, read marks and notes.
-  var LOCAL_ONLY = { theme: 1, lang: 1, simple: 1, ts: 1, 'pwa:hide': 1, 'my:view': 1, 'plan:view': 1 };
+  var LOCAL_ONLY = { theme: 1, lang: 1, simple: 1, ts: 1, 'pwa:hide': 1, 'my:view': 1, 'plan:view': 1, 'ch:view': 1 };
   var ts = {};
   try { ts = JSON.parse(localStorage.getItem('iria:ts') || '{}') || {}; } catch (e) { ts = {}; }
   var sync = { ref: null, state: 'off', timer: null, writing: false, again: false, onRemote: null };
@@ -1240,11 +1620,12 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     if (SYNTH[id]) return Object.assign({ id: id, blocks: [] }, SYNTH[id]);
     return null;
   }
-  var VIEWS = { home: 1, topics: 1, tasks: 1, acts: 1, plantable: 1, my: 1, files: 1, videos: 1 };
+  var VIEWS = { home: 1, topics: 1, tasks: 1, acts: 1, plantable: 1, my: 1, charters: 1, files: 1, videos: 1 };
+  function isCharter(id) { return /^c-./.test(id || '') && !!chGet(id.slice(2)); }
   function isMeasure(id) { return /^t-\d/.test(id || '') && !!areaItem(id.slice(2)); }
   function isWeek(id) { var m = /^h(\d+)$/.exec(id || ''); return m && +m[1] >= 1 && +m[1] <= NW ? +m[1] : 0; }
   function exists(id) {
-    if (VIEWS[id] || isWeek(id) || isMeasure(id)) return true;
+    if (VIEWS[id] || isWeek(id) || isMeasure(id) || isCharter(id)) return true;
     if (id === 'ref' || PHASES.some(function (p) { return p.id === id; })) return true;
     if (id === 'glossary') return terms.length > 0 || !!sections.glossary;
     if (id === 'quiz') return allQuiz().length > 0;
@@ -2175,6 +2556,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     { id: 'workbook', grp: 'tpl', kind: 'XLSX', ic: 'file-spreadsheet', f: ['tpl/portfel-is-defteri.xlsx', 'tpl/portfolio-workbook.xlsx'], t: ['Portfel iş dəftəri', 'Portfolio workbook'], d: ['Reyestr, risklər, asılılıqlar, RAG meyarları, Plan sətirləri', 'Register, risks, dependencies, RAG criteria, Plan rows'] },
     { id: 'passport', grp: 'tpl', kind: 'DOCX', ic: 'file-text', f: ['tpl/layihe-pasportu.docx', 'tpl/project-passport.docx'], t: ['Layihə pasportu', 'Project passport'], d: ['Bir layihənin bir səhifəlik vəsiqəsi', 'A one-page identity card for one project'] },
     { id: 'report', grp: 'tpl', kind: 'DOCX', ic: 'clipboard-list', f: ['tpl/ayliq-status-hesabati.docx', 'tpl/monthly-status-report.docx'], t: ['Aylıq status hesabatı', 'Monthly status report'], d: ['Doqquz hissəli şablon, iki səhifə', 'A nine-part template, two pages'] },
+    { id: 'charter', grp: 'tpl', kind: 'XLSX', ic: 'flag', f: ['tpl/charter-sablonu.xlsx', 'tpl/charter-template.xlsx'], t: ['Charter şablonu', 'Charter template'], d: ['Doldurub «CSV UTF-8» kimi saxlayın və «Charterlər» bölməsinə yükləyin', 'Fill it in, save as “CSV UTF-8” and upload it in “Charters”'] },
     { id: 'summary', grp: 'tpl', kind: 'DOCX', ic: 'chart-column', f: ['tpl/portfel-icmali.docx', 'tpl/portfolio-summary.docx'], t: ['Portfel icmalı', 'Portfolio summary'], d: ['Rəhbərlik üçün bir səhifə: statuslar, üç risk, üç qərar', 'One page for management: statuses, three risks, three decisions'] }
   ];
   function fileById(id) { for (var i = 0; i < FILES.length; i++) if (FILES[i].id === id) return FILES[i]; return null; }
@@ -2843,6 +3225,803 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
       '<div class="hits">' + (html || '<div class="empty">' + T('Heç nə tapılmadı. Başqa yazılış və ya ingilis qarşılığını yoxlayın.', 'Nothing found. Try another spelling or the Azerbaijani term.') + '</div>') + '</div></div>';
   }
 
+  /* ── charters: programme charters imported from a CSV the owner fills in ──────────────
+     The importer reads either layout (one row per charter, or one column per charter),
+     recognises column names in Azerbaijani or English in any order, and only needs a name.
+     Lists inside a cell are lines (or «;»); parts of a line are split by «|».
+     Changes made on the page (status, ticked milestones, resolved blockers…) are kept
+     as an overlay, so uploading a newer CSV keeps them for items whose text is unchanged. */
+  var CH_FIELDS = [
+    { k: 'name', az: 'Charter adı', en: 'Charter name', t: 'text', req: 1, al: ['charter', 'charter name', 'name', 'title', 'initiative', 'program', 'programme', 'program name', 'ad', 'adi', 'charter adi', 'proqram', 'proqramin adi', 'tesebbus', 'layihe'],
+      hint: 'Yeganə məcburi sahə. Qısa ad: «Startap vauçerləri».', hintEn: 'The only required field. A short name.' },
+    { k: 'code', az: 'Kod', en: 'Code', t: 'text', al: ['code', 'id', 'kod', 'no', 'nomre', 'charter id', 'plan code'],
+      hint: 'İstəyə bağlı. Məs. CH-01 və ya Plan sətri 8.2.9.', hintEn: 'Optional, e.g. CH-01 or Plan row 8.2.9.' },
+    { k: 'owner', az: 'Rəhbər', en: 'Owner', t: 'text', al: ['owner', 'lead', 'sponsor', 'program lead', 'charter owner', 'rehber', 'sahib', 'mesul', 'cavabdeh'],
+      hint: 'Charterin sahibi: ad və vəzifə.', hintEn: 'Who owns the charter.' },
+    { k: 'goal', az: 'Proqramın sonunda məqsəd', en: 'Goal at the end of Program', t: 'text', al: ['goal at the end of program', 'goal at the end of programme', 'goal', 'goals', 'objective', 'end goal', 'meqsed', 'proqramin sonunda meqsed', 'son meqsed'],
+      hint: '1–2 cümlə: proqram bitəndə nə dəyişmiş olacaq.', hintEn: '1–2 sentences: what will have changed when the programme ends.' },
+    { k: 'team', az: 'Komanda', en: 'Team', t: 'people', al: ['team', 'team members', 'komanda', 'heyet', 'isci qrupu'],
+      hint: 'Hər sətirdə bir nəfər: «Ad Soyad — rol».', hintEn: 'One person per line: “Name — role”.' },
+    { k: 'budget', az: 'Büdcə / resurslar', en: 'Budget / Resources', t: 'kv', al: ['budget/resources', 'budget resources', 'budget', 'resources', 'budce', 'resurslar', 'budce resurslar', 'maliyye'],
+      hint: 'Hər sətirdə bir maddə: «2026: 1,2 mln AZN», «Kadr: 3 ştat».', hintEn: 'One item per line: “2026: AZN 1.2m”.' },
+    { k: 'desc', az: 'Təsvir', en: 'Description', t: 'text', al: ['description', 'desc', 'summary', 'tesvir', 'izah', 'qisa tesvir', 'haqqinda'],
+      hint: 'Proqram nədir, kimə xidmət edir.', hintEn: 'What the programme is and who it serves.' },
+    { k: 'start', az: 'Başlanğıc nöqtəsi / aprel vəziyyəti', en: 'Starting point / Status as of April', t: 'text', al: ['starting point/status as of april', 'starting point', 'status as of april', 'baseline', 'as of april', 'baslangic', 'baslangic noqtesi', 'aprel veziyyeti', 'aprel statusu'],
+      hint: 'Aprel ayına olan vəziyyət, başlanğıc rəqəmləri.', hintEn: 'Where things stood in April; baseline figures.' },
+    { k: 'kpi', az: 'KPI 2026 · 2027 · 2028', en: 'KPI 2026 2027 2028', t: 'kpi3', al: ['kpi 2026 2027 2028', 'kpi 2026-2028', 'kpis', 'kpi', 'kpi-lar', 'gostericiler', 'esas gostericiler', 'targets'],
+      hint: 'Cədvəl: hər KPI bir sətir, sütunlar KPI · 2026 · 2027 · 2028.', hintEn: 'Table: one KPI per line; columns KPI · 2026 · 2027 · 2028.' },
+    { k: 'inter', az: 'Digər təşəbbüslərlə qarşılıqlı asılılıq', en: 'Interdependencies with other initiatives', t: 'list', al: ['interdependencies with other initiatives', 'interdependencies', 'related initiatives', 'links', 'qarsiliqli asililiq', 'diger tesebbuslerle elaqe', 'elaqeli tesebbusler'],
+      hint: 'Hər sətirdə bir təşəbbüs. Başqa charterin adı və ya kodu, Plan sətri (8.2.9) yazsanız, keçid olur.', hintEn: 'One per line. Another charter’s name or code, or a Plan row, becomes a link.' },
+    { k: 'plan26', az: '2026 planı', en: 'Plan for 2026', t: 'plan', al: ['plan for 2026', 'plan 2026', '2026 plan', '2026 plani', '2026 ucun plan'],
+      hint: 'Cədvəl: hər tapşırıq bir sətir, sütunlar № · Tapşırıq · Məsul · Müddət.', hintEn: 'Table: one task per line; columns № · Tasks · Responsible · Timeline.' },
+    { k: 'plan27', az: '2027 planı', en: 'Plan for 2027', t: 'plan', al: ['plan for 2027', 'plan 2027', '2027 plan', '2027 plani', '2027 ucun plan'],
+      hint: 'Cədvəl: hər tapşırıq bir sətir, sütunlar № · Tapşırıq · Məsul · Müddət.', hintEn: 'Table: one task per line; columns № · Tasks · Responsible · Timeline.' },
+    { k: 'deps', az: 'Əsas asılılıqlar və mərhələlər', en: 'Key dependencies & milestones', t: 'dated', al: ['key dependencies & milestones', 'key dependencies and milestones', 'key dependencies', 'dependencies', 'esas asililiqlar', 'asililiqlar', 'esas asililiqlar ve merheleler'],
+      hint: 'Hər sətirdə biri: «Nədən asılıdır | kimdən | tarix».', hintEn: 'One per line: “What | from whom | date”.' },
+    { k: 'kpi26', az: '2026 sonuna KPI', en: 'KPI by end of 2026', t: 'target', al: ['kpi by end of 2026', 'kpi end of 2026', 'kpi 2026 end', '2026 sonuna kpi', '2026 ilin sonuna kpi', 'kpi by end 2026'],
+      hint: 'Cədvəl: hər KPI bir sətir, sütunlar KPI · Q1 · Q2 · Q3 · Q4 (rüb sonuna hədəf). Faktiki rəqəmi istəyə bağlı yazın və ya paneldə daxil edin.', hintEn: 'Table: one KPI per line; columns KPI · Q1 · Q2 · Q3 · Q4 (target by quarter end). Actual is optional, or enter it on the page.' },
+    { k: 'status', az: 'Status', en: 'Status', t: 'status', al: ['status', 'rag', 'veziyyet', 'cari status', 'current status', 'overall status'],
+      hint: 'Rəng və şərh: «Sarı — müqavilə gecikir». Rənglər: yaşıl, sarı, qırmızı, tamamlanıb, başlanmayıb.', hintEn: 'Colour and comment: “Amber — contract delayed”.' },
+    { k: 'next', az: 'Növbəti addımlar', en: 'Next steps', t: 'action', al: ['next steps', 'next step', 'novbeti addimlar', 'novbeti addim', 'next actions'],
+      hint: 'Hər sətirdə bir addım: «Addım | kim | tarix».', hintEn: 'One per line: “Step | who | date”.' },
+    { k: 'block', az: 'Maneələr', en: 'Blockers', t: 'action', al: ['blockers', 'blocker', 'issues', 'maneeler', 'mane', 'problemler'],
+      hint: 'Hər sətirdə bir maneə: «Nə | kim həll edə bilər | nə vaxtdan».', hintEn: 'One per line: “What | who can unblock | since when”.' },
+    { k: 'dec', az: 'Qəbul ediləcək qərarlar', en: 'Decisions to be taken', t: 'action', al: ['decisions to be taken', 'decisions', 'decisions needed', 'qerarlar', 'qebul edilecek qerarlar', 'lazim olan qerarlar'],
+      hint: 'Hər sətirdə bir qərar: «Qərar | kim qəbul edir | son tarix».', hintEn: 'One per line: “Decision | who decides | by when”.' },
+    { k: 'ms26', az: '2026 mərhələləri', en: 'Milestones for 2026', t: 'milestone', al: ['milestones for 2026', 'milestones 2026', '2026 milestones', 'milestones', '2026 merheleleri', 'merheleler'],
+      hint: 'Cədvəl: hər mərhələ bir sətir, sütunlar Tapşırıq · Məsul · Müddət (15.06.2026, iyun 2026 və ya Q2 2026) · Status (edildi, gecikir — istəyə bağlı).', hintEn: 'Table: one milestone per line; columns Tasks · Responsible · Timeline (15.06.2026, June 2026 or Q2 2026) · Status (optional).' },
+    { k: 'asof', az: 'Yenilənmə tarixi', en: 'Updated', t: 'date', al: ['updated', 'last updated', 'as of', 'date', 'yenilenme tarixi', 'tarix', 'yenilenib'],
+      hint: 'İstəyə bağlı: məlumatın hansı tarixə olduğu.', hintEn: 'Optional: the date the data is as of.' }
+  ];
+  var CHF = {}; CH_FIELDS.forEach(function (f) { CHF[f.k] = f; });
+  // table sections: their columns, in the order a «|»-separated line is read
+  var CH_PLAN_COLS = [['no', '№', '№', ['no', 'nomre', 'n', 'sira', 'number']], ['task', 'Tapşırıq', 'Tasks', ['tasks', 'task', 'tapsiriq', 'tapsiriqlar', 'is', 'isler', 'fealiyyet', 'activity', 'activities', 'tedbir']],
+    ['who', 'Məsul', 'Responsible', ['responsible', 'mesul', 'owner', 'cavabdeh', 'icraci', 'kim']], ['time', 'Müddət', 'Timeline', ['timeline', 'muddet', 'tarix', 'date', 'deadline', 'vaxt', 'son tarix', 'icra muddeti', 'due']]];
+  var CH_TAB = {
+    plan26: CH_PLAN_COLS, plan27: CH_PLAN_COLS,
+    kpi: [['name', 'KPI', 'KPI', ['kpi', 'ad', 'gosterici', 'name', 'indicator', 'metric']], ['2026', '2026', '2026', ['2026']], ['2027', '2027', '2027', ['2027']], ['2028', '2028', '2028', ['2028']]],
+    kpi26: [['name', 'KPI', 'KPI', ['kpi', 'ad', 'gosterici', 'name', 'indicator', 'metric']], ['q1', 'Q1', 'Q1', ['q1', '1 rub', 'i rub', 'rub 1']], ['q2', 'Q2', 'Q2', ['q2', '2 rub', 'ii rub', 'rub 2']], ['q3', 'Q3', 'Q3', ['q3', '3 rub', 'iii rub', 'rub 3']], ['q4', 'Q4', 'Q4', ['q4', '4 rub', 'iv rub', 'rub 4', 'il sonu', 'year end']],
+      ['act', 'Faktiki', 'Actual', ['faktiki', 'fakt', 'actual', 'cari', 'current', 'icra']]],
+    ms26: [['task', 'Tapşırıq', 'Tasks', ['tasks', 'task', 'tapsiriq', 'tapsiriqlar', 'milestone', 'merhele', 'ad', 'is']], ['who', 'Məsul', 'Responsible', ['responsible', 'mesul', 'owner', 'cavabdeh', 'icraci', 'kim']],
+      ['time', 'Müddət', 'Timeline', ['timeline', 'muddet', 'tarix', 'date', 'deadline', 'vaxt', 'son tarix', 'due']], ['st', 'Status', 'Status', ['status', 'veziyyet', 'icra veziyyeti']]]
+  };
+  function chSubOf(k, word) { var t = CH_TAB[k], w = chNorm(word); if (!t) return null; for (var i = 0; i < t.length; i++) if (t[i][3].indexOf(w) >= 0 || chNorm(t[i][1]) === w || chNorm(t[i][2]) === w) return t[i][0]; return null; }
+  var CH_HINT_COL = /^(nece|hint|example|numune|izah|tesvir ve numune|how to fill|nece doldurmali|sahe|field|bolme|section)\b/;
+  var CH_STATUS = [
+    ['b', 'Tamamlanıb', 'Done', /^(?:done|complete|completed|closed|tamam\w*|bitib|bitdi|icra edil\w*|edildi|b|blue|mavi)\b/],
+    ['r', 'Qırmızı', 'Red', /^(?:red|r|qirmizi|off ?track|critical|blocked|kritik|gecik\w*|delayed|late)\b/],
+    ['y', 'Sarı', 'Amber', /^(?:amber|yellow|a|y|sari|at ?risk|risk\w*|narahat\w*|diqqet|watch)\b/],
+    ['g', 'Yaşıl', 'Green', /^(?:green|g|yasil|on ?track|ok|qaydasindadir|qaydasinda|normal|plan uzre|planuzre|good)\b/],
+    ['x', 'Başlanmayıb', 'Not started', /^(?:not ?started|x|grey|gray|boz|baslanmayib|baslamayib|hele yox|planned|planlasdirilib|pending|gozlenilir)\b/]
+  ];
+  function chStatusName(s) { for (var i = 0; i < CH_STATUS.length; i++) if (CH_STATUS[i][0] === s) return T(CH_STATUS[i][1], CH_STATUS[i][2]); return T('Status yoxdur', 'No status'); }
+
+  /* ── CSV reading ── */
+  function chDecode(buf) {
+    var u8 = new Uint8Array(buf);
+    try { return { text: new TextDecoder('utf-8', { fatal: true }).decode(u8).replace(/^﻿/, ''), enc: 'utf-8' }; } catch (e) { /* not UTF-8 */ }
+    try { return { text: new TextDecoder('windows-1254').decode(u8), enc: 'windows-1254' }; } catch (e2) { return { text: new TextDecoder('utf-8').decode(u8), enc: 'utf-8?' }; }
+  }
+  function chDelim(text) {
+    var line = '', q = false;
+    for (var i = 0; i < text.length && i < 20000; i++) { var c = text[i]; if (c === '"') q = !q; else if (!q && (c === '\n' || c === '\r')) { if (line.trim()) break; line = ''; continue; } if (!q) line += c; }
+    var best = ',', n = -1;
+    ['\t', ';', ','].forEach(function (d) { var k = line.split(d).length - 1; if (k > n) { n = k; best = d; } });
+    return best;
+  }
+  function chParseCsv(text) {
+    text = String(text || '').replace(/^﻿/, '');
+    var d = chDelim(text), rows = [], row = [], cell = '', q = false, i = 0, c;
+    for (; i < text.length; i++) {
+      c = text[i];
+      if (q) { if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; continue; }
+      if (c === '"' && cell.trim() === '') { cell = ''; q = true; continue; }
+      if (c === d) { row.push(cell); cell = ''; continue; }
+      if (c === '\r') continue;
+      if (c === '\n') { row.push(cell); rows.push(row); row = []; cell = ''; continue; }
+      cell += c;
+    }
+    if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
+    rows = rows.filter(function (r) { return r.some(function (x) { return String(x).trim() !== ''; }); });
+    return { rows: rows, delim: d };
+  }
+  function chNorm(s) { return fold(s).replace(/[«»"'’`()\[\]{}*:.·•]/g, ' ').replace(/[&+]/g, ' and ').replace(/[\/,_\-–—]+/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function chMatch(header) {
+    var segs = String(header || '').split(/\s+\/\s+/);
+    for (var si = 0; si < segs.length; si++) {
+      var sp = /^(.+?)\s+[—–-]\s+(.+)$/.exec(segs[si].trim()) || /^(.+?):\s*(.+)$/.exec(segs[si].trim());
+      if (sp) { var base = chMatch1(sp[1]); if (base && CH_TAB[base.k]) { var sub = chSubOf(base.k, sp[2]); if (sub) return { k: base.k, sub: sub, score: 1 }; } }
+    }
+    return chMatch1(header);
+  }
+  function chMatch1(header) {
+    var h = chNorm(header);
+    if (!h) return null;
+    var ky = /^kpi\s*(?:for\s*|ucun\s*)?(202[6-8])$/.exec(h) || /^(202[6-8])\s*kpi$/.exec(h);
+    if (ky) return { k: 'kpi', year: ky[1], score: 1 };
+    var hw = h.split(' '), best = null;
+    CH_FIELDS.forEach(function (f) {
+      f.al.concat([f.az, f.en]).forEach(function (a) {
+        var an = chNorm(a), sc;
+        if (an === h) sc = 1;
+        else {
+          var aw = an.split(' '), inter = aw.filter(function (w) { return hw.indexOf(w) >= 0; }).length;
+          sc = inter / (aw.length + hw.length - inter);
+          if (h.indexOf(an) === 0 && an.length >= 4) sc = Math.max(sc, 0.55 + 0.4 * an.length / h.length);
+        }
+        if (!best || sc > best.score || (sc === best.score && an.length > best.len)) best = { k: f.k, score: sc, len: an.length };
+      });
+    });
+    return best && best.score >= 0.5 ? best : null;
+  }
+  function chMatchCount(cells) { var n = 0, seen = {}; cells.forEach(function (c) { var m = chMatch(c); if (m && !seen[m.k + (m.year || m.sub || '')]) { seen[m.k + (m.year || m.sub || '')] = 1; n++; } }); return n; }
+
+  function chImport(text) {
+    var p = chParseCsv(text), rows = p.rows, rep = { delim: p.delim, fields: [], unknown: [], warn: [], layout: 'rows', skipped: 0 };
+    if (!rows.length) throw new Error(T('Fayl boşdur.', 'The file is empty.'));
+    var width = Math.max.apply(null, rows.map(function (r) { return r.length; }));
+    var byRow = chMatchCount(rows[0]), byCol = chMatchCount(rows.map(function (r) { return r[0] || ''; }));
+    var headers, records = [];
+    if (byCol > byRow) {
+      rep.layout = 'cols';
+      headers = rows.map(function (r) { return r[0] || ''; });
+      var topRow = -1; headers.forEach(function (h, i) { if (topRow < 0 && !chMatch(h)) topRow = i; });
+      for (var j = 1; j < width; j++) {
+        var top = topRow >= 0 ? chNorm(rows[topRow][j] || '') : '';
+        if (CH_HINT_COL.test(top)) { rep.skipped++; continue; }
+        records.push(rows.map(function (r) { return r[j] == null ? '' : String(r[j]); }));
+      }
+    } else {
+      headers = rows[0];
+      records = rows.slice(1).map(function (r) { var o = []; for (var j2 = 0; j2 < headers.length; j2++) o.push(r[j2] == null ? '' : String(r[j2])); return o; });
+    }
+    var map = headers.map(function (h) { return chMatch(h); }), got = {};
+    headers.forEach(function (h, i) {
+      var m = map[i];
+      if (m) { var gk = m.k + (m.year || m.sub || ''); if (!got[gk]) { got[gk] = 1; got[m.k] = 1; rep.fields.push({ h: String(h).trim(), k: m.k, year: m.year || '', sub: m.sub || '' }); } }
+      else if (String(h).trim() && !CH_HINT_COL.test(chNorm(h))) rep.unknown.push(String(h).trim());
+    });
+    if (!got.name) throw new Error(T('«Charter adı» sütunu və ya sətri tapılmadı. Şablondakı adları saxlayın.', 'No “Charter name” column or row was found. Keep the names from the template.'));
+    var out = [];
+    records.forEach(function (rec) {
+      var raw = {}, kpiY = {}, subs = {};
+      headers.forEach(function (h, i) {
+        var m = map[i], v = String(rec[i] == null ? '' : rec[i]).replace(/\s+$/, '');
+        if (!m || !v.trim()) return;
+        if (m.sub) { (subs[m.k] = subs[m.k] || {})[m.sub] = v; return; }
+        v = v.trim();
+        if (m.year) { kpiY[m.year] = v; return; }
+        raw[m.k] = raw[m.k] ? raw[m.k] + '\n' + v : v;
+      });
+      // sub-columns («Plan for 2026 — Tasks», «… — Responsible» …) are read line by line and joined into «|» lines
+      Object.keys(subs).forEach(function (k) {
+        var cols = CH_TAB[k], lines = {}, n = 0;
+        cols.forEach(function (c) { lines[c[0]] = subs[k][c[0]] != null ? String(subs[k][c[0]]).split(/\r?\n/) : []; n = Math.max(n, lines[c[0]].length); });
+        var out = [];
+        for (var li = 0; li < n; li++) {
+          var row = cols.map(function (c) { return (lines[c[0]][li] || '').trim().replace(/\|/g, '/'); });
+          if (row.some(Boolean)) out.push(cols.map(function (c, ci) { return c[0] + '=' + row[ci]; }).join(' | '));
+        }
+        if (out.length) raw[k] = (raw[k] ? raw[k] + '\n' : '') + out.join('\n');
+      });
+      if (!raw.name) return;
+      if (/^(numune|example)\b/.test(chNorm(raw.name))) { rep.skipped++; return; }
+      var c = chBuild(raw, kpiY, rep);
+      out.push(c);
+    });
+    if (!out.length) throw new Error(T('Heç bir charterin adı doldurulmayıb.', 'No charter has a name filled in.'));
+    var ids = {};
+    out.forEach(function (c) { var b = c.id, k = 2; while (ids[c.id]) c.id = b + '-' + (k++); ids[c.id] = 1; });
+    rep.n = out.length;
+    return { list: out, rep: rep };
+  }
+  function chSlug(s) { return fold(s).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'charter'; }
+  function chLines(v) {
+    var ls = String(v || '').split(/\r?\n/);
+    if (ls.length === 1 && ls[0].indexOf(';') >= 0) ls = ls[0].split(';');
+    return ls.map(function (x) { return x.replace(/^\s*(?:[-–—•*·▪●]|\d{1,2}[.)](?!\d))\s*/, '').trim(); }).filter(Boolean);
+  }
+  function chParts(line) { return line.split(/\s*\|\s*/).map(function (x) { return x.trim(); }); }
+  var CH_MON = { yan: 1, jan: 1, fev: 2, feb: 2, mar: 3, apr: 4, may: 5, iyun: 6, jun: 6, iyul: 7, jul: 7, avq: 8, aug: 8, sen: 9, sep: 9, okt: 10, oct: 10, noy: 11, nov: 11, dek: 12, dec: 12 };
+  function chPad(n) { return ('0' + n).slice(-2); }
+  function chLastDay(y, m) { return new Date(y, m, 0).getDate(); }
+  // reads one date out of free text; returns { iso, txt, approx } or null
+  function chDate(s) {
+    var t = fold(s), m;
+    if ((m = /(20\d\d)-(\d{1,2})-(\d{1,2})/.exec(t))) return { iso: m[1] + '-' + chPad(+m[2]) + '-' + chPad(+m[3]), txt: m[0] };
+    if ((m = /(\d{1,2})[./](\d{1,2})[./](20\d\d|\d\d)\b/.exec(t))) { var y = m[3].length === 2 ? '20' + m[3] : m[3]; if (+m[2] >= 1 && +m[2] <= 12) return { iso: y + '-' + chPad(+m[2]) + '-' + chPad(+m[1]), txt: m[0] }; }
+    if ((m = /\b(?:q|r)\s?([1-4])\s*(?:'|,)?\s*(20\d\d)\b/.exec(t)) || (m = /\b([1-4])\s*(?:-?ci|-?cu|-?cü|-?ci)?\s*(?:rub|quarter|kv)\w*\s*(20\d\d)\b/.exec(t))) { var mm = +m[1] * 3; return { iso: m[2] + '-' + chPad(mm) + '-' + chLastDay(+m[2], mm), txt: m[0], approx: 1 }; }
+    if ((m = /\b(20\d\d)\s*(?:q|r)\s?([1-4])\b/.exec(t))) { var mq = +m[2] * 3; return { iso: m[1] + '-' + chPad(mq) + '-' + chLastDay(+m[1], mq), txt: m[0], approx: 1 }; }
+    if ((m = /\bh([12])\s*(20\d\d)\b/.exec(t))) { var mh = m[1] === '1' ? 6 : 12; return { iso: m[2] + '-' + chPad(mh) + '-' + chLastDay(+m[2], mh), txt: m[0], approx: 1 }; }
+    if ((m = /(\d{1,2})?\s*\b(yan|jan|fev|feb|mar|apr|may|iyun|jun|iyul|jul|avq|aug|sen|sep|okt|oct|noy|nov|dek|dec)[a-z]*\.?\s*,?\s*(20\d\d)/.exec(t))) {
+      var mo = CH_MON[m[2]]; if (m[1]) return { iso: m[3] + '-' + chPad(mo) + '-' + chPad(+m[1]), txt: m[0].trim() };
+      return { iso: m[3] + '-' + chPad(mo) + '-' + chLastDay(+m[3], mo), txt: m[0].trim(), approx: 1 };
+    }
+    if ((m = /\b(ilin sonu|year end|end of year|il sonu)\b/.exec(t))) return { iso: '2026-12-31', txt: m[0], approx: 1 };
+    return null;
+  }
+  function chItemState(s) {
+    var t = fold(s);
+    if (/(\[x\]|✓|✔|\bdone\b|\bcompleted?\b|tamamland|tamamlanib|\bedildi\b|icra edildi|\bbitib\b|\bhazirdir\b|\bresolved\b|hell edildi|qebul edildi|\btaken\b)/.test(t)) return 'done';
+    if (/(\bgecik|\bdelayed\b|\blate\b|\boverdue\b|vaxti kecib)/.test(t)) return 'late';
+    if (/(\brisk\b|\bat risk\b|riskli)/.test(t)) return 'risk';
+    if (/(\bdavam edir\b|\bin progress\b|\bongoing\b|icradadir|\bicrada\b)/.test(t)) return 'wip';
+    return '';
+  }
+  // «name=…» parts come from sub-columns; plain parts are positional
+  function chKeyed(p) {
+    if (!p.length || !/^[a-z0-9]+=/.test(p[0])) return null;
+    var o = {}; p.forEach(function (x) { var i = x.indexOf('='); if (i > 0) o[x.slice(0, i)] = x.slice(i + 1).trim(); }); return o;
+  }
+  function chPlanRow(l, i) {
+    var p = chParts(l), kv = chKeyed(p), o = { no: '', t: '', w: '', dt: '' };
+    if (kv) { o.no = kv.no || ''; o.t = kv.task || ''; o.w = kv.who || ''; o.dt = kv.time || ''; }
+    else {
+      var q = p.slice();
+      if (q.length > 1 && /^\d{1,3}[.)]?$/.test(q[0])) o.no = q.shift().replace(/[.)]$/, '');
+      o.t = q[0] || '';
+      if (q.length >= 3) { o.w = q[1]; o.dt = q.slice(2).join(' · '); }
+      else if (q.length === 2) { if (chDate(q[1]) || /\b(q[1-4]|rub|ay|month|week|hefte|il sonu|year)\b/i.test(fold(q[1])) || /\d/.test(q[1])) o.dt = q[1]; else o.w = q[1]; }
+    }
+    if (!o.no) o.no = String(i + 1);
+    var d = o.dt ? chDate(o.dt) : null; o.d = d ? d.iso : ''; o.ap = d && d.approx ? 1 : 0;
+    o.h = chHash(o.t);
+    return o;
+  }
+  function chStateOf(p, l) { var x = p.slice(1).filter(chIsState)[0]; return x ? chItemState(x) : (/\[x\]|✓|✔/i.test(l) ? 'done' : ''); }
+  // a cell that is only a status word («edildi», «gecikir», «done»…)
+  function chIsState(x) { return /^(?:\[x\]|✓|✔|done|completed?|edildi|icra edildi|icra olunub|tamamlan\w*|bitib|hazirdir|resolved|hell edildi|qebul edildi|taken|gecikir|gecikib|delayed|late|overdue|risk|at risk|riskli|davam edir|icradadir|in progress|ongoing|planned|planda|plan)$/.test(fold(String(x || '')).trim()); }
+  function chStripState(s) { return s.replace(/\s*\[(?:x| )\]\s*/i, ' ').replace(/[✓✔]/g, '').trim(); }
+  function chNum(s) {
+    var t = String(s || '').replace(/\s/g, '').replace(/,(\d{3})(?!\d)/g, '$1').replace(',', '.'), m = /(-?\d+(?:\.\d+)?)\s*(%|k|m|mln|mlrd|bn|min)?/i.exec(t);
+    if (!m) return null;
+    var n = parseFloat(m[1]), u = (m[2] || '').toLowerCase();
+    if (u === 'k' || u === 'min') n *= 1e3; else if (u === 'm' || u === 'mln') n *= 1e6; else if (u === 'mlrd' || u === 'bn') n *= 1e9;
+    return n;
+  }
+  function chHash(s) { var h = 5381, t = fold(s).replace(/\s+/g, ' ').trim(); for (var i = 0; i < t.length; i++) h = ((h * 33) ^ t.charCodeAt(i)) >>> 0; return h.toString(36); }
+
+  function chBuild(raw, kpiY, rep) {
+    var c = { id: chSlug(raw.code || raw.name), name: raw.name.split(/\r?\n/)[0].trim() };
+    ['code', 'owner', 'goal', 'desc', 'start'].forEach(function (k) { if (raw[k]) c[k] = raw[k]; });
+    if (raw.asof) { var da = chDate(raw.asof); c.asof = da ? da.iso : raw.asof; }
+    if (raw.team) c.team = chLines(raw.team).map(function (l) {
+      var m = /^(.+?)\s*(?:\(([^)]+)\)|\s[—–-]\s|\s*\|\s*|:\s+|,\s+)(.*)$/.exec(l);
+      if (!m) return { n: l, r: '' };
+      return { n: m[1].trim(), r: (m[2] || m[3] || '').trim() };
+    });
+    if (raw.budget) c.budget = chLines(raw.budget).map(function (l) {
+      var m = /^([^:|]+?)\s*[:|]\s*(.+)$/.exec(l) || /^(.+?)\s+[—–-]\s+(.+)$/.exec(l);
+      return m ? { l: m[1].trim(), v: m[2].trim() } : { l: '', v: l };
+    });
+    var kp = [];
+    if (raw.kpi) chLines(raw.kpi).forEach(function (l) {
+      var parts = chParts(l), name, vals = {}, kv = chKeyed(parts);
+      if (kv) { name = kv.name || ''; ['2026', '2027', '2028'].forEach(function (y) { if (kv[y]) vals[y] = kv[y]; }); }
+      else if (parts.length > 1) { name = parts[0]; var rest = parts.slice(1); if (rest.some(function (x) { return /^(202[6-8])\s*[:=]/.test(x); })) rest.forEach(function (x) { var m = /^(202[6-8])\s*[:=]\s*(.*)$/.exec(x); if (m) vals[m[1]] = m[2]; }); else rest.forEach(function (x, i) { if (i < 3) vals[2026 + i] = x; }); }
+      else {
+        var yr = /(202[6-8])\s*[:=]\s*([^;,]+)/g, mm, any = false;
+        while ((mm = yr.exec(l))) { vals[mm[1]] = mm[2].trim(); any = true; }
+        if (any) name = l.slice(0, l.search(/202[6-8]\s*[:=]/)).replace(/[\s:—–-]+$/, '').trim() || l;
+        else {
+          var m2 = /^(.+?)\s*[:—–]\s*(.+)$/.exec(l);
+          if (m2) { name = m2[1].trim(); var vs = m2[2].split(/\s*[\/;→>]\s*/); vs.forEach(function (x, i) { if (i < 3 && x) vals[2026 + i] = x.trim(); }); }
+          else name = l;
+        }
+      }
+      kp.push({ n: name, y: [vals[2026] || vals['2026'] || '', vals[2027] || vals['2027'] || '', vals[2028] || vals['2028'] || ''] });
+    });
+    ['2026', '2027', '2028'].forEach(function (y, yi) {
+      if (!kpiY[y]) return;
+      chLines(kpiY[y]).forEach(function (l, i) {
+        var parts = chParts(l), name = parts.length > 1 ? parts[0] : '', val = parts.length > 1 ? parts[1] : l;
+        if (!name) { var m3 = /^(.+?)\s*[:—–]\s*(.+)$/.exec(l); if (m3) { name = m3[1]; val = m3[2]; } }
+        var row = name ? kp.filter(function (r) { return fold(r.n) === fold(name); })[0] : kp[i];
+        if (!row) { row = { n: name || ('KPI ' + (kp.length + 1)), y: ['', '', ''] }; kp.push(row); }
+        row.y[yi] = val;
+      });
+    });
+    if (kp.length) c.kpi = kp;
+    if (raw.inter) c.inter = chLines(raw.inter);
+    var p26 = raw.plan26 ? chLines(raw.plan26) : [], p27 = raw.plan27 ? chLines(raw.plan27) : [];
+    // a combined «Plan for 2026, plan for 2027» cell: split by year markers
+    if (p26.length && !p27.length) {
+      var cur = '26', a = [], b = [], seen = false;
+      p26.forEach(function (l) {
+        var m = /^(?:plan\s*(?:for)?\s*)?(2026|2027)\s*(?:plani|planı|plan|ucun|üçün|il)?\s*[:—–-]\s*(.*)$/i.exec(l);
+        if (m) { seen = true; cur = m[1].slice(2); if (m[2]) (cur === '27' ? b : a).push(m[2]); return; }
+        (cur === '27' ? b : a).push(l);
+      });
+      if (seen) { p26 = a; p27 = b; }
+    }
+    if (p26.length) c.plan26 = p26.map(function (l, i) { return chPlanRow(l, i); });
+    if (p27.length) c.plan27 = p27.map(function (l, i) { return chPlanRow(l, i); });
+    if (raw.deps) c.deps = chLines(raw.deps).map(function (l) { var p = chParts(l), d = chDate(l); return { t: p[0], w: p.length > 2 ? p[1] : '', d: d ? d.iso : '', dt: d ? d.txt : (p.length > 1 ? p[p.length - 1] : '') }; });
+    if (raw.kpi26) c.kpi26 = chLines(raw.kpi26).map(function (l) {
+      var p = chParts(l), kv = chKeyed(p), o = { n: '', q: ['', '', '', ''], ac: '' };
+      if (kv) { o.n = kv.name || ''; o.q = [kv.q1 || '', kv.q2 || '', kv.q3 || '', kv.q4 || '']; o.ac = kv.act || ''; }
+      else {
+        o.n = p[0];
+        var rest = p.slice(1);
+        if (p.length === 1) { var m = /^(.+?)\s*[:—–]\s*(.+)$/.exec(l); if (m) { o.n = m[1].trim(); rest = m[2].split(/\s*[;\/]\s*/); } }
+        var pos = 0;
+        rest.forEach(function (x) {
+          var mq = /^(?:q|r)\s?([1-4])\s*[:=]\s*(.*)$/i.exec(x.trim()), ma = /^(?:faktiki|fakt|actual|cari)\s*[:=]\s*(.*)$/i.exec(fold(x.trim()));
+          if (mq) o.q[+mq[1] - 1] = mq[2]; else if (ma) o.ac = x.replace(/^[^:=]*[:=]\s*/, ''); else if (pos < 4) o.q[pos++] = x; else if (!o.ac) o.ac = x;
+        });
+      }
+      o.h = chHash(o.n);
+      return o;
+    }).filter(function (o) { return o.n || o.q.some(Boolean); });
+    if (raw.status) {
+      var st = raw.status.trim().replace(/\r?\n/g, ' '), s = '', note = st;
+      var em = /^\s*(🟢|🟡|🟠|🔴|🔵|⚪)\s*/.exec(st);
+      if (em) { s = { '🟢': 'g', '🟡': 'y', '🟠': 'y', '🔴': 'r', '🔵': 'b', '⚪': 'x' }[em[1]]; st = st.slice(em[0].length); note = st.replace(/^[—–:|,\-\s]+/, ''); }
+      var hm = /^\s*([^—–:|,(]+?)\s*(?:[—–:|,(]\s*(.*))?$/.exec(st), head = hm ? chNorm(hm[1]) : '';
+      var find = function (txt) { var r = ''; CH_STATUS.forEach(function (x) { if (!r && x[3].test(txt)) r = x[0]; }); return r; };
+      if (!s && head && head.split(' ').length <= 4 && find(head)) { s = find(head); note = (hm[2] || '').replace(/\)\s*$/, ''); }
+      if (!s && find(chNorm(st))) { s = find(chNorm(st)); note = chNorm(st).split(' ').length <= 3 ? '' : st; }
+      c.status = { s: s, note: note.trim() };
+      if (!s) rep.warn.push(c.name + ': ' + T('status rəngi anlaşılmadı («', 'status colour not recognised (“') + st.slice(0, 30) + T('»)', '”)'));
+    }
+    ['next', 'block', 'dec'].forEach(function (k) {
+      if (!raw[k]) return;
+      c[k] = chLines(raw[k]).map(function (l) {
+        var p = chParts(l), d = chDate(p.length > 1 ? p.slice(1).join(' | ') : l), txt = chStripState(p[0]);
+        var w = p.length > 1 && !(d && fold(p[1]).indexOf(d.txt) >= 0) && !chIsState(p[1]) ? p[1] : '';
+        return { h: chHash(txt), t: txt, w: w, d: d ? d.iso : '', st: chStateOf(p, l) };
+      });
+    });
+    if (raw.ms26) c.ms26 = chLines(raw.ms26).map(function (l) {
+      var p = chParts(l), kv = chKeyed(p), task = '', who = '', time = '', st = '';
+      if (kv) { task = kv.task || ''; who = kv.who || ''; time = kv.time || ''; st = kv.st || ''; }
+      else {
+        var restP = [];
+        p.forEach(function (x) {
+          if (!x || /^\d{1,3}[.)]?$/.test(x)) return;
+          if (!time && chDate(x) && fold(x).replace(chDate(x).txt, '').replace(/[\s.,|-]/g, '').length < 6) { time = x; return; }
+          if (!st && p.length > 1 && chIsState(x)) { st = x; return; }
+          restP.push(x);
+        });
+        task = restP[0] || ''; who = restP[1] || '';
+        if (!time && p.length === 1) { var dd = chDate(l); if (dd) { var fi = fold(l).indexOf(dd.txt); task = (l.slice(0, fi) + ' ' + l.slice(fi + dd.txt.length)).replace(/\s+/g, ' ').replace(/^[\s:—–|-]+|[\s:—–|-]+$/g, '') || l; time = dd.txt; } }
+      }
+      task = chStripState(task || l);
+      var d = time ? chDate(time) : null;
+      if (!d && time) rep.warn.push(c.name + ': ' + T('mərhələnin müddəti tarix kimi anlaşılmadı — «', 'milestone timeline not read as a date — “') + time.slice(0, 30) + T('»', '”'));
+      if (!time) rep.warn.push(c.name + ': ' + T('mərhələnin müddəti yoxdur — «', 'milestone has no timeline — “') + task.slice(0, 40) + T('»', '”'));
+      return { h: chHash(task), t: task, w: who, d: d ? d.iso : '', dt: time, ap: d && d.approx ? 1 : 0, st: st ? chItemState(st) : (/\[x\]|✓|✔/i.test(l) ? 'done' : '') };
+    }).sort(function (a, b) { return (a.d || '9999') < (b.d || '9999') ? -1 : 1; });
+    return c;
+  }
+
+  /* ── storage, overlay and derived numbers ── */
+  function chList() { var l = store.get('charters', null); return l && Array.isArray(l.list) ? l : { list: [], at: 0 }; }
+  function chGet(id) { return chList().list.filter(function (c) { return c.id === id; })[0] || null; }
+  function chOv(id) { return store.get('chx:' + id, {}); }
+  function chSetOv(id, patch) { var o = chOv(id); Object.keys(patch).forEach(function (k) { o[k] = patch[k]; }); o.t = Date.now(); store.set('chx:' + id, o); }
+  function chItemDone(c, k, it) { var o = chOv(c.id), m = o[k] || {}; return m[it.h] != null ? !!m[it.h] : it.st === 'done'; }
+  function chStatus(c) {
+    var o = chOv(c.id), imp = chList().at || 0;
+    if (o.s && o.st > imp) return { s: o.s, note: o.note != null ? o.note : ((c.status || {}).note || ''), local: 1 };
+    return c.status || { s: '', note: '' };
+  }
+  function chMsInfo(c) {
+    var t = today(), list = c.ms26 || [], done = 0, late = 0, next = null;
+    list.forEach(function (m) { var d = chItemDone(c, 'ms', m); if (d) done++; else { if (m.d && m.d < t) late++; if (m.d && m.d >= t && (!next || m.d < next.d)) next = m; } });
+    return { n: list.length, done: done, late: late, next: next, p: list.length ? done / list.length : null };
+  }
+  function chAct(c, r) { var o = chOv(c.id).act || {}; return o[r.h] != null && o[r.h] !== '' ? o[r.h] : r.ac; }
+  function chTgt(r) { for (var i = 3; i >= 0; i--) if (chNum(r.q[i]) != null) return { i: i, v: chNum(r.q[i]), raw: r.q[i] }; return null; }
+  function chKP(c, r) { var a = chNum(chAct(c, r)), t = chTgt(r); return a != null && t && t.v ? Math.max(0, Math.min(1, a / t.v)) : null; }
+  function chQnow() { var t = today(); return t < '2026-01-01' ? -1 : t > '2026-12-31' ? 4 : Math.floor((+t.slice(5, 7) - 1) / 3); }
+  function chKpiP(c) { var ps = (c.kpi26 || []).map(function (r) { return chKP(c, r); }).filter(function (x) { return x != null; }); return ps.length ? ps.reduce(function (a, x) { return a + x; }, 0) / ps.length : null; }
+  function chOpen(c, k) { return (c[k] || []).filter(function (it) { return !chItemDone(c, k, it); }); }
+  function chFilled(c) { var keys = CH_FIELDS.filter(function (f) { return f.k !== 'name' && f.k !== 'asof'; }); return { n: keys.filter(function (f) { var v = c[f.k]; return v && (!Array.isArray(v) || v.length) && (f.k !== 'status' || v.s || v.note); }).length, of: keys.length, miss: keys.filter(function (f) { var v = c[f.k]; return !v || (Array.isArray(v) && !v.length); }) }; }
+  function chDateTxt(iso, ap) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); if (!m) return iso || '';
+    var mn = EN ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+m[2] - 1] : MONTHS[+m[2] - 1];
+    return ap ? (EN ? mn + ' ' + m[1] : mn + ' ' + m[1]) : (+m[3]) + ' ' + mn + ' ' + m[1];
+  }
+  function chDays(iso) { return Math.round((new Date(iso + 'T00:00:00') - new Date(today() + 'T00:00:00')) / 864e5); }
+  function chInitials(n) { return String(n || '?').split(/\s+/).filter(Boolean).slice(0, 2).map(function (w) { return w[0]; }).join('').toUpperCase(); }
+  function chRing(p, size, cls) {
+    var r = 15.9155, v = p == null ? 0 : Math.round(p * 100);
+    return '<svg class="chring ' + (cls || '') + '" viewBox="0 0 36 36" width="' + size + '" height="' + size + '" aria-hidden="true"><circle cx="18" cy="18" r="' + r + '" class="chring__bg"/>' +
+      (p == null ? '' : '<circle cx="18" cy="18" r="' + r + '" class="chring__fg" stroke-dasharray="' + v + ' ' + (100 - v) + '" transform="rotate(-90 18 18)"/>') + '</svg>';
+  }
+  function chLinkify(text, self) {
+    var out = esc(text), list = chList().list;
+    out = out.replace(/\b(8\.\d{1,2}\.\d{1,2}[a-z]?)\b/g, function (m) { return '<button type="button" class="chlink" data-chplan="' + m + '">' + m + '</button>'; });
+    list.forEach(function (o) {
+      if (o.id === self) return;
+      [o.code, o.name].forEach(function (key) {
+        if (!key || key.length < 3) return;
+        var re = new RegExp('(^|[^\\w>])(' + esc(key).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(?![\\w<])', 'i');
+        if (re.test(out) && out.indexOf('data-ch="' + o.id + '"') < 0) out = out.replace(re, '$1<a class="chlink" href="#c-' + o.id + '" data-ch="' + o.id + '">$2</a>');
+      });
+    });
+    return out;
+  }
+
+  /* ── template files ── */
+  function chCsvQ(v) { v = String(v == null ? '' : v); return /[",;\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+  function chSpec() {
+    var out = [];
+    CH_FIELDS.forEach(function (f) {
+      if (CH_TAB[f.k]) CH_TAB[f.k].forEach(function (sc) { out.push({ k: f.k, sub: sc[0], label: EN ? f.en + ' — ' + sc[2] : f.az + ' — ' + sc[1] + ' / ' + f.en + ' — ' + sc[2], f: f, sc: sc }); });
+      else out.push({ k: f.k, sub: '', label: EN ? f.en : f.az + ' / ' + f.en, f: f });
+    });
+    return out;
+  }
+  function chSubHint(r) {
+    if (!r.sub) return (r.f.req ? T('MƏCBURİ. ', 'REQUIRED. ') : '') + T(r.f.hint, r.f.hintEn);
+    var first = CH_TAB[r.k][0][0] === r.sub, H = {
+      no: T('Sıra nömrəsi; boş qalsa, özü nömrələnir.', 'Row number; numbered automatically if left empty.'),
+      task: T('Hər tapşırıq yeni sətirdə (Excel-də Alt+Enter).', 'Each task on a new line (Alt+Enter in Excel).'),
+      who: T('Hər sətirdə yuxarıdakı tapşırığın məsulu, eyni sırada.', 'The responsible person for each task, in the same order.'),
+      time: T('Hər sətirdə müddət: 15.06.2026, iyun 2026 və ya Q2 2026.', 'Each line a timeline: 15.06.2026, June 2026 or Q2 2026.'),
+      name: T('Hər KPI yeni sətirdə.', 'Each KPI on a new line.'),
+      '2026': T('Hər KPI üçün 2026 hədəfi, eyni sırada.', 'The 2026 target for each KPI, same order.'), '2027': T('2027 hədəfi, eyni sırada.', '2027 target, same order.'), '2028': T('2028 hədəfi, eyni sırada.', '2028 target, same order.'),
+      q1: T('Hər KPI üçün 1-ci rübün sonuna hədəf.', 'Target by the end of Q1 for each KPI.'), q2: T('2-ci rübün sonuna hədəf.', 'Target by the end of Q2.'), q3: T('3-cü rübün sonuna hədəf.', 'Target by the end of Q3.'), q4: T('İlin sonuna hədəf.', 'Target by year end.'),
+      act: T('İstəyə bağlı: indiki faktiki rəqəm. Paneldə də yazmaq olar.', 'Optional: the current actual. It can also be entered on the page.'),
+      st: T('İstəyə bağlı: edildi, gecikir, risk.', 'Optional: done, late, at risk.')
+    }[r.sub] || '';
+    return (first ? T(r.f.hint, r.f.hintEn) + ' ' : '') + H;
+  }
+  var CH_EX = {
+    name: 'NÜMUNƏ — Startap vauçer proqramı', code: 'CH-01', owner: 'Ad Soyad, şöbə müdiri',
+    goal: '2028-ə qədər 300 startap ilk müştərisini tapır və 40-ı xarici bazara çıxır.',
+    team: 'Ad Soyad — proqram rəhbəri\nAd Soyad — maliyyə\nAd Soyad — tərəfdaşlarla iş', budget: '2026: 1,5 mln AZN\n2027: 2 mln AZN\nKadr: 4 ştat',
+    desc: 'Erkən mərhələli startaplara ekspert xidmətləri üçün vauçerlər verilir.', start: 'Aprel 2026: qaydalar layihəsi hazırdır, operator seçilməyib.',
+    'kpi.name': 'Vauçer alan startap sayı\nXarici bazara çıxan startap', 'kpi.2026': '60\n5', 'kpi.2027': '120\n15', 'kpi.2028': '300\n40',
+    inter: 'CH-02 Akselerasiya proqramı\n8.2.9',
+    'plan26.no': '1\n2\n3', 'plan26.task': 'Qaydaları təsdiqə göndərmək\nOperatoru seçmək\nİlk çağırışı elan etmək', 'plan26.who': 'Ad Soyad\nSatınalma şöbəsi\nAd Soyad', 'plan26.time': '30.06.2026\nQ3 2026\n15.12.2026',
+    'plan27.no': '1\n2', 'plan27.task': 'İkinci və üçüncü çağırış\nNəticələrin qiymətləndirilməsi', 'plan27.who': 'Ad Soyad\nMonitorinq şöbəsi', 'plan27.time': 'H1 2027\nQ4 2027',
+    deps: 'Qaydaların təsdiqi | Nazirlik | 30.06.2026\nMaliyyələşmə | Maliyyə şöbəsi | Q3 2026',
+    'kpi26.name': 'Vauçer alan startap sayı\nİstifadə olunan büdcə, %', 'kpi26.q1': '0\n5', 'kpi26.q2': '10\n20', 'kpi26.q3': '30\n50', 'kpi26.q4': '60\n100', 'kpi26.act': '18\n35',
+    status: 'Sarı — operatorun seçilməsi gecikir', next: 'Operator üçün texniki tapşırıq | Ad Soyad | 05.12.2026\nRəhbərliyə status təqdimatı | Ad Soyad | 15.12.2026',
+    block: 'Satınalma planına daxil edilməyib | Maliyyə şöbəsi', dec: 'Vauçerin maksimal məbləği | Rəhbərlik | 20.12.2026',
+    'ms26.task': 'Konsepsiya təsdiqləndi\nQaydalar təsdiqləndi\nOperator seçildi\nİlk çağırış elan edildi', 'ms26.who': 'Ad Soyad\nNazirlik\nSatınalma şöbəsi\nAd Soyad',
+    'ms26.time': '31.03.2026\n30.06.2026\nQ3 2026\n15.12.2026', 'ms26.st': 'edildi\nedildi\ngecikir\n', asof: '23.11.2026'
+  };
+  function chTemplate(layout) {
+    var spec = chSpec(), rows;
+    var ex = function (r) { return CH_EX[r.sub ? r.k + '.' + r.sub : r.k] || ''; };
+    if (layout === 'cols') {
+      rows = [[T('Sahə', 'Field'), T('Necə doldurmalı', 'How to fill in'), 'Charter 1', 'Charter 2', 'Charter 3', T('Nümunə', 'Example')]];
+      spec.forEach(function (r) { rows.push([r.label, chSubHint(r), '', '', '', ex(r)]); });
+    } else {
+      rows = [spec.map(function (r) { return r.label; }), spec.map(ex), spec.map(function () { return ''; })];
+    }
+    return '﻿' + rows.map(function (r) { return r.map(chCsvQ).join(';'); }).join('\r\n') + '\r\n';
+  }
+  function chIsoDmy(iso) { return iso ? iso.split('-').reverse().join('.') : ''; }
+  function chSer(c, k, sub) {
+    var v = c[k]; if (v == null) return '';
+    var col = function (key) { return v.map(function (r) { return r[key] == null ? '' : String(r[key]).replace(/\r?\n/g, ' '); }).join('\n'); };
+    if (sub) switch (k) {
+      case 'plan26': case 'plan27': return col({ no: 'no', task: 't', who: 'w', time: 'dt' }[sub]);
+      case 'kpi': return sub === 'name' ? col('n') : v.map(function (r) { return r.y[+sub - 2026] || ''; }).join('\n');
+      case 'kpi26': return sub === 'name' ? col('n') : sub === 'act' ? v.map(function (r) { return chAct(c, r) || ''; }).join('\n') : v.map(function (r) { return r.q[+sub.slice(1) - 1] || ''; }).join('\n');
+      case 'ms26': return sub === 'task' ? col('t') : sub === 'who' ? col('w') : sub === 'time' ? v.map(function (m) { return m.dt || chIsoDmy(m.d); }).join('\n') : v.map(function (m) { return chItemDone(c, 'ms', m) ? 'edildi' : m.st === 'late' ? 'gecikir' : m.st === 'risk' ? 'risk' : ''; }).join('\n');
+    }
+    switch (k) {
+      case 'team': return v.map(function (p) { return p.n + (p.r ? ' — ' + p.r : ''); }).join('\n');
+      case 'budget': return v.map(function (b) { return (b.l ? b.l + ': ' : '') + b.v; }).join('\n');
+      case 'deps': return v.map(function (r) { return [r.t, r.w, r.dt].filter(Boolean).join(' | '); }).join('\n');
+      case 'status': var st = chStatus(c); return (st.s ? chStatusName(st.s) : '') + (st.note ? (st.s ? ' — ' : '') + st.note : '');
+      case 'next': case 'block': case 'dec': var ok = k === 'next' ? 'edildi' : k === 'block' ? 'həll edildi' : 'qəbul edildi';
+        return v.map(function (it) { return [it.t, it.w, chIsoDmy(it.d)].filter(Boolean).join(' | ') + (chItemDone(c, k, it) ? ' | ' + ok : ''); }).join('\n');
+      case 'asof': return chIsoDmy(today());
+      default: return Array.isArray(v) ? v.join('\n') : v;
+    }
+  }
+  function chExport() {
+    var L = chList().list, spec = chSpec();
+    var rows = [[T('Sahə', 'Field')].concat(L.map(function (c, i) { return 'Charter ' + (i + 1); }))];
+    spec.forEach(function (r) { rows.push([r.label].concat(L.map(function (c) { return chSer(c, r.k, r.sub); }))); });
+    return '﻿' + rows.map(function (r) { return r.map(chCsvQ).join(';'); }).join('\r\n') + '\r\n';
+  }
+  function chSaveCsv(name, text) { saveFile(name, text); }
+
+  /* ── import flow ── */
+  var chUi = { view: 'cards', f: '', q: '', rep: null, sec: '' };
+  try { chUi.view = store.get('ch:view', 'cards'); } catch (e) { /* default */ }
+  function chApply(res, srcName) {
+    var old = chList(), ovKeep = 0, now = Date.now();
+    old.list.forEach(function (c) { var st = chOv(c.id).st || 0; if (st >= now) now = st + 1; });   // a new upload is always newer than earlier status edits
+    var oldIds = {}; old.list.forEach(function (c) { oldIds[c.id] = 1; });
+    res.list.forEach(function (c) { if (oldIds[c.id]) ovKeep++; });
+    var hist = store.get('ch:hist', []);
+    hist.push({ t: now, s: res.list.reduce(function (o, c) { o[c.id] = (c.status || {}).s || ''; return o; }, {}) });
+    store.set('ch:hist', hist.slice(-24));
+    store.set('charters', { list: res.list, at: now, src: srcName || '', demo: !!res.demo });
+    res.rep.same = ovKeep; res.rep.src = srcName || '';
+    chUi.rep = res.rep;
+  }
+  function chReadFile(file) {
+    var fr = new FileReader();
+    fr.onload = function () {
+      var d = chDecode(fr.result);
+      try {
+        var res = chImport(d.text);
+        if (d.enc !== 'utf-8') res.rep.warn.unshift(T('Fayl UTF-8 deyil; «ə» kimi hərflər itə bilər. Excel-də «CSV UTF-8» kimi saxlayın.', 'The file is not UTF-8; letters such as “ə” may be lost. Save as “CSV UTF-8” in Excel.'));
+        chApply(res, file.name); go('charters', function () { paint({ keepScroll: false }); });
+        toast(T(res.list.length + ' charter yükləndi.', res.list.length + ' charters loaded.'));
+      } catch (e) { chUi.rep = { error: e.message || String(e), src: file.name }; paint({ keepScroll: true }); toast(T('Fayl oxunmadı.', 'The file could not be read.')); }
+    };
+    fr.readAsArrayBuffer(file);
+  }
+  function chDemo() {
+    var F = function (k) { return CHF[k].az + ' / ' + CHF[k].en; };
+    var A = {
+      name: 'Startap vauçer proqramı (nümunə)', code: 'CH-01', owner: 'Ad Soyad, şöbə müdiri', goal: CH_EX.goal, team: CH_EX.team, budget: CH_EX.budget, desc: CH_EX.desc, start: CH_EX.start,
+      kpi: 'Vauçer alan startap sayı | 60 | 120 | 300\nXarici bazara çıxan startap | 5 | 15 | 40', inter: 'CH-02\n8.2.9',
+      plan26: '1 | Qaydaları təsdiqə göndərmək | Ad Soyad | 30.06.2026\n2 | Operatoru seçmək | Satınalma şöbəsi | Q3 2026\n3 | İlk çağırışı elan etmək | Ad Soyad | 15.12.2026',
+      plan27: '1 | İkinci və üçüncü çağırış | Ad Soyad | H1 2027\n2 | Nəticələrin qiymətləndirilməsi | Monitorinq şöbəsi | Q4 2027', deps: CH_EX.deps,
+      kpi26: 'Vauçer alan startap sayı | 0 | 10 | 30 | 60 | 18\nİstifadə olunan büdcə, % | 5 | 20 | 50 | 100 | 35', status: CH_EX.status, next: CH_EX.next, block: CH_EX.block, dec: CH_EX.dec,
+      ms26: 'Konsepsiya təsdiqləndi | Ad Soyad | 31.03.2026 | edildi\nQaydalar təsdiqləndi | Nazirlik | 30.06.2026 | edildi\nOperator seçildi | Satınalma şöbəsi | Q3 2026 | gecikir\nİlk çağırış elan edildi | Ad Soyad | 15.12.2026', asof: '23.11.2026'
+    };
+    var B = Object.assign({}, A, { name: 'Akselerasiya proqramı (nümunə)', code: 'CH-02', status: 'Yaşıl — plan üzrə', inter: 'CH-01\n8.2.13', block: '', dec: '',
+      kpi: 'Akselerasiyadan keçən komanda | 30 | 60 | 90\nCəlb olunan investisiya, mln AZN | 5 | 12 | 20',
+      kpi26: 'Akselerasiyadan keçən komanda | 0 | 12 | 24 | 30 | 24\nCəlb olunan investisiya, mln AZN | 0 | 1 | 3 | 5 | 3,1',
+      plan26: '1 | Tərəfdaş akseleratoru seçmək | Ad Soyad | Q1 2026\n2 | 1-ci axın | Tərəfdaş | Q2–Q3 2026\n3 | 2-ci axına qəbul | Ad Soyad | dekabr 2026',
+      ms26: 'Tərəfdaş akselerator seçildi | Ad Soyad | 28.02.2026 | edildi\n1-ci axın başladı | Tərəfdaş | 30.05.2026 | edildi\n1-ci axının demo günü | Tərəfdaş | 30.09.2026 | edildi\n2-ci axın başladı | Ad Soyad | 15.12.2026',
+      next: 'Demo gününün hesabatı | Ad Soyad | 30.11.2026' });
+    var C = Object.assign({}, A, { name: 'İnnovasiya qrantları (nümunə)', code: 'CH-03', status: 'Qırmızı — qaydalar təsdiqlənməyib', inter: 'CH-01',
+      kpi: 'Verilən qrant sayı | 20 | 50 | 80', kpi26: 'Verilən qrant sayı | 0 | 0 | 5 | 20 | 0',
+      plan26: '1 | Qaydaların layihəsi | Hüquq şöbəsi | 30.04.2026\n2 | Qaydaların təsdiqi | Nazirlik | 31.07.2026\n3 | Birinci müsabiqə | Ad Soyad | 20.12.2026', plan27: '',
+      ms26: 'Qaydalar layihəsi | Hüquq şöbəsi | 30.04.2026 | edildi\nQaydaların təsdiqi | Nazirlik | 31.07.2026 | gecikir\nEkspert şurası yaradıldı | HR | 31.10.2026\nBirinci müsabiqə | Ad Soyad | 20.12.2026',
+      block: 'Qaydalar Nazirlikdə razılaşdırılmayıb | Nazirlik | iyul 2026\nEkspert şurası üçün kadr yoxdur | HR', dec: 'Qrantın maksimal məbləği | Rəhbərlik | 10.12.2026\nMüsabiqəni 2027-yə keçirmək? | Rəhbərlik | 15.12.2026' });
+    var keys = CH_FIELDS.map(function (f) { return f.k; });
+    var csv = [['Sahə', 'Charter 1', 'Charter 2', 'Charter 3']].concat(keys.map(function (k) { return [F(k), A[k] || '', B[k] || '', C[k] || '']; }))
+      .map(function (r) { return r.map(chCsvQ).join(';'); }).join('\n');
+    var res = chImport(csv); res.demo = true; chApply(res, T('nümunə', 'example')); chUi.rep = null;
+  }
+
+  /* ── views ── */
+  function chPill(s, big) { return '<span class="chpill rag-' + (s || 'x') + (big ? ' chpill--lg' : '') + '"><span class="ragdot"></span>' + esc(chStatusName(s)) + '</span>'; }
+  function chBar(p, cls) { return '<span class="chbar ' + (cls || '') + '"><span style="width:' + (p == null ? 0 : Math.round(p * 100)) + '%"></span></span>'; }
+  function chReport() {
+    var r = chUi.rep; if (!r) return '';
+    if (r.error) return '<div class="chrep chrep--err">' + ic('triangle-alert', 18) + '<div><b>' + esc(r.src || '') + T(' oxunmadı', ' could not be read') + '</b><p>' + esc(r.error) + '</p></div><button type="button" class="iconbtn" data-chrep-x aria-label="' + T('Bağla', 'Close') + '">' + ic('x', 18) + '</button></div>';
+    var lay = r.layout === 'cols' ? T('hər sütun bir charter', 'one column per charter') : T('hər sətir bir charter', 'one row per charter');
+    return '<div class="chrep">' + ic('circle-check', 18) + '<div><b>' + esc(r.src) + ': ' + r.n + T(' charter oxundu', ' charters read') + '</b>' +
+      '<p>' + esc(lay) + ' · ' + T('ayırıcı', 'separator') + ' «' + (r.delim === '\t' ? 'Tab' : r.delim) + '» · ' + r.fields.length + T(' sahə tanındı', ' fields recognised') + (r.skipped ? ' · ' + r.skipped + T(' köməkçi sütun/nümunə keçildi', ' helper columns/examples skipped') : '') + (r.same ? ' · ' + T('əvvəlki qeydləriniz saxlanıldı', 'your earlier ticks were kept') : '') + '</p>' +
+      '<details><summary>' + T('Hansı sütun hara düşdü', 'How the columns were mapped') + '</summary><ul class="chmap">' + r.fields.map(function (f) { return '<li><span>' + esc(f.h) + '</span>' + ic('arrow-right', 13) + '<b>' + esc(EN ? CHF[f.k].en : CHF[f.k].az) + (f.year ? ' ' + f.year : '') + '</b></li>'; }).join('') +
+      r.unknown.map(function (u) { return '<li class="is-x"><span>' + esc(u) + '</span>' + ic('arrow-right', 13) + '<b>' + T('tanınmadı, keçildi', 'not recognised, skipped') + '</b></li>'; }).join('') + '</ul></details>' +
+      (r.warn.length ? '<ul class="chwarn">' + r.warn.slice(0, 8).map(function (w) { return '<li>' + ic('info', 14) + esc(w) + '</li>'; }).join('') + (r.warn.length > 8 ? '<li>… +' + (r.warn.length - 8) + '</li>' : '') + '</ul>' : '') +
+      '</div><button type="button" class="iconbtn" data-chrep-x aria-label="' + T('Bağla', 'Close') + '">' + ic('x', 18) + '</button></div>';
+  }
+  function chDrop(big) {
+    return '<label class="chdrop' + (big ? ' chdrop--big' : '') + '" id="chdrop">' + ic('upload', big ? 28 : 18) + '<span><b>' + T('CSV faylını bura atın', 'Drop the CSV here') + '</b>' + (big ? '<small>' + T('və ya seçmək üçün toxunun · Excel-dən «CSV UTF-8» kimi saxlayın', 'or tap to choose · save from Excel as “CSV UTF-8”') + '</small>' : '<small>' + T('və ya seçin', 'or choose') + '</small>') + '</span>' +
+      '<input type="file" id="ch-file" accept=".csv,.tsv,.txt,text/csv,text/plain" hidden></label>';
+  }
+  function chTplBtns() {
+    return '<a class="btn btn--pri" href="' + esc(fileUrl(fileById('charter'))) + '" target="_blank" rel="noopener">' + ic('file-spreadsheet', 18) + T('Excel şablonu', 'Excel template') + '</a>' +
+      '<button type="button" class="btn" data-chtpl="cols">' + ic('download', 16) + T('CSV şablonu', 'CSV template') + '</button>' +
+      '<button type="button" class="btn" data-chtpl="rows">' + ic('table-2', 16) + T('Sətir-sətir CSV', 'Row-per-charter CSV') + '</button>';
+  }
+  function chartersView() {
+    var L = chList(), list = L.list;
+    var head = '<header class="sh"><div class="sh__eyebrow">' + T('Portfel', 'Portfolio') + '</div><h1>' + T('Charterlər', 'Charters') + '</h1>' +
+      '<p class="sh__lede">' + T('Proqram charterlərini Excel-də doldurun, CSV kimi yükləyin və burada izləyin: status, KPI, mərhələlər, maneələr və qərarlar.', 'Fill the programme charters in Excel, upload them as CSV and track them here: status, KPIs, milestones, blockers and decisions.') + '</p></header>';
+    if (!list.length) {
+      return '<div class="col col--wide chpage">' + head + chReport() +
+        '<section class="chempty"><ol class="chsteps">' +
+        '<li><span class="chsteps__n">1</span><div><b>' + T('Şablonu yükləyin', 'Download the template') + '</b><p>' + T('Hər sütun bir charter, hər sətir bir bölmə. İkinci sütunda hər bölmənin necə doldurulacağı yazılıb.', 'Each column is a charter, each row a section. The second column says how to fill each section in.') + '</p><div class="chsteps__a">' + chTplBtns() + '</div></div></li>' +
+        '<li><span class="chsteps__n">2</span><div><b>' + T('Excel-də doldurun', 'Fill it in Excel') + '</b><p>' + T('Yalnız «Charter adı» məcburidir, qalanını bildiyiniz qədər yazın. Cədvəl bölmələrinin (Plan, KPI, mərhələlər) hər sütunu ayrıca sətirdədir: maddələri hər xanada eyni sırada, yeni sətirdə (Alt+Enter) yazın. Saxlayanda «CSV UTF-8» seçin.', 'Only “Charter name” is required. Each column of the table sections (Plan, KPIs, milestones) has its own row: write the items in each cell in the same order, one per line (Alt+Enter). Save as “CSV UTF-8”.') + '</p></div></li>' +
+        '<li><span class="chsteps__n">3</span><div><b>' + T('Buraya yükləyin', 'Upload it here') + '</b><p>' + T('Sistem sütunların adını, sırasını, ayırıcını və tarix formatını özü tanıyır. Yenilənmiş faylı istənilən vaxt yenidən yükləyə bilərsiniz.', 'The page recognises column names, order, separator and date formats by itself. Upload a newer file at any time.') + '</p>' + chDrop(true) + '</div></li></ol>' +
+        '<div class="chempty__demo">' + ic('sparkles', 18) + '<span>' + T('Necə görünəcəyini əvvəlcə nümunədə görmək istəyirsiniz?', 'Want to see how it looks first?') + '</span><button type="button" class="btn" data-chdemo>' + T('Nümunə ilə aç', 'Open with an example') + '</button></div>' +
+        '</section>' + chGuide() + '</div>';
+    }
+    var t = today(), all = list.map(function (c) { return { c: c, s: chStatus(c), ms: chMsInfo(c), kp: chKpiP(c), bl: chOpen(c, 'block').length, dc: chOpen(c, 'dec').length }; });
+    var cnt = { g: 0, y: 0, r: 0, b: 0, x: 0 }; all.forEach(function (a) { cnt[a.s.s || 'x']++; });
+    var msAll = all.reduce(function (o, a) { o.n += a.ms.n; o.d += a.ms.done; o.l += a.ms.late; return o; }, { n: 0, d: 0, l: 0 });
+    var upcoming = []; all.forEach(function (a) { (a.c.ms26 || []).forEach(function (m) { if (m.d && m.d >= t && chDays(m.d) <= 45 && !chItemDone(a.c, 'ms', m)) upcoming.push({ c: a.c, m: m }); }); });
+    upcoming.sort(function (x, y) { return x.m.d < y.m.d ? -1 : 1; });
+    var bl = all.reduce(function (n, a) { return n + a.bl; }, 0), dc = all.reduce(function (n, a) { return n + a.dc; }, 0);
+    var q = fold(chUi.q), shown = all.filter(function (a) { return (!chUi.f || (a.s.s || 'x') === chUi.f || (chUi.f === 'bl' && a.bl) || (chUi.f === 'dc' && a.dc)) && (!q || fold([a.c.name, a.c.code, a.c.owner, a.c.goal].join(' ')).indexOf(q) >= 0); });
+    var order = { r: 0, y: 1, x: 2, g: 3, b: 4 }; shown.sort(function (a, b) { return (order[a.s.s || 'x'] - order[b.s.s || 'x']) || (b.bl - a.bl) || String(a.c.code || a.c.name).localeCompare(String(b.c.code || b.c.name)); });
+    var summary = '<section class="chsum">' +
+      '<div class="chsum__main"><div class="chsum__n"><b>' + list.length + '</b><span>' + T('charter', 'charters') + '</span></div>' +
+      '<div class="chstack" role="img" aria-label="' + T('Status bölgüsü', 'Status split') + '">' + ['r', 'y', 'g', 'b', 'x'].map(function (k) { return cnt[k] ? '<span class="rag-' + k + '" style="flex:' + cnt[k] + '" title="' + esc(chStatusName(k)) + ': ' + cnt[k] + '"></span>' : ''; }).join('') + '</div>' +
+      '<div class="chsum__leg">' + ['r', 'y', 'g', 'b', 'x'].map(function (k) { return cnt[k] ? '<button type="button" class="chlg rag-' + k + '" data-chf="' + k + '" aria-pressed="' + (chUi.f === k) + '"><span class="ragdot"></span>' + esc(chStatusName(k)) + ' <b>' + cnt[k] + '</b></button>' : ''; }).join('') + '</div></div>' +
+      '<div class="chkpis">' +
+      '<div class="chk"><span class="chk__ic">' + ic('milestone', 18) + '</span><b>' + msAll.d + '<small>/' + msAll.n + '</small></b><span>' + T('2026 mərhələsi icra olunub', '2026 milestones done') + (msAll.l ? ' · <em>' + msAll.l + T(' gecikir', ' late') + '</em>' : '') + '</span></div>' +
+      '<button type="button" class="chk chk--btn' + (bl ? ' is-hot' : '') + '" data-chf="bl" aria-pressed="' + (chUi.f === 'bl') + '"><span class="chk__ic">' + ic('triangle-alert', 18) + '</span><b>' + bl + '</b><span>' + T('açıq maneə', 'open blockers') + '</span></button>' +
+      '<button type="button" class="chk chk--btn" data-chf="dc" aria-pressed="' + (chUi.f === 'dc') + '"><span class="chk__ic">' + ic('gavel', 18) + '</span><b>' + dc + '</b><span>' + T('qərar gözlənilir', 'decisions pending') + '</span></button>' +
+      '</div>' +
+      (upcoming.length ? '<div class="chsoon"><div class="chsoon__h">' + ic('calendar-clock', 15) + T('Yaxın 45 gündə', 'Next 45 days') + '</div><div class="chsoon__l">' + upcoming.slice(0, 6).map(function (u) { var dd = chDays(u.m.d); return '<a href="#c-' + u.c.id + '" class="chsoon__i"><span class="chsoon__d' + (dd <= 7 ? ' is-near' : '') + '">' + esc(chDateTxt(u.m.d, u.m.ap)) + '</span><span class="chsoon__t">' + esc(u.m.t) + '</span><span class="chsoon__c">' + esc(u.c.code || u.c.name) + '</span></a>'; }).join('') + '</div></div>' : '') +
+      '</section>';
+    var tools = '<div class="chtools"><div class="chsearch">' + ic('search', 16) + '<input type="search" id="ch-q" placeholder="' + T('Charter axtar', 'Search charters') + '" value="' + esc(chUi.q) + '"></div>' +
+      '<div class="chips" id="ch-view">' + [['cards', 'layout-grid', T('Kartlar', 'Cards')], ['table', 'table-2', T('Cədvəl', 'Table')], ['time', 'calendar-days', T('2026 qrafiki', '2026 timeline')]].map(function (v) { return '<button type="button" class="chip" data-chv="' + v[0] + '" aria-pressed="' + (chUi.view === v[0]) + '">' + ic(v[1], 14) + esc(v[2]) + '</button>'; }).join('') + '</div>' +
+      (chUi.f ? '<button type="button" class="chip chip--x" data-chf="">' + ic('x', 13) + T('Filtri sil', 'Clear filter') + '</button>' : '') + '</div>';
+    var body = !shown.length ? '<div class="emptybox">' + ic('search', 24) + T('Bu filtrə uyğun charter yoxdur.', 'No charter matches this filter.') + '</div>'
+      : chUi.view === 'table' ? chTable(shown) : chUi.view === 'time' ? chTimeline(shown.map(function (a) { return a.c; })) : '<div class="chgrid">' + shown.map(chCard).join('') + '</div>';
+    var foot = '<section class="chio"><div class="chio__h"><h2>' + T('Məlumatı yeniləmək', 'Updating the data') + '</h2><p>' + T('Son yükləmə: ', 'Last upload: ') + '<b>' + esc(L.src || '—') + '</b>' + (L.at ? ' · ' + esc(new Date(L.at).toLocaleDateString(EN ? 'en-GB' : 'az-Latn-AZ')) : '') + (L.demo ? ' · <span class="chdemo">' + T('nümunə məlumat', 'example data') + '</span>' : '') + '</p></div>' +
+      chDrop(false) + '<div class="chio__a">' +
+      '<button type="button" class="btn" data-chexp>' + ic('download', 16) + T('Cari vəziyyəti CSV kimi yüklə', 'Download current state as CSV') + '</button>' + chTplBtns() +
+      '<button type="button" class="btn btn--ghost" data-chclear>' + ic('trash-2', 16) + T('Hamısını sil', 'Remove all') + '</button></div>' +
+      '<p class="chio__n">' + T('Burada etdiyiniz dəyişikliklər (status, işarələnmiş mərhələ, həll olunmuş maneə) yeni fayl yükləyəndə də qalır. Onları Excel-ə qaytarmaq üçün «Cari vəziyyəti CSV kimi yüklə» düyməsindən istifadə edin.', 'Changes you make here (status, ticked milestones, resolved blockers) survive a new upload. To take them back to Excel, use “Download current state as CSV”.') + '</p></section>';
+    return '<div class="col col--wide chpage">' + head + chReport() + summary + tools + body + foot + chGuide() + '</div>';
+  }
+  function chCard(a) {
+    var c = a.c, s = a.s, nx = chOpen(c, 'next')[0], fl = chFilled(c);
+    return '<a class="chc rag-' + (s.s || 'x') + '" href="#c-' + c.id + '">' +
+      '<div class="chc__top">' + (c.code ? '<span class="chc__code">' + esc(c.code) + '</span>' : '') + chPill(s.s) + '</div>' +
+      '<h3 class="chc__t">' + esc(c.name) + '</h3>' +
+      (c.owner ? '<div class="chc__o">' + ic('circle-user', 14) + esc(c.owner) + '</div>' : '') +
+      (c.goal ? '<p class="chc__g">' + esc(c.goal) + '</p>' : '') +
+      (s.note ? '<p class="chc__note">' + esc(s.note) + '</p>' : '') +
+      '<div class="chc__m">' +
+      '<div class="chc__ring">' + chRing(a.ms.p, 44) + '<span><b>' + a.ms.done + '/' + a.ms.n + '</b>' + T('mərhələ', 'milestones') + '</span></div>' +
+      '<div class="chc__ring">' + chRing(a.kp, 44, 'chring--k') + '<span><b>' + (a.kp == null ? '—' : Math.round(a.kp * 100) + '%') + '</b>' + T('KPI 2026', 'KPI 2026') + '</span></div>' +
+      '<div class="chc__cnt"><span class="' + (a.bl ? 'is-hot' : '') + '">' + ic('triangle-alert', 14) + a.bl + '</span><span>' + ic('gavel', 14) + a.dc + '</span></div></div>' +
+      (a.ms.next ? '<div class="chc__nx">' + ic('flag', 14) + '<span>' + esc(chDateTxt(a.ms.next.d, a.ms.next.ap)) + '</span>' + esc(a.ms.next.t) + '</div>' : '') +
+      (nx ? '<div class="chc__nx chc__nx--s">' + ic('arrow-right', 14) + esc(nx.t) + '</div>' : '') +
+      '<div class="chc__f" title="' + T('Doldurulmuş bölmələr', 'Sections filled in') + '">' + chBar(fl.n / fl.of, 'chbar--thin') + '<span>' + fl.n + '/' + fl.of + '</span></div></a>';
+  }
+  function chTable(rows) {
+    return '<div class="chtbl-w"><table class="chtbl"><thead><tr><th>' + T('Charter', 'Charter') + '</th><th>Status</th><th>' + T('Mərhələlər 2026', 'Milestones 2026') + '</th><th>KPI 2026</th><th>' + T('Maneə', 'Blockers') + '</th><th>' + T('Qərar', 'Decisions') + '</th><th>' + T('Növbəti mərhələ', 'Next milestone') + '</th><th>' + T('Növbəti addım', 'Next step') + '</th></tr></thead><tbody>' +
+      rows.map(function (a) {
+        var c = a.c, nx = chOpen(c, 'next')[0];
+        return '<tr data-chgo="' + c.id + '"><td><a href="#c-' + c.id + '" class="chtbl__n">' + (c.code ? '<span>' + esc(c.code) + '</span>' : '') + esc(c.name) + '</a>' + (c.owner ? '<small>' + esc(c.owner) + '</small>' : '') + '</td>' +
+          '<td>' + chPill(a.s.s) + (a.s.note ? '<small>' + esc(a.s.note) + '</small>' : '') + '</td>' +
+          '<td><div class="chtbl__p">' + chBar(a.ms.p) + '<span>' + a.ms.done + '/' + a.ms.n + (a.ms.late ? ' · <em>' + a.ms.late + T(' gecikir', ' late') + '</em>' : '') + '</span></div></td>' +
+          '<td><div class="chtbl__p">' + chBar(a.kp, 'chbar--k') + '<span>' + (a.kp == null ? '—' : Math.round(a.kp * 100) + '%') + '</span></div></td>' +
+          '<td class="chtbl__c' + (a.bl ? ' is-hot' : '') + '">' + a.bl + '</td><td class="chtbl__c">' + a.dc + '</td>' +
+          '<td>' + (a.ms.next ? '<b>' + esc(chDateTxt(a.ms.next.d, a.ms.next.ap)) + '</b><small>' + esc(a.ms.next.t) + '</small>' : '<span class="chmuted">—</span>') + '</td>' +
+          '<td>' + (nx ? esc(nx.t) + (nx.w || nx.d ? '<small>' + esc([nx.w, nx.d ? chDateTxt(nx.d) : ''].filter(Boolean).join(' · ')) + '</small>' : '') : '<span class="chmuted">—</span>') + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+  function chTimeline(list, single) {
+    var y = 2026, t = today(), M = EN ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] : ['Yan', 'Fev', 'Mar', 'Apr', 'May', 'İyn', 'İyl', 'Avq', 'Sen', 'Okt', 'Noy', 'Dek'];
+    var pos = function (iso) { var d = new Date(iso + 'T00:00:00'), s = new Date(y, 0, 1), e = new Date(y + 1, 0, 1); return Math.max(0, Math.min(100, (d - s) / (e - s) * 100)); };
+    var tp = t.slice(0, 4) === String(y) ? pos(t) : (t > y + '-12-31' ? 100 : 0);
+    var rows = list.map(function (c) {
+      var ms = (c.ms26 || []).filter(function (m) { return m.d && m.d.slice(0, 4) === String(y); });
+      return '<div class="chtl__r">' + (single ? '' : '<a class="chtl__l" href="#c-' + c.id + '"><span class="ragdot rag-' + (chStatus(c).s || 'x') + '"></span>' + esc(c.code || c.name) + '</a>') +
+        '<div class="chtl__track">' + ms.map(function (m) {
+          var dn = chItemDone(c, 'ms', m), st = dn ? 'done' : (m.d < t ? 'late' : m.st === 'late' || m.st === 'risk' ? 'risk' : 'plan');
+          return '<span class="chtl__m is-' + st + '" style="left:' + pos(m.d) + '%" tabindex="0" title="' + esc(chDateTxt(m.d, m.ap) + ' — ' + m.t) + '"><i></i>' + (single ? '<em>' + esc(m.t) + '</em>' : '') + '</span>';
+        }).join('') + '</div></div>';
+    }).join('');
+    return '<div class="chtl' + (single ? ' chtl--one' : '') + '"><div class="chtl__scroll"><div class="chtl__in">' +
+      '<div class="chtl__hd">' + (single ? '' : '<span class="chtl__l"></span>') + '<div class="chtl__months">' + M.map(function (m) { return '<span>' + m + '</span>'; }).join('') + '</div></div>' +
+      '<div class="chtl__body">' + rows + '<div class="chtl__today" style="--x:' + tp.toFixed(2) + '"><span>' + T('Bu gün', 'Today') + '</span></div></div></div></div>' +
+      '<div class="chtl__leg"><span class="is-done"><i></i>' + T('İcra olunub', 'Done') + '</span><span class="is-plan"><i></i>' + T('Planda', 'Planned') + '</span><span class="is-risk"><i></i>' + T('Risk / gecikir', 'At risk / late') + '</span><span class="is-late"><i></i>' + T('Tarixi keçib', 'Overdue') + '</span></div></div>';
+  }
+  function chGuide() {
+    return '<details class="acc acc--help chguide"><summary><span class="bd bd--sm ph-rf">' + ic('circle-help', 16) + '</span><span class="acc__t">' + T('Hər bölmə necə doldurulur', 'How to fill in each section') + '</span>' + ic('chevron-down', 18, 'chev') + '</summary><div class="acc__b">' +
+      '<p class="chguide__p">' + T('Sütun adlarını azərbaycanca və ya ingiliscə, istənilən sırada yaza bilərsiniz. Boş qalan bölmə sadəcə göstərilmir.', 'Column names can be in Azerbaijani or English, in any order. Empty sections are simply not shown.') + '</p>' +
+      '<table class="chguide__t"><tbody>' + CH_FIELDS.map(function (f) { return '<tr><th>' + esc(EN ? f.en : f.az) + (f.req ? ' <span class="chreq">' + T('məcburi', 'required') + '</span>' : '') + '</th><td>' + esc(T(f.hint, f.hintEn)) + '</td></tr>'; }).join('') + '</tbody></table></div></details>';
+  }
+
+  function charterView(id) {
+    var L = chList().list, c = chGet(id);
+    if (!c) return '<div class="col">' + '<div class="emptybox">' + T('Bu charter tapılmadı.', 'Charter not found.') + ' <a href="#charters">' + T('Charterlərə qayıt', 'Back to charters') + '</a></div></div>';
+    var i = L.map(function (x) { return x.id; }).indexOf(c.id), s = chStatus(c), ms = chMsInfo(c), kp = chKpiP(c), fl = chFilled(c), bl = chOpen(c, 'block'), dc = chOpen(c, 'dec');
+    var hist = store.get('ch:hist', []).filter(function (h) { return h.s[c.id] != null; }).slice(-8);
+    var prev = L[(i - 1 + L.length) % L.length], next = L[(i + 1) % L.length];
+    var nav = [['ov', T('Ümumi', 'Overview'), c.goal || c.desc || c.start || c.team || c.budget], ['kpi', 'KPI', c.kpi || c.kpi26], ['plan', T('Plan', 'Plan'), c.plan26 || c.plan27 || c.deps || c.inter], ['ms', T('Mərhələlər', 'Milestones'), c.ms26], ['run', T('İcra', 'Delivery'), c.next || c.block || c.dec || (s.note)]].filter(function (x) { return x[2]; });
+    var hero = '<header class="chhero rag-' + (s.s || 'x') + '">' +
+      '<div class="chhero__top"><a href="#charters" class="chback">' + ic('arrow-left', 16) + T('Charterlər', 'Charters') + '</a><span class="chhero__pn">' + (L.length > 1 ? '<a href="#c-' + prev.id + '" class="iconbtn" aria-label="' + T('Əvvəlki', 'Previous') + '">' + ic('chevron-left', 18) + '</a><span>' + (i + 1) + ' / ' + L.length + '</span><a href="#c-' + next.id + '" class="iconbtn" aria-label="' + T('Növbəti', 'Next') + '">' + ic('chevron-right', 18) + '</a>' : '') + '</span></div>' +
+      (c.code ? '<span class="chhero__code">' + esc(c.code) + '</span>' : '') + '<h1>' + esc(c.name) + '</h1>' +
+      (c.owner ? '<div class="chhero__o">' + ic('circle-user', 16) + esc(c.owner) + '</div>' : '') +
+      '<div class="chhero__st"><label class="chstsel rag-' + (s.s || 'x') + '"><span class="ragdot"></span><select id="ch-st" data-chid="' + c.id + '" aria-label="Status">' +
+      ['', 'g', 'y', 'r', 'b', 'x'].map(function (k) { return '<option value="' + k + '"' + ((s.s || '') === k ? ' selected' : '') + '>' + esc(k ? chStatusName(k) : T('Status seçin', 'Choose status')) + '</option>'; }).join('') + '</select>' + ic('chevron-down', 14) + '</label>' +
+      (hist.length > 1 ? '<span class="chhist" title="' + T('Son yükləmələrdə status', 'Status in recent uploads') + '">' + hist.map(function (h) { return '<span class="ragdot rag-' + (h.s[c.id] || 'x') + '"></span>'; }).join('') + '</span>' : '') +
+      (c.asof ? '<span class="chhero__asof">' + T('Məlumat tarixi: ', 'As of ') + esc(/^\d{4}-/.test(c.asof) ? chDateTxt(c.asof) : c.asof) + '</span>' : '') + '</div>' +
+      '<textarea class="chnote" id="ch-note" data-chid="' + c.id + '" rows="2" placeholder="' + T('Status şərhi: nə baş verir, niyə bu rəng', 'Status comment: what is happening and why this colour') + '">' + esc(s.note || '') + '</textarea>' +
+      (c.goal ? '<div class="chgoal">' + ic('target', 20) + '<div><span>' + T('Proqramın sonunda məqsəd', 'Goal at the end of the programme') + '</span><p>' + esc(c.goal) + '</p></div></div>' : '') +
+      '<div class="chstats">' +
+      '<div class="chstat">' + chRing(ms.p, 52) + '<div><b>' + ms.done + '<small>/' + ms.n + '</small></b><span>' + T('2026 mərhələsi', '2026 milestones') + (ms.late ? ' · <em>' + ms.late + T(' gecikir', ' late') + '</em>' : '') + '</span></div></div>' +
+      '<div class="chstat">' + chRing(kp, 52, 'chring--k') + '<div><b>' + (kp == null ? '—' : Math.round(kp * 100) + '%') + '</b><span>' + T('KPI 2026 icrası', 'KPI 2026 progress') + '</span></div></div>' +
+      '<div class="chstat' + (bl.length ? ' is-hot' : '') + '"><span class="chstat__ic">' + ic('triangle-alert', 22) + '</span><div><b>' + bl.length + '</b><span>' + T('açıq maneə', 'open blockers') + '</span></div></div>' +
+      '<div class="chstat"><span class="chstat__ic">' + ic('gavel', 22) + '</span><div><b>' + dc.length + '</b><span>' + T('qərar gözlənilir', 'decisions pending') + '</span></div></div></div>' +
+      '</header>';
+    var jump = nav.length > 1 ? '<nav class="chjump" aria-label="' + T('Bölmələr', 'Sections') + '">' + nav.map(function (x) { return '<button type="button" class="chip" data-chjump="' + x[0] + '">' + esc(x[1]) + '</button>'; }).join('') + '</nav>' : '';
+    var blk = function (icn, title, html, cls) { return html ? '<section class="chb' + (cls ? ' ' + cls : '') + '"><h3 class="chb__h">' + ic(icn, 17) + esc(title) + '</h3>' + html + '</section>' : ''; };
+    var ul = function (a, self) { return a && a.length ? '<ul class="chul">' + a.map(function (x) { return '<li>' + chLinkify(x, self) + '</li>'; }).join('') + '</ul>' : ''; };
+    var para = function (t) { return t ? '<div class="chtext">' + esc(t).replace(/\r?\n/g, '<br>') + '</div>' : ''; };
+    var ov = blk('file-text', T('Təsvir', 'Description'), para(c.desc)) + blk('flag', T('Başlanğıc nöqtəsi / aprel vəziyyəti', 'Starting point / status as of April'), para(c.start), 'chb--soft') +
+      blk('users', T('Komanda', 'Team'), c.team ? '<div class="chteam">' + c.team.map(function (p) { return '<div class="chp"><span class="chp__a">' + esc(chInitials(p.n)) + '</span><div><b>' + esc(p.n) + '</b>' + (p.r ? '<span>' + esc(p.r) + '</span>' : '') + '</div></div>'; }).join('') + '</div>' : '') +
+      blk('wallet', T('Büdcə / resurslar', 'Budget / resources'), c.budget ? '<dl class="chkv">' + c.budget.map(function (b) { return '<div>' + (b.l ? '<dt>' + esc(b.l) + '</dt>' : '') + '<dd>' + esc(b.v) + '</dd></div>'; }).join('') + '</dl>' : '');
+    var kmax = function (r) { var n = r.y.map(chNum).filter(function (x) { return x != null; }); return n.length ? Math.max.apply(null, n) : 0; };
+    var kpi = blk('trending-up', T('KPI 2026 · 2027 · 2028', 'KPI 2026 · 2027 · 2028'), c.kpi ? '<div class="chtw"><table class="cht cht--kpi"><thead><tr><th>KPI</th><th>2026</th><th>2027</th><th>2028</th></tr></thead><tbody>' + c.kpi.map(function (r) {
+      var mx = kmax(r);
+      return '<tr><th scope="row">' + esc(r.n) + '</th>' + r.y.map(function (v, yi) { var n = chNum(v); return '<td><div class="chyv"><b>' + (v ? esc(v) : '—') + '</b>' + (n != null && mx ? '<span class="chyv__b' + (yi === 0 ? ' is-now' : '') + '"><span style="width:' + Math.max(4, Math.round(n / mx * 100)) + '%"></span></span>' : '') + '</div></td>'; }).join('') + '</tr>';
+    }).join('') + '</tbody></table></div>' : '', 'chb--wide');
+    var qn = chQnow();
+    var kpi26 = blk('target', T('2026 sonuna KPI · rüblər üzrə', 'KPI by end of 2026 · by quarter'), c.kpi26 ? '<div class="chtw"><table class="cht cht--q"><thead><tr><th>KPI</th>' + ['Q1', 'Q2', 'Q3', 'Q4'].map(function (q, i) { return '<th class="' + (i === qn ? 'is-now' : '') + '">' + q + (i === qn ? '<small>' + T('indi', 'now') + '</small>' : '') + '</th>'; }).join('') + '<th>' + T('Faktiki', 'Actual') + '</th><th>' + T('İl hədəfinə görə', 'Vs year target') + '</th></tr></thead><tbody>' + c.kpi26.map(function (r) {
+      var a = chAct(c, r), pp = chKP(c, r), cur = qn >= 0 && qn < 4 ? chNum(r.q[qn]) : null, an = chNum(a), behind = an != null && cur != null && an < cur;
+      return '<tr><th scope="row">' + esc(r.n) + '</th>' + r.q.map(function (v, i) { return '<td class="' + (i === qn ? 'is-now' : '') + (i < qn ? ' is-past' : '') + '">' + (v ? esc(v) : '<span class="chmuted">—</span>') + '</td>'; }).join('') +
+        '<td><input class="chact-in' + (behind ? ' is-behind' : '') + '" type="text" inputmode="decimal" value="' + esc(a || '') + '" placeholder="—" data-chact="' + c.id + '" data-h="' + r.h + '" aria-label="' + T('Faktiki: ', 'Actual: ') + esc(r.n) + '"></td>' +
+        '<td><div class="chtbl__p">' + chBar(pp, 'chbar--lg' + (pp != null && pp >= 1 ? ' is-ok' : '')) + '<span>' + (pp == null ? '—' : Math.round(pp * 100) + '%') + '</span></div>' + (behind ? '<small class="chbehind">' + T('cari rüb hədəfindən geri: ', 'behind this quarter: ') + esc(r.q[qn]) + '</small>' : '') + '</td></tr>';
+    }).join('') + '</tbody></table></div><p class="chfoot">' + T('Faktiki rəqəmi bu cədvəldə yazın, saxlanılır və növbəti CSV ixracına düşür.', 'Type the actual here; it is saved and included in the next CSV export.') + '</p>' : '', 'chb--wide');
+    kpi = kpi + kpi26;
+    var ptable = function (yr, rows) {
+      var t = today();
+      return '<div class="chplan__c"><span class="chplan__y">' + yr + '</span><div class="chtw"><table class="cht cht--plan"><thead><tr><th>№</th><th>' + T('Tapşırıq', 'Task') + '</th><th>' + T('Məsul', 'Responsible') + '</th><th>' + T('Müddət', 'Timeline') + '</th></tr></thead><tbody>' + rows.map(function (r) {
+        var dd = r.d ? chDays(r.d) : null;
+        return '<tr><td class="cht__no">' + esc(r.no) + '</td><td>' + chLinkify(r.t, c.id) + '</td><td>' + (r.w ? esc(r.w) : '<span class="chmuted">—</span>') + '</td><td>' + (r.dt || r.d ? '<span class="chdate' + (dd != null && dd < 0 && yr === '2026' ? ' is-past' : dd != null && dd >= 0 && dd <= 30 ? ' is-near' : '') + '">' + esc(r.dt || chDateTxt(r.d, r.ap)) + '</span>' : '<span class="chmuted">—</span>') + '</td></tr>';
+      }).join('') + '</tbody></table></div></div>';
+    };
+    var plan = ((c.plan26 || c.plan27) ? '<section class="chb chb--wide"><h3 class="chb__h">' + ic('list-checks', 17) + T('Plan', 'Plan') + '</h3><div class="chplan">' +
+      (c.plan26 ? ptable('2026', c.plan26) : '') + (c.plan27 ? ptable('2027', c.plan27) : '') + '</div></section>' : '') +
+      blk('route', T('Əsas asılılıqlar və mərhələlər', 'Key dependencies & milestones'), c.deps ? '<ul class="chdeps">' + c.deps.map(function (d) {
+        var dd = d.d ? chDays(d.d) : null;
+        return '<li><div><b>' + chLinkify(d.t, c.id) + '</b>' + (d.w ? '<span>' + esc(d.w) + '</span>' : '') + '</div>' + (d.d || d.dt ? '<span class="chdate' + (dd != null && dd < 0 ? ' is-late' : dd != null && dd <= 30 ? ' is-near' : '') + '">' + esc(d.d ? chDateTxt(d.d) : d.dt) + '</span>' : '') + '</li>';
+      }).join('') + '</ul>' : '') +
+      blk('network', T('Digər təşəbbüslərlə qarşılıqlı asılılıq', 'Interdependencies with other initiatives'), c.inter ? '<div class="chinter">' + c.inter.map(function (x) { return '<span class="chinter__i">' + chLinkify(x, c.id) + '</span>'; }).join('') + '</div>' : '');
+    var msb = c.ms26 ? '<section class="chb"><h3 class="chb__h">' + ic('milestone', 17) + T('2026 mərhələləri', 'Milestones for 2026') + '<span class="chb__n">' + ms.done + '/' + ms.n + '</span></h3>' + chTimeline([c], true) +
+      '<ol class="chms">' + c.ms26.map(function (m) {
+        var dn = chItemDone(c, 'ms', m), dd = m.d ? chDays(m.d) : null, st = dn ? 'done' : dd != null && dd < 0 ? 'late' : (m.st === 'late' || m.st === 'risk') ? 'risk' : 'plan';
+        var lab = { done: T('icra olunub', 'done'), late: T('tarixi keçib', 'overdue'), risk: T('risk', 'at risk'), plan: dd != null ? (dd === 0 ? T('bu gün', 'today') : T(dd + ' gün qalıb', dd + ' days left')) : T('tarixsiz', 'no date') }[st];
+        return '<li class="is-' + st + '"><label class="chms__chk"><input type="checkbox" data-chitem="ms" data-chid="' + c.id + '" data-h="' + m.h + '"' + (dn ? ' checked' : '') + '><span class="chms__box">' + ic('check', 14) + '</span></label>' +
+          '<div class="chms__b"><span class="chms__t">' + esc(m.t) + '</span><span class="chms__m">' + (m.w ? '<span>' + ic('circle-user', 13) + esc(m.w) + '</span>' : '') + '<span class="chms__d">' + ic('calendar-clock', 13) + esc(m.dt || (m.d ? chDateTxt(m.d, m.ap) : '—')) + '</span></span></div><span class="chms__s">' + esc(lab) + '</span></li>';
+      }).join('') + '</ol></section>' : '';
+    var act = function (k, icn, title, doneLab, empty) {
+      var lst = c[k] || [];
+      if (!lst.length) return '';
+      return '<section class="chcol chcol--' + k + '"><h3 class="chb__h">' + ic(icn, 17) + esc(title) + '<span class="chb__n">' + chOpen(c, k).length + '</span></h3><ul class="chact">' + lst.map(function (it) {
+        var dn = chItemDone(c, k, it), dd = it.d ? chDays(it.d) : null;
+        return '<li class="' + (dn ? 'is-done' : '') + '"><label class="chms__chk"><input type="checkbox" data-chitem="' + k + '" data-chid="' + c.id + '" data-h="' + it.h + '"' + (dn ? ' checked' : '') + ' aria-label="' + esc(doneLab) + '"><span class="chms__box">' + ic('check', 14) + '</span></label>' +
+          '<div><p>' + chLinkify(it.t, c.id) + '</p>' + (it.w || it.d ? '<div class="chact__m">' + (it.w ? '<span>' + ic('circle-user', 13) + esc(it.w) + '</span>' : '') + (it.d ? '<span class="chdate' + (!dn && dd < 0 ? ' is-late' : !dn && dd <= 7 ? ' is-near' : '') + '">' + ic('calendar-clock', 13) + esc(chDateTxt(it.d)) + '</span>' : '') + '</div>' : '') + '</div></li>';
+      }).join('') + '</ul></section>';
+    };
+    var run = (c.next || c.block || c.dec) ? '<div class="chboard">' + act('next', 'arrow-right', T('Növbəti addımlar', 'Next steps'), T('edildi', 'done')) + act('block', 'triangle-alert', T('Maneələr', 'Blockers'), T('həll edildi', 'resolved')) + act('dec', 'gavel', T('Qəbul ediləcək qərarlar', 'Decisions to be taken'), T('qəbul edildi', 'taken')) + '</div>' : '';
+    var miss = fl.miss.filter(function (f) { return f.k !== 'code'; });
+    var missBox = miss.length ? '<details class="chmiss"><summary>' + ic('info', 15) + T('Doldurulmayan bölmələr: ', 'Empty sections: ') + miss.length + '</summary><ul>' + miss.map(function (f) { return '<li><b>' + esc(EN ? f.en : f.az) + '</b><span>' + esc(T(f.hint, f.hintEn)) + '</span></li>'; }).join('') + '</ul><p>' + T('Bunları Excel faylında doldurub yenidən yükləyin.', 'Fill them in the Excel file and upload it again.') + '</p></details>' : '';
+    var part = function (id, html) { return html ? '<div class="chpart" id="chp-' + id + '">' + html + '</div>' : ''; };
+    return '<div class="col col--wide chpage chdetail">' + hero + jump +
+      part('ov', ov ? '<div class="chgrid2">' + ov + '</div>' : '') + part('kpi', kpi ? '<div class="chgrid2">' + kpi + '</div>' : '') + part('plan', plan ? '<div class="chgrid2">' + plan + '</div>' : '') + part('ms', msb) + part('run', run) + missBox + '</div>';
+  }
+
+  /* ── events ── */
+  function chRepaint() { paint({ keepScroll: true }); }
+  document.addEventListener('click', function (ev) {
+    var t = ev.target; if (!(t instanceof Element)) return;
+    var b;
+    if ((b = t.closest('[data-chtpl]'))) { chSaveCsv(b.dataset.chtpl === 'cols' ? T('charter-sablonu.csv', 'charter-template.csv') : T('charter-sablonu-setirler.csv', 'charter-template-rows.csv'), chTemplate(b.dataset.chtpl)); return; }
+    if (t.closest('[data-chdemo]')) { chDemo(); chRepaint(); toast(T('Nümunə məlumat yükləndi. Öz faylınızı yükləyəndə əvəz olunacaq.', 'Example data loaded. Your own file will replace it.')); return; }
+    if (t.closest('[data-chexp]')) { chSaveCsv('charterler-' + today() + '.csv', chExport()); return; }
+    if (t.closest('[data-chclear]')) {
+      if (!window.confirm(T('Bütün charterlər və onlardakı qeydləriniz bu cihazdan silinsin?', 'Remove all charters and your ticks from this device?'))) return;
+      chList().list.forEach(function (c) { store.set('chx:' + c.id, {}); }); store.set('charters', { list: [], at: Date.now() }); chUi.rep = null; chRepaint(); return;
+    }
+    if (t.closest('[data-chrep-x]')) { chUi.rep = null; chRepaint(); return; }
+    if ((b = t.closest('[data-chv]'))) { chUi.view = b.dataset.chv; store.set('ch:view', chUi.view); chRepaint(); return; }
+    if ((b = t.closest('[data-chf]'))) { chUi.f = chUi.f === b.dataset.chf ? '' : b.dataset.chf; chRepaint(); return; }
+    if ((b = t.closest('[data-chjump]'))) { var el = document.getElementById('chp-' + b.dataset.chjump); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    if ((b = t.closest('[data-chplan]'))) { ev.preventDefault(); var no = b.dataset.chplan; if (isMeasure('t-' + no)) go('t-' + no); else openMeasure(no); return; }
+    if ((b = t.closest('tr[data-chgo]')) && !t.closest('a')) { go('c-' + b.dataset.chgo); return; }
+  });
+  document.addEventListener('change', function (ev) {
+    var t = ev.target; if (!(t instanceof Element)) return;
+    if (t.id === 'ch-file' && t.files && t.files[0]) { chReadFile(t.files[0]); t.value = ''; return; }
+    if (t.dataset && t.dataset.chact) { var o2 = chOv(t.dataset.chact), a2 = o2.act || {}; a2[t.dataset.h] = t.value.trim(); chSetOv(t.dataset.chact, { act: a2 }); setTimeout(chRepaint, 0); return; }
+    if (t.id === 'ch-st') { chSetOv(t.dataset.chid, { s: t.value, st: Math.max(Date.now(), (chList().at || 0) + 1), note: (document.getElementById('ch-note') || {}).value }); setTimeout(chRepaint, 0); toast(T('Status yeniləndi.', 'Status updated.')); return; }
+    if (t.dataset && t.dataset.chitem) {
+      var o = chOv(t.dataset.chid), key = t.dataset.chitem, m = o[key] || {}; m[t.dataset.h] = t.checked; var p = {}; p[key] = m; chSetOv(t.dataset.chid, p); setTimeout(chRepaint, 0); return;
+    }
+  });
+  var chNoteT = null;
+  document.addEventListener('input', function (ev) {
+    var t = ev.target; if (!(t instanceof Element)) return;
+    if (t.id === 'ch-q') { chUi.q = t.value; clearTimeout(chNoteT); chNoteT = setTimeout(function () { var pos = t.selectionStart; chRepaint(); var n = document.getElementById('ch-q'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (e) { /* type=search */ } } }, 160); return; }
+    if (t.dataset && t.dataset.chact) { var cid = t.dataset.chact, hh = t.dataset.h, vv = t.value; clearTimeout(chNoteT); chNoteT = setTimeout(function () { var o = chOv(cid), act = o.act || {}; act[hh] = vv.trim(); chSetOv(cid, { act: act }); }, 500); return; }
+    if (t.id === 'ch-note') { var id = t.dataset.chid, v = t.value; clearTimeout(chNoteT); chNoteT = setTimeout(function () { var cur = chStatus(chGet(id)); chSetOv(id, { s: cur.s, st: Math.max(Date.now(), (chList().at || 0) + 1), note: v }); }, 500); }
+  });
+  ['dragover', 'dragenter'].forEach(function (e) { document.addEventListener(e, function (ev) { var d = ev.target instanceof Element && ev.target.closest('#chdrop'); if (d) { ev.preventDefault(); d.classList.add('is-over'); } }); });
+  document.addEventListener('dragleave', function (ev) { var d = ev.target instanceof Element && ev.target.closest('#chdrop'); if (d) d.classList.remove('is-over'); });
+  document.addEventListener('drop', function (ev) { var d = ev.target instanceof Element && ev.target.closest('#chdrop'); if (!d) return; ev.preventDefault(); d.classList.remove('is-over'); var f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0]; if (f) chReadFile(f); });
+  window.__chImport = chImport;   // used by the tests
+  window.__ch = { tpl: chTemplate, exp: chExport };
+
+
   /* ── routing + paint ────────────────────────────────── */
   var current = 'home';
   function route() {
@@ -2854,8 +4033,8 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     return (id && exists(id)) ? id : 'home';
   }
   function paintRail() {
-    var act = sections[current] || isWeek(current) ? 'topics' : isMeasure(current) ? 'my' : current;
-    var main = [['home', 'house', T('Əsas', 'Home')], ['topics', 'calendar-days', T('Həftələr', 'Weeks')], ['my', 'folder-kanban', T('Portfelim', 'Portfolio')], ['plantable', 'clipboard-list', T('Plan', 'Plan')], ['tasks', 'list-checks', T('İşlərim', 'My tasks')]];
+    var act = sections[current] || isWeek(current) ? 'topics' : isMeasure(current) ? 'my' : isCharter(current) ? 'charters' : current;
+    var main = [['home', 'house', T('Əsas', 'Home')], ['topics', 'calendar-days', T('Həftələr', 'Weeks')], ['my', 'folder-kanban', T('Portfelim', 'Portfolio')], ['charters', 'flag', T('Charterlər', 'Charters')], ['plantable', 'clipboard-list', T('Plan', 'Plan')], ['tasks', 'list-checks', T('İşlərim', 'My tasks')]];
     var more = [['glossary', 'book-a', T('Lüğət', 'Glossary')], ['acts', 'scale', T('Hüquqi aktlar', 'Legal acts')], ['quiz', 'graduation-cap', T('Özünüyoxlama', 'Self-test')], ['videos', 'clapperboard', T('Videolar', 'Videos')], ['files', 'files', T('Fayllar', 'Files')], ['sources', 'message-circle-question', T('Mənbələr', 'Sources')]];
     var link = function (x, cls) { return '<a href="#' + x[0] + '"' + (cls ? ' class="' + cls + '"' : '') + (x[0] === act ? ' aria-current="page"' : '') + '>' + ic(x[1], 22) + '<span>' + esc(x[2]) + '</span></a>'; };
     rail.innerHTML = '<div class="side__in">' + main.map(function (x) { return link(x, ''); }).join('') + '<div class="side__sep"></div>' + more.map(function (x) { return link(x, 'is-2'); }).join('') + '</div>' +
@@ -2873,6 +4052,8 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     else if (current === 'tasks') html = tasksView();
     else if (isWeek(current)) html = weekView(isWeek(current));
     else if (current === 'my') html = myView();
+    else if (current === 'charters') html = chartersView();
+    else if (isCharter(current)) html = charterView(current.slice(2));
     else if (isMeasure(current)) html = measureView(current.slice(2));
     else if (current === 'files') html = filesView();
     else if (current === 'videos') html = videosView();
@@ -2884,7 +4065,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     if (current === 'plantable') paintPlan();
     if (current === 'glossary') paintGlossary();
     if (current === 'quiz') paintQuiz();
-    var tl = current === 'home' ? '' : current === 'topics' ? T('13 həftə', '13 weeks') : isWeek(current) ? wLabel(isWeek(current)) : current === 'my' ? T('Portfelim', 'My portfolio') : isMeasure(current) ? current.slice(2) + ' · ' + T('Tədbir', 'Measure') : current === 'files' ? T('Fayllar', 'Files') : current === 'videos' ? T('Videolar', 'Videos') : current === 'tasks' ? T('İşlərim', 'My tasks') : sections[current] ? tname(current) : (secMeta(current) || {}).title;
+    var tl = current === 'home' ? '' : current === 'topics' ? T('13 həftə', '13 weeks') : isWeek(current) ? wLabel(isWeek(current)) : current === 'my' ? T('Portfelim', 'My portfolio') : current === 'charters' ? T('Charterlər', 'Charters') : isCharter(current) ? (chGet(current.slice(2)) || {}).name : isMeasure(current) ? current.slice(2) + ' · ' + T('Tədbir', 'Measure') : current === 'files' ? T('Fayllar', 'Files') : current === 'videos' ? T('Videolar', 'Videos') : current === 'tasks' ? T('İşlərim', 'My tasks') : sections[current] ? tname(current) : (secMeta(current) || {}).title;
     document.title = (tl ? tl + ' · ' : '') + 'İRİA Bələdçisi';
     if (!opts.keepScroll) window.scrollTo(0, 0);
     Array.prototype.forEach.call(document.querySelectorAll('.gt__scroll'), function (g) { g.scrollLeft = Math.max(0, +g.dataset.today - g.clientWidth * 0.35); });
