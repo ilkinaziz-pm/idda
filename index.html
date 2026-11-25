@@ -1507,6 +1507,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
 .ghsteps{margin:18px 0 0;padding-left:22px;display:grid;gap:8px;font-size:14.5px;color:var(--text-soft)}
 .ghnote{margin-top:14px;font-size:13px;color:var(--muted);max-width:72ch}
 @media (max-width:640px){.ghform{grid-template-columns:1fr}}
+.ghban--err{background:var(--warn-bg);color:var(--warn)}
 
 </style>
 <header class="bar">
@@ -1600,7 +1601,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     clearTimeout(sync.timer); sync.pending = false;
     if (sync.writing) { sync.again = true; return; }
     sync.writing = true;
-    sync.ref.set({ keys: snapshotLocal() }).then(function () { setSync('on'); }, function () { setSync('err'); })
+    sync.ref.set({ keys: snapshotLocal() }).then(function () { sync.ghErr = 0; setSync('on'); }, function (e) { sync.ghErr = (e && e.status) || 0; sync.ghWhere = (e && e.where) || ''; setSync('err'); })
       .then(function () { sync.writing = false; if (sync.again) { sync.again = false; pushNow(); } });
   }
   var MERGE = {};   // keys whose value is merged item by item instead of «newer wins» (see todos.js)
@@ -1669,12 +1670,13 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   function ghHead(c, json) { var h = { Authorization: 'Bearer ' + c.token, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }; if (json) h['Content-Type'] = 'application/json'; return h; }
   function ghB64e(s) { return btoa(unescape(encodeURIComponent(s))); }
   function ghB64d(s) { return decodeURIComponent(escape(atob(String(s).replace(/\s/g, '')))); }
-  function ghErr(r) { var e = new Error('http ' + r.status); e.status = r.status; return e; }
+  function ghErr(r, where) { var e = new Error('http ' + r.status); e.status = r.status; e.where = where || ''; return e; }
   function ghPull() {
     var c = ghCfg(); if (!c) return Promise.resolve(false);
     return fetch(ghUrl(c) + '?ref=' + encodeURIComponent(c.branch) + '&_=' + Date.now(), { headers: ghHead(c), cache: 'no-store' }).then(function (r) {
-      if (r.status === 404) { ghSha = null; return null; }
-      if (!r.ok) throw ghErr(r);
+      if (r.status === 404)   // GitHub answers 404 both for «no file yet» and for «this token cannot see the repository»
+        return fetch('https://api.github.com/repos/' + c.repo, { headers: ghHead(c), cache: 'no-store' }).then(function (rr) { if (!rr.ok) throw ghErr(rr, 'repo'); ghSha = null; return null; });
+      if (!r.ok) throw ghErr(r, 'read');
       return r.json();
     }).then(function (j) {
       if (!j) return false;
@@ -1689,13 +1691,13 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     var txt = JSON.stringify(body);
     return fetch(ghUrl(c), { method: 'PUT', headers: ghHead(c, true), body: txt, keepalive: txt.length < 60000 }).then(function (r) {
       if ((r.status === 409 || r.status === 422) && (n || 0) < 2) return ghPull().then(function () { return ghPut({ keys: snapshotLocal() }, (n || 0) + 1); });
-      if (!r.ok) throw ghErr(r);
+      if (!r.ok) throw ghErr(r, 'write');
       return r.json().then(function (j) { ghSha = j.content && j.content.sha; });
     });
   }
   function ghRefresh() {
     if (sync.kind !== 'gh' || sync.writing) return;
-    ghPull().then(function (ch) { setSync('on'); if (ch && sync.onRemote) sync.onRemote(); }, function (e) { sync.ghErr = e.status || 0; setSync('err'); });
+    ghPull().then(function (ch) { setSync('on'); if (ch && sync.onRemote) sync.onRemote(); }, function (e) { sync.ghErr = e.status || 0; sync.ghWhere = e.where || ''; setSync('err'); });
   }
   function ghStart() {
     if (window.claude && typeof window.claude.use === 'function') return Promise.resolve(false);
@@ -1709,11 +1711,12 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
       if (Object.keys(ts).length) queuePush();   // first run on this device: send what is only here
       if (ch && sync.onRemote) sync.onRemote();
       return true;
-    }, function (e) { sync.ghErr = e.status || 0; setSync('err'); return false; });
+    }, function (e) { sync.ghErr = e.status || 0; sync.ghWhere = e.where || ''; setSync('err'); return false; });
   }
   function ghStop() { clearInterval(ghPoll); sync.ref = null; sync.kind = ''; setSync('off'); }
   function ghBanner() {   // one line on pages with personal data: is this copy synced?
     if (window.claude && typeof window.claude.use === 'function') return '';
+    if (sync.kind === 'gh' && sync.state === 'err') return '<a class="ghban ghban--err" href="#sync">' + ic('triangle-alert', 16) + '<span>' + T('GitHub sinxronu işləmir: dəyişikliklər hələ yalnız bu cihazdadır.', 'GitHub sync is not working: changes are only on this device for now.') + '</span><b>' + T('Səbəbə bax', 'See why') + ic('chevron-right', 14) + '</b></a>';
     if (sync.kind === 'gh') return '<a class="ghban ghban--on" href="#sync"><span class="syncst syncst--' + sync.state + '" id="sync-st">' + syncLabel() + '</span>' + ic('chevron-right', 14) + '</a>';
     return '<a class="ghban" href="#sync">' + ic('cloud-off', 16) + '<span>' + T('Sinxron qoşulmayıb: işlər yalnız bu cihazdadır və cümə e-poçtuna düşmür.', 'Sync is off: tasks stay on this device and do not reach the Friday email.') + '</span><b>' + T('Qoş', 'Connect') + ic('chevron-right', 14) + '</b></a>';
   }
@@ -1723,9 +1726,14 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     var tok = (document.getElementById('gh-token') || {}).value || '', repo = ((document.getElementById('gh-repo') || {}).value || GH_DEF.repo).trim().replace(/^https?:\/\/github\.com\//, '').replace(/\.git$/, '');
     if (!tok.trim()) return;
     store.set('gh', { token: tok.trim(), repo: repo, branch: GH_DEF.branch, path: GH_DEF.path });
+    var fail = function (e) { var st = (e && e.status) || sync.ghErr, wh = (e && e.where) || sync.ghWhere; store.set('gh', { repo: repo }); ghStop(); sync.ghErr = st; sync.ghWhere = wh; setSync('err'); paint({ keepScroll: true }); toast(T('Qoşulmaq alınmadı.', 'Could not connect.')); };
+    toast(T('Yoxlanılır…', 'Checking…'));
     ghStart().then(function (ok) {
-      if (!ok) { var keep = sync.ghErr; store.set('gh', { repo: repo }); ghStop(); sync.ghErr = keep; setSync('err'); paint({ keepScroll: true }); toast(T('Qoşulmaq alınmadı.', 'Could not connect.')); return; }
-      paint({ keepScroll: true }); toast(T('GitHub sinxronu qoşuldu.', 'GitHub sync connected.'));
+      if (!ok) { fail(); return; }
+      clearTimeout(sync.timer); sync.pending = false;
+      return ghPut({ keys: snapshotLocal() }, 0).then(function () {   // a test write right away: read-only tokens fail here, not later
+        sync.ghErr = 0; setSync('on'); paint({ keepScroll: true }); toast(T('GitHub sinxronu qoşuldu: oxuma və yazma işləyir.', 'GitHub sync connected: reading and writing work.'));
+      }, fail);
     });
   });
   document.addEventListener('click', function (ev) {
@@ -3271,8 +3279,12 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   }
   function syncView() {
     var inClaude = window.claude && typeof window.claude.use === 'function', c = store.get('gh', null) || {}, on = sync.kind === 'gh';
-    var err = sync.ghErr === 401 ? T('Token qəbul olunmadı (401): müddəti bitib və ya səhv kopyalanıb.', 'The token was not accepted (401): expired or mistyped.')
-      : sync.ghErr === 403 || sync.ghErr === 404 ? T('Tokenin bu repoya yazma icazəsi yoxdur (' + sync.ghErr + '). «Contents: Read and write» icazəsini və repo seçimini yoxlayın.', 'The token cannot write to this repository (' + sync.ghErr + '). Check “Contents: Read and write” and the repository choice.')
+    var E = sync.ghErr, W = sync.ghWhere;
+    var err = E === 401 ? T('Token qəbul olunmadı (401): səhv kopyalanıb, müddəti bitib və ya silinib.', 'The token was not accepted (401): mistyped, expired or deleted.')
+      : W === 'repo' || (E === 404) ? T('Token bu repoya baxa bilmir (404). Tokendə «Resource owner» ilkinaziz-pm olmalı, «Repository access → Only select repositories» bölməsində idda-guide seçilməlidir.', 'The token cannot see this repository (404). The token’s “Resource owner” must be ilkinaziz-pm and idda-guide must be picked under “Repository access → Only select repositories”.')
+      : E === 403 && W === 'write' ? T('Token oxuya bilir, amma yaza bilmir (403). «Permissions → Contents» «Read and write» olmalıdır, «Read-only» yox.', 'The token can read but not write (403). “Permissions → Contents” must be “Read and write”, not “Read-only”.')
+      : E === 403 ? T('GitHub girişi rədd etdi (403). Tokenin icazələrini yoxlayın və ya bir neçə dəqiqə sonra yenidən cəhd edin.', 'GitHub refused access (403). Check the token permissions or try again in a few minutes.')
+      : E ? T('GitHub xəta qaytardı (' + E + ').', 'GitHub returned an error (' + E + ').')
       : sync.state === 'err' ? T('GitHub-a qoşulmaq alınmadı. İnternet bağlantısını yoxlayın.', 'Could not reach GitHub. Check the connection.') : '';
     var body = inClaude ? '<div class="okbox">' + ic('circle-check', 18) + T('Bu Claude linkidir: sinxron avtomatik işləyir, token lazım deyil.', 'This is the Claude link: sync works by itself, no token needed.') + '</div>'
       : '<section class="ghcard' + (on ? ' is-on' : '') + '"><div class="ghcard__st"><span class="syncst syncst--' + sync.state + '" id="sync-st">' + syncLabel() + '</span>' + (on ? '<span class="ghcard__repo">' + ic('library', 14) + esc((c.repo || GH_DEF.repo) + ' · ' + (c.branch || GH_DEF.branch) + ' · ' + (c.path || GH_DEF.path)) + '</span>' : '') + '</div>' +
