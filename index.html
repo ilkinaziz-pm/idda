@@ -1508,6 +1508,10 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
 .ghnote{margin-top:14px;font-size:13px;color:var(--muted);max-width:72ch}
 @media (max-width:640px){.ghform{grid-template-columns:1fr}}
 .ghban--err{background:var(--warn-bg);color:var(--warn)}
+.tdsubform{display:flex;gap:6px;align-items:center}
+.tdsubform .tdsubadd{flex:1;min-width:0}
+.tdsubbtn{flex:none;width:40px;height:40px;border-radius:10px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center}
+.tdsubbtn:hover{filter:brightness(.95)}
 
 </style>
 <header class="bar">
@@ -4507,7 +4511,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
       '<label class="tdf tdf--wide"><span>' + T('Qeyd', 'Note') + '</span><textarea rows="2" data-tdf="note" data-id="' + x.id + '" placeholder="' + T('Kontekst, link, kiminlə danışmalı…', 'Context, links, whom to talk to…') + '">' + esc(x.note || '') + '</textarea></label>' +
       '<div class="tdf tdf--wide"><span>' + T('Alt addımlar', 'Subtasks') + '</span><ul class="tdsubs">' + (x.subs || []).map(function (s, i) {
         return '<li class="' + (s.d ? 'is-done' : '') + '"><label class="td__chk td__chk--s"><input type="checkbox" data-tdsub="' + x.id + '" data-i="' + i + '"' + (s.d ? ' checked' : '') + '><span>' + ic('check', 12) + '</span></label><span>' + esc(s.t) + '</span><button type="button" class="tdx" data-tdsubx="' + x.id + '" data-i="' + i + '" aria-label="' + T('Sil', 'Remove') + '">' + ic('x', 14) + '</button></li>';
-      }).join('') + '</ul><input type="text" class="tdsubadd" data-tdsubadd="' + x.id + '" placeholder="' + T('+ alt addım yazın və Enter basın', '+ type a subtask and press Enter') + '"></div>' +
+      }).join('') + '</ul><form class="tdsubform" data-tdsubform="' + x.id + '" autocomplete="off"><input type="text" class="tdsubadd" data-tdsubadd="' + x.id + '" enterkeyhint="enter" placeholder="' + T('Alt addım yazın…', 'Type a subtask…') + '" aria-label="' + T('Yeni alt addım', 'New subtask') + '"><button type="submit" class="tdsubbtn" aria-label="' + T('Alt addımı əlavə et', 'Add subtask') + '">' + ic('plus', 18) + '</button></form></div>' +
       '<div class="td__eda"><button type="button" class="btn btn--ghost" data-tddel="' + x.id + '">' + ic('trash-2', 15) + T('Sil', 'Delete') + '</button><button type="button" class="btn" data-tdopen="' + x.id + '">' + T('Bağla', 'Close') + '</button></div>' +
       '<datalist id="td-cats">' + cats.map(function (c) { return '<option value="' + esc(c) + '">'; }).join('') + '</datalist><datalist id="td-people">' + people.map(function (c) { return '<option value="' + esc(c) + '">'; }).join('') + '</datalist>' +
       '</div>';
@@ -4598,6 +4602,15 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   function tdRepaint() { setTimeout(function () { paint({ keepScroll: true }); }, 0); }
   var tdTimers = {};
   document.addEventListener('submit', function (ev) {
+    var sf = ev.target && ev.target.dataset && ev.target.dataset.tdsubform;
+    if (sf) {   // a form, so the phone keyboard's Enter / Go and the + button both add the subtask
+      ev.preventDefault();
+      var inp = ev.target.querySelector('input'), v = inp && inp.value.trim(); if (!v) return;
+      var it = tdGet(sf); if (!it) return;
+      tdPatch(it.id, { subs: (it.subs || []).concat([{ t: v, d: false }]) }); inp.value = '';
+      tdRepaint(); setTimeout(function () { var n = document.querySelector('[data-tdsubadd="' + sf + '"]'); if (n) n.focus(); }, 40);
+      return;
+    }
     if (!ev.target || ev.target.id !== 'td-add') return;
     ev.preventDefault();
     var inp = document.getElementById('td-new'), v = inp && inp.value.trim(); if (!v) return;
@@ -4645,7 +4658,6 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   });
   document.addEventListener('keydown', function (ev) {
     var t = ev.target; if (!(t instanceof Element) || ev.key !== 'Enter') return;
-    if (t.dataset && t.dataset.tdsubadd) { ev.preventDefault(); var v = t.value.trim(); if (!v) return; var it = tdGet(t.dataset.tdsubadd); if (it) { tdPatch(it.id, { subs: (it.subs || []).concat([{ t: v, d: false }]) }); tdRepaint(); setTimeout(function () { var n = document.querySelector('[data-tdsubadd="' + it.id + '"]'); if (n) n.focus(); }, 40); } return; }
     if (t.dataset && t.dataset.tdf === 't') { ev.preventDefault(); t.blur(); }
   });
   // board: drag a card to another column
