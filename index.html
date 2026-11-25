@@ -1488,6 +1488,26 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   .seg[data-seg="tasks"] button{flex:0 0 auto;padding-left:12px;padding-right:12px;white-space:nowrap}
 }
 
+/* GitHub sync */
+.ghban{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;background:var(--rf-bg);color:var(--rf-fg);text-decoration:none;font-size:13.5px;font-weight:600}
+.ghban span{flex:1}
+.ghban b{display:inline-flex;align-items:center;gap:2px;white-space:nowrap}
+.ghban--on{background:none;padding:0 4px;justify-content:flex-end;color:var(--muted)}
+.ghban--on span{flex:none}
+.ghcard{background:var(--surface);border-radius:20px;box-shadow:var(--card);padding:18px 20px;display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.ghcard.is-on{border-left:4px solid var(--ok)}
+.ghcard__st{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.ghcard__st .syncst{font-weight:700}
+.ghcard__repo{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.ghcard__err{display:flex;gap:8px;align-items:flex-start;color:var(--warn);font-size:14px}
+.ghcard__err .ic{flex:none;margin-top:3px}
+.ghcard__a{display:flex;flex-wrap:wrap;gap:8px}
+.ghform{display:grid;grid-template-columns:1.4fr 1fr auto;gap:10px;align-items:end}
+.ghform .btn{height:40px}
+.ghsteps{margin:18px 0 0;padding-left:22px;display:grid;gap:8px;font-size:14.5px;color:var(--text-soft)}
+.ghnote{margin-top:14px;font-size:13px;color:var(--muted);max-width:72ch}
+@media (max-width:640px){.ghform{grid-template-columns:1fr}}
+
 </style>
 <header class="bar">
   <a class="brand" href="#home" aria-label="İRİA Bələdçisi, ana səhifə">
@@ -1550,7 +1570,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   /* ── storage (per viewer, may be unavailable) ───────── */
   // Progress lives in localStorage; inside claude.ai it is also mirrored to the viewer's private
   // db document, so phone and laptop show the same ticks, read marks and notes.
-  var LOCAL_ONLY = { theme: 1, lang: 1, simple: 1, ts: 1, 'pwa:hide': 1, 'my:view': 1, 'plan:view': 1, 'ch:view': 1, 'td:view': 1 };
+  var LOCAL_ONLY = { theme: 1, lang: 1, simple: 1, ts: 1, 'pwa:hide': 1, 'my:view': 1, 'plan:view': 1, 'ch:view': 1, 'td:view': 1, gh: 1 };
   var ts = {};
   try { ts = JSON.parse(localStorage.getItem('iria:ts') || '{}') || {}; } catch (e) { ts = {}; }
   var sync = { ref: null, state: 'off', timer: null, writing: false, again: false, onRemote: null };
@@ -1572,24 +1592,35 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   function queuePush() {
     if (!sync.ref) return;
     clearTimeout(sync.timer);
-    sync.timer = setTimeout(pushNow, 900);
+    sync.pending = true;
+    sync.timer = setTimeout(pushNow, sync.delay || 900);
   }
   function pushNow() {
     if (!sync.ref) return;
+    clearTimeout(sync.timer); sync.pending = false;
     if (sync.writing) { sync.again = true; return; }
     sync.writing = true;
     sync.ref.set({ keys: snapshotLocal() }).then(function () { setSync('on'); }, function () { setSync('err'); })
       .then(function () { sync.writing = false; if (sync.again) { sync.again = false; pushNow(); } });
   }
+  var MERGE = {};   // keys whose value is merged item by item instead of «newer wins» (see todos.js)
   function applyRemote(data) {
     var keys = (data && data.keys) || {}, changed = false, newer = false;
     Object.keys(keys).forEach(function (k) {
       var r = keys[k];
       if (!r || typeof r.t !== 'number' || LOCAL_ONLY[k]) return;
+      var lv = MERGE[k] && ts[k] ? store.get(k, null) : null;
+      if (lv != null && r.v != null) {
+        var m = MERGE[k](lv, r.v), mj = JSON.stringify(m);
+        if (mj !== JSON.stringify(lv)) { store.put(k, m); changed = true; }
+        var t0 = Math.max(ts[k], r.t);
+        ts[k] = mj !== JSON.stringify(r.v) ? t0 + 1 : t0;   // the merge has something the other side lacks: send it back
+        return;
+      }
       if (!ts[k] || r.t > ts[k]) { store.put(k, r.v); ts[k] = r.t; changed = true; }
     });
     Object.keys(ts).forEach(function (k) { if (!keys[k] || keys[k].t < ts[k]) newer = true; });
-    if (changed) store.put('ts', ts);
+    store.put('ts', ts);
     if (newer) queuePush();
     return changed;
   }
@@ -1599,8 +1630,9 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     if (el) { el.className = 'syncst syncst--' + st; el.textContent = syncLabel(); }
   }
   function syncLabel() {
-    var az = { off: 'Bu cihazda saxlanılır', wait: 'Sinxron qoşulur…', on: 'Telefon və noutbuk sinxrondur', err: 'Sinxron alınmadı — bu cihazda saxlanılır' };
-    var en = { off: 'Saved on this device', wait: 'Connecting sync…', on: 'Phone and laptop in sync', err: 'Sync failed — saved on this device' };
+    var gh = sync.kind === 'gh';
+    var az = { off: 'Bu cihazda saxlanılır', wait: 'Sinxron qoşulur…', on: gh ? 'GitHub ilə sinxrondur' : 'Telefon və noutbuk sinxrondur', err: gh ? 'GitHub sinxronu alınmadı — bu cihazda saxlanılır' : 'Sinxron alınmadı — bu cihazda saxlanılır' };
+    var en = { off: 'Saved on this device', wait: 'Connecting sync…', on: gh ? 'In sync with GitHub' : 'Phone and laptop in sync', err: gh ? 'GitHub sync failed — saved on this device' : 'Sync failed — saved on this device' };
     return (typeof EN !== 'undefined' && EN ? en : az)[sync.state];
   }
   function startSync() {
@@ -1625,6 +1657,87 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
       });
     }, function () { setSync('off'); });
   }
+
+  /* ── GitHub sync for the github.io copy ──
+     Progress is one JSON file ({keys:{k:{v,t}}}) on a branch of a private repository, read and written with
+     the contents API and a fine-grained token that the owner pastes once per device (kept only in this browser).
+     The newer value of each key wins, so two devices merge instead of overwriting each other. */
+  var GH_DEF = { repo: 'ilkinaziz-pm/idda-guide', branch: 'data', path: 'progress.json' };
+  var ghSha = null, ghPoll = null;
+  function ghCfg() { var c = store.get('gh', null); return c && c.token ? { token: c.token, repo: c.repo || GH_DEF.repo, branch: c.branch || GH_DEF.branch, path: c.path || GH_DEF.path } : null; }
+  function ghUrl(c) { return 'https://api.github.com/repos/' + c.repo + '/contents/' + c.path.split('/').map(encodeURIComponent).join('/'); }
+  function ghHead(c, json) { var h = { Authorization: 'Bearer ' + c.token, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }; if (json) h['Content-Type'] = 'application/json'; return h; }
+  function ghB64e(s) { return btoa(unescape(encodeURIComponent(s))); }
+  function ghB64d(s) { return decodeURIComponent(escape(atob(String(s).replace(/\s/g, '')))); }
+  function ghErr(r) { var e = new Error('http ' + r.status); e.status = r.status; return e; }
+  function ghPull() {
+    var c = ghCfg(); if (!c) return Promise.resolve(false);
+    return fetch(ghUrl(c) + '?ref=' + encodeURIComponent(c.branch) + '&_=' + Date.now(), { headers: ghHead(c), cache: 'no-store' }).then(function (r) {
+      if (r.status === 404) { ghSha = null; return null; }
+      if (!r.ok) throw ghErr(r);
+      return r.json();
+    }).then(function (j) {
+      if (!j) return false;
+      ghSha = j.sha;
+      return applyRemote(JSON.parse(ghB64d(j.content || '')));
+    });
+  }
+  function ghPut(data, n) {
+    var c = ghCfg(); if (!c) return Promise.reject(new Error('no token'));
+    var body = { message: 'sync ' + new Date().toISOString().slice(0, 16).replace('T', ' '), content: ghB64e(JSON.stringify(data, null, 1)), branch: c.branch };
+    if (ghSha) body.sha = ghSha;
+    var txt = JSON.stringify(body);
+    return fetch(ghUrl(c), { method: 'PUT', headers: ghHead(c, true), body: txt, keepalive: txt.length < 60000 }).then(function (r) {
+      if ((r.status === 409 || r.status === 422) && (n || 0) < 2) return ghPull().then(function () { return ghPut({ keys: snapshotLocal() }, (n || 0) + 1); });
+      if (!r.ok) throw ghErr(r);
+      return r.json().then(function (j) { ghSha = j.content && j.content.sha; });
+    });
+  }
+  function ghRefresh() {
+    if (sync.kind !== 'gh' || sync.writing) return;
+    ghPull().then(function (ch) { setSync('on'); if (ch && sync.onRemote) sync.onRemote(); }, function (e) { sync.ghErr = e.status || 0; setSync('err'); });
+  }
+  function ghStart() {
+    if (window.claude && typeof window.claude.use === 'function') return Promise.resolve(false);
+    var c = ghCfg(); if (!c) return Promise.resolve(false);
+    sync.kind = 'gh'; sync.delay = 3500; sync.ghErr = 0;
+    sync.ref = { set: function (d) { return ghPut(d, 0); } };
+    setSync('wait');
+    clearInterval(ghPoll); ghPoll = setInterval(function () { if (document.visibilityState === 'visible' && !sync.pending) ghRefresh(); }, 45000);
+    return ghPull().then(function (ch) {
+      setSync('on');
+      if (Object.keys(ts).length) queuePush();   // first run on this device: send what is only here
+      if (ch && sync.onRemote) sync.onRemote();
+      return true;
+    }, function (e) { sync.ghErr = e.status || 0; setSync('err'); return false; });
+  }
+  function ghStop() { clearInterval(ghPoll); sync.ref = null; sync.kind = ''; setSync('off'); }
+  function ghBanner() {   // one line on pages with personal data: is this copy synced?
+    if (window.claude && typeof window.claude.use === 'function') return '';
+    if (sync.kind === 'gh') return '<a class="ghban ghban--on" href="#sync"><span class="syncst syncst--' + sync.state + '" id="sync-st">' + syncLabel() + '</span>' + ic('chevron-right', 14) + '</a>';
+    return '<a class="ghban" href="#sync">' + ic('cloud-off', 16) + '<span>' + T('Sinxron qoşulmayıb: işlər yalnız bu cihazdadır və cümə e-poçtuna düşmür.', 'Sync is off: tasks stay on this device and do not reach the Friday email.') + '</span><b>' + T('Qoş', 'Connect') + ic('chevron-right', 14) + '</b></a>';
+  }
+  document.addEventListener('submit', function (ev) {
+    if (!ev.target || ev.target.id !== 'gh-form') return;
+    ev.preventDefault();
+    var tok = (document.getElementById('gh-token') || {}).value || '', repo = ((document.getElementById('gh-repo') || {}).value || GH_DEF.repo).trim().replace(/^https?:\/\/github\.com\//, '').replace(/\.git$/, '');
+    if (!tok.trim()) return;
+    store.set('gh', { token: tok.trim(), repo: repo, branch: GH_DEF.branch, path: GH_DEF.path });
+    ghStart().then(function (ok) {
+      if (!ok) { var keep = sync.ghErr; store.set('gh', { repo: repo }); ghStop(); sync.ghErr = keep; setSync('err'); paint({ keepScroll: true }); toast(T('Qoşulmaq alınmadı.', 'Could not connect.')); return; }
+      paint({ keepScroll: true }); toast(T('GitHub sinxronu qoşuldu.', 'GitHub sync connected.'));
+    });
+  });
+  document.addEventListener('click', function (ev) {
+    var t = ev.target; if (!(t instanceof Element)) return;
+    if (t.closest('[data-gh-now]')) { if (sync.pending) pushNow(); else ghRefresh(); toast(T('Yenilənir…', 'Refreshing…')); return; }
+    if (t.closest('[data-gh-off]')) { if (sync.pending) pushNow(); var c = store.get('gh', {}) || {}; store.set('gh', { repo: c.repo }); ghStop(); paint({ keepScroll: true }); toast(T('Bu cihazda sinxron ayrıldı. Məlumat bu cihazda qalır.', 'Sync disconnected on this device. The data stays here.')); }
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (sync.kind !== 'gh') return;
+    if (document.visibilityState === 'hidden' && sync.pending) pushNow();   // leaving the page: send now
+    else if (document.visibilityState === 'visible' && !sync.pending) ghRefresh();
+  });
 
   /* ── structure ──────────────────────────────────────── */
   /* 13 weeks, grouped into three months (content/weeks.json) */
@@ -1759,7 +1872,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     if (SYNTH[id]) return Object.assign({ id: id, blocks: [] }, SYNTH[id]);
     return null;
   }
-  var VIEWS = { home: 1, topics: 1, tasks: 1, acts: 1, plantable: 1, my: 1, charters: 1, files: 1, videos: 1 };
+  var VIEWS = { home: 1, topics: 1, tasks: 1, acts: 1, plantable: 1, my: 1, charters: 1, files: 1, videos: 1, sync: 1 };
   function isCharter(id) { return /^c-./.test(id || '') && !!chGet(id.slice(2)); }
   function isMeasure(id) { return /^t-\d/.test(id || '') && !!areaItem(id.slice(2)); }
   function isWeek(id) { var m = /^h(\d+)$/.exec(id || ''); return m && +m[1] >= 1 && +m[1] <= NW ? +m[1] : 0; }
@@ -3156,11 +3269,31 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
       '<div class="gt__leg"><span><i class="gt__bar--ok"></i>' + T('vaxtında', 'on time') + '</span><span><i class="gt__bar--soon"></i>' + T('60 gün qalıb', 'due within 60 days') + '</span><span><i class="gt__bar--late"></i>' + T('müddət bitib', 'past due') + '</span><span><i class="gt__bar--ongoing"></i>' + T('mütəmadi', 'ongoing') + '</span><span><i class="gt__bar--done"></i>' + T('edilib', 'done') + '</span></div>' +
       '<p class="hint">' + T('Zolaq Planın təsdiqindən (27 fevral 2026) tədbirin son müddətinə qədərdir; içindəki tünd hissə sizin işarələdiyiniz irəliləyişdir.', 'Each bar runs from the Plan’s approval (27 February 2026) to the measure’s deadline; the darker part is the progress you have marked.') + '</p></div>';
   }
-  function syncHint() {   // on the github.io copy, statuses stay on this device; the Friday email reads the Claude link
-    if (window.claude && typeof window.claude.use === 'function') return '';
-    var u = (D.meta || {}).sync;
-    return u ? '<p class="mxhint">' + ic('info', 15) + '<span>' + T('Cümə e-poçtundakı status Claude linkindən oxunur. Burada yazdıqlarınız yalnız bu cihazda qalır, ona görə statusu ', 'The Friday email reads statuses from the Claude link. What you enter here stays on this device, so record statuses ') + '<a href="' + esc(u) + '#my" target="_blank" rel="noopener">' + T('Claude linkində', 'on the Claude link') + '</a>' + T(' yazın. Burada artıq yazdıqlarınızı «Layihələr → Ehtiyat nüsxə» faylı ilə oraya köçürə bilərsiniz.', '. To move what you already entered here, use «Projects → Backup» and restore the file there.') + '</span></p>' : '';
+  function syncView() {
+    var inClaude = window.claude && typeof window.claude.use === 'function', c = store.get('gh', null) || {}, on = sync.kind === 'gh';
+    var err = sync.ghErr === 401 ? T('Token qəbul olunmadı (401): müddəti bitib və ya səhv kopyalanıb.', 'The token was not accepted (401): expired or mistyped.')
+      : sync.ghErr === 403 || sync.ghErr === 404 ? T('Tokenin bu repoya yazma icazəsi yoxdur (' + sync.ghErr + '). «Contents: Read and write» icazəsini və repo seçimini yoxlayın.', 'The token cannot write to this repository (' + sync.ghErr + '). Check “Contents: Read and write” and the repository choice.')
+      : sync.state === 'err' ? T('GitHub-a qoşulmaq alınmadı. İnternet bağlantısını yoxlayın.', 'Could not reach GitHub. Check the connection.') : '';
+    var body = inClaude ? '<div class="okbox">' + ic('circle-check', 18) + T('Bu Claude linkidir: sinxron avtomatik işləyir, token lazım deyil.', 'This is the Claude link: sync works by itself, no token needed.') + '</div>'
+      : '<section class="ghcard' + (on ? ' is-on' : '') + '"><div class="ghcard__st"><span class="syncst syncst--' + sync.state + '" id="sync-st">' + syncLabel() + '</span>' + (on ? '<span class="ghcard__repo">' + ic('library', 14) + esc((c.repo || GH_DEF.repo) + ' · ' + (c.branch || GH_DEF.branch) + ' · ' + (c.path || GH_DEF.path)) + '</span>' : '') + '</div>' +
+        (err ? '<p class="ghcard__err">' + ic('triangle-alert', 15) + esc(err) + '</p>' : '') +
+        (on ? '<div class="ghcard__a"><button type="button" class="btn" data-gh-now>' + ic('rotate-ccw', 16) + T('İndi yenilə', 'Refresh now') + '</button><button type="button" class="btn btn--ghost" data-gh-off>' + ic('cloud-off', 16) + T('Bu cihazda sinxronu ayır', 'Disconnect on this device') + '</button></div>'
+          : '<form class="ghform" id="gh-form" autocomplete="off"><label class="tdf"><span>' + T('GitHub tokeni', 'GitHub token') + '</span><input type="password" id="gh-token" placeholder="github_pat_…" required></label>' +
+            '<label class="tdf"><span>' + T('Repo', 'Repository') + '</span><input type="text" id="gh-repo" value="' + esc(c.repo || GH_DEF.repo) + '"></label>' +
+            '<button type="submit" class="btn btn--pri">' + ic('cloud', 16) + T('Qoş', 'Connect') + '</button></form>') + '</section>' +
+        '<ol class="ghsteps"><li>' + T('GitHub-da <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">yeni fine-grained token</a> açın. Ad: «İRİA bələdçisi», müddət: 90 gün və ya çox.', 'On GitHub open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">a new fine-grained token</a>. Name: “İRİA guide”, expiry: 90 days or more.') + '</li>' +
+        '<li>' + T('<b>Repository access</b> → «Only select repositories» → yalnız <b>idda-guide</b>.', '<b>Repository access</b> → “Only select repositories” → only <b>idda-guide</b>.') + '</li>' +
+        '<li>' + T('<b>Permissions → Repository permissions → Contents</b>: «Read and write». Başqa icazə lazım deyil.', '<b>Permissions → Repository permissions → Contents</b>: “Read and write”. Nothing else.') + '</li>' +
+        '<li>' + T('«Generate token» basın, tokeni kopyalayıb yuxarıya yapışdırın və «Qoş» basın. Telefonda və noutbukda bir dəfə edin.', 'Press “Generate token”, paste it above and press “Connect”. Do it once on the phone and once on the laptop.') + '</li></ol>' +
+        '<p class="ghnote">' + T('Token yalnız bu brauzerdə saxlanılır, başqa yerə göndərilmir və heç bir faylda yoxdur. Məlumat <b>idda-guide</b> reposunun <b>data</b> budağında bir JSON faylda durur; cümə e-poçtu da onu oxuyur. İki cihazda eyni şeyi dəyişsəniz, sonuncu dəyişiklik qalır.', 'The token is kept only in this browser and is not sent anywhere else. The data is one JSON file on the <b>data</b> branch of <b>idda-guide</b>; the Friday email reads it too. If two devices change the same thing, the later change wins.') + '</p>';
+    return '<div class="col">' + pageHead('cloud', T('Sinxron', 'Sync'), T('İşləriniz, qeydləriniz və işarələriniz telefonda və noutbukda eyni olsun və cümə e-poçtuna düşsün.', 'Keep your tasks, notes and ticks the same on phone and laptop, and in the Friday email.')) + body + '</div>';
   }
+  function syncHint() {   // the github.io copy: suggest connecting GitHub sync, which the Friday email also reads
+    if (window.claude && typeof window.claude.use === 'function') return '';
+    if (sync.kind === 'gh') return '';
+    return '<p class="mxhint">' + ic('info', 15) + '<span>' + T('Burada yazdıqlarınız hələ yalnız bu cihazda qalır və cümə e-poçtuna düşmür. ', 'What you enter here stays on this device for now and does not reach the Friday email. ') + '<a href="#sync">' + T('GitHub sinxronunu qoşun', 'Connect GitHub sync') + '</a>.</span></p>';
+  }
+
   function mxView() {
     var items = areaItems(), done = 0, late = 0;
     items.forEach(function (it) { var du = dueInfo(it, itemPrj(it.no)); if (du.cls === 'done') done++; if (du.cls === 'late') late++; });
@@ -4170,7 +4303,17 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   var tdUi = { view: 'list', who: '', cat: '', q: '', open: '', showDone: false };
   try { tdUi.view = store.get('td:view', 'list') === 'board' ? 'board' : 'list'; } catch (e) { /* default */ }
   function tdAll() { var d = store.get('todo2', null); return d && Array.isArray(d.items) ? d.items : []; }
-  function tdSave(items) { store.set('todo2', { items: items }); }
+  function tdDel() { var d = store.get('todo2', null); return (d && d.del) || {}; }
+  function tdSave(items, del) { store.set('todo2', del ? { items: items, del: del } : { items: items, del: tdDel() }); }
+  // two devices: each task keeps its latest version (field «u»); a deletion wins over older versions
+  MERGE.todo2 = function (a, b) {
+    var del = {}, by = {}, order = [];
+    [a, b].forEach(function (x) { Object.keys((x && x.del) || {}).forEach(function (id) { del[id] = Math.max(del[id] || 0, x.del[id]); }); });
+    [a, b].forEach(function (x) { ((x && x.items) || []).forEach(function (it) { if (!it || !it.id) return; if (!by[it.id]) { order.push(it.id); by[it.id] = it; } else if ((it.u || 0) > (by[it.id].u || 0)) by[it.id] = it; }); });
+    var items = order.map(function (id) { return by[id]; }).filter(function (it) { return !(del[it.id] && del[it.id] >= (it.u || 0)); });
+    var cut = Date.now() - 180 * 864e5; Object.keys(del).forEach(function (id) { if (del[id] < cut) delete del[id]; });
+    return { items: items, del: del };
+  };
   function tdMe() { return String(store.get('todo:me', '') || '').trim(); }
   function tdMine(it) { var w = fold(it.who || '').trim(), me = fold(tdMe()); return !w || (me && w === me) || /^(men|mən|me|i|ozum)$/.test(w); }
   function tdGet(id) { return tdAll().filter(function (x) { return x.id === id; })[0] || null; }
@@ -4425,7 +4568,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     var io = '<details class="acc acc--help tdio"><summary><span class="bd bd--sm ph-m2">' + ic('file-spreadsheet', 16) + '</span><span class="acc__t">' + T('Excel ilə: ixrac və idxal', 'With Excel: export and import') + '</span>' + ic('chevron-down', 18, 'chev') + '</summary><div class="acc__b">' +
       '<p>' + T('Ixrac edilən faylda sütunlar: №, Description, Status, Deadline, Owner, Priority, Category, Note, Subtasks, Repeat, Follow-up. Excel-də dəyişib «CSV UTF-8» kimi saxlayın və yenidən idxal edin: eyni adlı işlər yenilənir, yeniləri əlavə olunur. Yalnız «Description» sütunu məcburidir.', 'The exported file has: №, Description, Status, Deadline, Owner, Priority, Category, Note, Subtasks, Repeat, Follow-up. Edit it in Excel, save as “CSV UTF-8” and import it again: tasks with the same name are updated, new ones are added. Only “Description” is required.') + '</p>' +
       '<div class="tdio__a"><button type="button" class="btn" data-tdexp>' + ic('download', 16) + T('Excel üçün yüklə (CSV)', 'Download for Excel (CSV)') + '</button><label class="btn">' + ic('upload', 16) + T('Excel-dən idxal et', 'Import from Excel') + '<input type="file" id="td-file" accept=".csv,.tsv,.txt,text/csv" hidden></label></div>' + me + '</div></details>';
-    return '<div class="tdpage">' + head + add + tools + body + io + '</div>';
+    return '<div class="tdpage">' + ghBanner() + head + add + tools + body + io + '</div>';
   }
   function todoHomeCard() {
     var all = tdAll(); if (!all.length) return '';
@@ -4461,7 +4604,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     if ((b = t.closest('[data-tdview]'))) { tdUi.view = b.dataset.tdview; store.set('td:view', tdUi.view); tdRepaint(); return; }
     if (t.closest('[data-tdshowdone]')) { tdUi.showDone = !tdUi.showDone; tdRepaint(); return; }
     if ((b = t.closest('[data-tdnext]'))) { var it = tdGet(b.dataset.tdnext); if (it) tdPatch(it.id, { st: it.st === 'todo' ? 'doing' : 'done' }); tdRepaint(); return; }
-    if ((b = t.closest('[data-tddel]'))) { var x = tdGet(b.dataset.tddel); if (x && window.confirm(T('Bu iş silinsin?\n', 'Delete this task?\n') + x.t)) { tdSave(tdAll().filter(function (y) { return y.id !== x.id; })); tdUi.open = ''; tdRepaint(); } return; }
+    if ((b = t.closest('[data-tddel]'))) { var x = tdGet(b.dataset.tddel); if (x && window.confirm(T('Bu iş silinsin?\n', 'Delete this task?\n') + x.t)) { var dl = tdDel(); dl[x.id] = Date.now(); tdSave(tdAll().filter(function (y) { return y.id !== x.id; }), dl); tdUi.open = ''; tdRepaint(); } return; }
     if ((b = t.closest('[data-tdsubx]'))) { var s1 = tdGet(b.dataset.tdsubx); if (s1) { var subs = (s1.subs || []).slice(); subs.splice(+b.dataset.i, 1); tdPatch(s1.id, { subs: subs }); tdRepaint(); } return; }
     if (t.closest('[data-tdexp]')) { saveFile(T('islerim-', 'my-tasks-') + today() + '.csv', tdExport()); return; }
   });
@@ -4539,6 +4682,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     else if (isCharter(current)) html = charterView(current.slice(2));
     else if (isMeasure(current)) html = measureView(current.slice(2));
     else if (current === 'files') html = filesView();
+    else if (current === 'sync') html = syncView();
     else if (current === 'videos') html = videosView();
     else if (sections[current]) html = topicView(current);
     else html = pageView(current);
@@ -4548,7 +4692,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     if (current === 'plantable') paintPlan();
     if (current === 'glossary') paintGlossary();
     if (current === 'quiz') paintQuiz();
-    var tl = current === 'home' ? '' : current === 'topics' ? T('13 həftə', '13 weeks') : isWeek(current) ? wLabel(isWeek(current)) : current === 'my' ? T('Portfelim', 'My portfolio') : current === 'charters' ? T('Charterlər', 'Charters') : isCharter(current) ? (chGet(current.slice(2)) || {}).name : isMeasure(current) ? current.slice(2) + ' · ' + T('Tədbir', 'Measure') : current === 'files' ? T('Fayllar', 'Files') : current === 'videos' ? T('Videolar', 'Videos') : current === 'tasks' ? T('İşlərim', 'My tasks') : sections[current] ? tname(current) : (secMeta(current) || {}).title;
+    var tl = current === 'home' ? '' : current === 'topics' ? T('13 həftə', '13 weeks') : isWeek(current) ? wLabel(isWeek(current)) : current === 'my' ? T('Portfelim', 'My portfolio') : current === 'charters' ? T('Charterlər', 'Charters') : isCharter(current) ? (chGet(current.slice(2)) || {}).name : isMeasure(current) ? current.slice(2) + ' · ' + T('Tədbir', 'Measure') : current === 'files' ? T('Fayllar', 'Files') : current === 'sync' ? T('Sinxron', 'Sync') : current === 'videos' ? T('Videolar', 'Videos') : current === 'tasks' ? T('İşlərim', 'My tasks') : sections[current] ? tname(current) : (secMeta(current) || {}).title;
     document.title = (tl ? tl + ' · ' : '') + 'İRİA Bələdçisi';
     if (!opts.keepScroll) window.scrollTo(0, 0);
     Array.prototype.forEach.call(document.querySelectorAll('.gt__scroll'), function (g) { g.scrollLeft = Math.max(0, +g.dataset.today - g.clientWidth * 0.35); });
@@ -4864,8 +5008,9 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     if (a && (a.tagName === 'TEXTAREA' || a.tagName === 'INPUT')) return;
     paint({ keepScroll: true });
   };
-  seedArea();
   startSync();
+  if (ghCfg() && !(window.claude && typeof window.claude.use === 'function')) ghStart().then(function () { seedArea(); paint({ keepScroll: true }); });   // read GitHub first, so a new device does not seed over saved statuses
+  else seedArea();
   if (EN) setLang(true); else paint();
 })();
 
