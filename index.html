@@ -1513,6 +1513,73 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
 .tdsubbtn{flex:none;width:40px;height:40px;border-radius:10px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center}
 .tdsubbtn:hover{filter:brightness(.95)}
 
+/* ── «Bu gün» home, library, portfolio tabs: the lighter layout ── */
+.home--lite{gap:18px}
+.today{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 16px;padding-top:4px}
+.today small{font:600 12px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+.today h1{font-size:clamp(30px,4.4vw,42px);font-weight:700;margin-top:6px}
+.today .ghban{flex:1 1 320px;max-width:560px}
+.today .ghban--on{flex:none}
+.home2{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:18px;align-items:start}
+.home2__main>.sec,.home2__side>.sec{margin:0}
+.home2__side{display:flex;flex-direction:column;gap:14px}
+.home--lite .tdhome{background:var(--surface);border-radius:22px;box-shadow:var(--card);padding:16px 16px 12px}
+.home--lite .tdhome .td{box-shadow:none;background:var(--bg)}
+.lite{background:var(--surface);border-radius:20px;box-shadow:var(--card);padding:14px 16px}
+.lite .sec__h{margin-bottom:8px}
+.lite .sec__h h2{display:flex;align-items:center;gap:8px;font-size:16px}
+.lite .sec__h h2 .ic{color:var(--accent-ink)}
+.litelist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.litelist a{display:grid;grid-template-columns:76px 1fr;gap:10px;padding:8px 2px;border-top:1px solid var(--line-2);text-decoration:none;color:var(--text);font-size:13.5px;line-height:1.35}
+.litelist li:first-child a{border-top:0}
+.litelist a:hover{color:var(--accent-ink)}
+.litelist__d{font:700 12.5px/1.35 var(--font-display);color:var(--pro);white-space:nowrap}
+.lite__t{font-weight:600;font-size:14.5px;line-height:1.4}
+.lite__chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.lite__ok{display:flex;align-items:center;gap:6px;color:var(--ok);font-size:13.5px;margin-top:8px}
+.pfrow{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;padding:10px 4px;border-top:1px solid var(--line-2);text-decoration:none;color:var(--text)}
+.pfrow:first-of-type{border-top:0}
+.pfrow:hover b{color:var(--accent-ink)}
+.pfrow__ic{width:36px;height:36px;border-radius:11px;background:var(--bg-2);display:grid;place-items:center;color:var(--text-soft)}
+.pfrow__b{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pfrow__b b{font-size:14.5px}
+.pfrow__b b em{font-style:normal;font:700 12px/1 var(--font-display);background:var(--bg-2);padding:3px 7px;border-radius:99px;margin-left:4px;color:var(--text-soft)}
+.pfrow__b span{font-size:12.5px;color:var(--muted)}
+.pfrow__b i{font-style:normal}
+.pfrow__b .hot{color:var(--warn);font-weight:700}
+.home--lite .foot{margin-top:6px}
+
+/* portfolio tab bar shared by «Portfel» and «Charterlər» */
+.seg--pf a{flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;gap:6px;font:700 13.5px/1 var(--font-body);padding:11px 4px;border-radius:12px;color:var(--muted);text-decoration:none;white-space:nowrap}
+.seg--pf a[aria-selected="true"]{background:var(--surface);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.10)}
+.seg--pf a .n{font:700 11px/1 var(--font-display);background:var(--bg-2);padding:3px 6px;border-radius:99px}
+.chpage>.seg--pf{margin-bottom:-4px}
+
+/* library hub */
+.libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:10px}
+.libt{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:14px;border-radius:18px;background:var(--surface);box-shadow:var(--card);text-decoration:none;color:var(--text)}
+.libt:hover{box-shadow:var(--shadow)}
+.libt .bd{background:var(--pb);color:var(--pf)}
+.libt b{display:block;font-size:15px;line-height:1.3}
+.libt small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.lib .home__mid{margin-top:8px}
+.libback{display:inline-flex;align-items:center;gap:4px;font-size:13.5px;font-weight:600;color:var(--muted);text-decoration:none;margin-bottom:6px}
+
+/* calmer to-do page: stats become one line, shortcuts show while typing */
+.tdstats{display:flex;flex-wrap:wrap;gap:6px}
+.tdstats .tds{flex-direction:row;align-items:baseline;gap:6px;padding:7px 12px;border-radius:99px;box-shadow:none;background:var(--surface);border:1px solid var(--line)}
+.tdstats .tds b{font-size:15px}
+.tdstats .tds span{font-size:12.5px}
+.tdstats .tds.is-zero{display:none}
+.tdstats .tds--ok.is-zero{display:none}
+.tdadd__h{display:none}   /* the shortcuts are in the input's placeholder and tooltip; showing them on focus moved the page under the finger */
+
+@media (max-width:900px){.home2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){
+  .tdstats .tds{padding:6px 10px}
+  .seg--pf a{font-size:12.5px;padding:11px 2px}
+}
+
 </style>
 <header class="bar">
   <a class="brand" href="#home" aria-label="İRİA Bələdçisi, ana səhifə">
@@ -1884,7 +1951,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     if (SYNTH[id]) return Object.assign({ id: id, blocks: [] }, SYNTH[id]);
     return null;
   }
-  var VIEWS = { home: 1, topics: 1, tasks: 1, acts: 1, plantable: 1, my: 1, charters: 1, files: 1, videos: 1, sync: 1 };
+  var VIEWS = { home: 1, topics: 1, tasks: 1, acts: 1, plantable: 1, my: 1, charters: 1, files: 1, videos: 1, sync: 1, library: 1, learn: 1, area: 1 };
   function isCharter(id) { return /^c-./.test(id || '') && !!chGet(id.slice(2)); }
   function isMeasure(id) { return /^t-\d/.test(id || '') && !!areaItem(id.slice(2)); }
   function isWeek(id) { var m = /^h(\d+)$/.exec(id || ''); return m && +m[1] >= 1 && +m[1] <= NW ? +m[1] : 0; }
@@ -2614,7 +2681,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
       WK.weeks.map(function (b) { return weekChip(b.n, n, live || d < 1); }).join('') + '</div></section>';
 
     var up = upcoming(6);
-    var dates = up.length ? '<section class="sec"><div class="sec__h"><h2>' + T('Qarşıdakı tarixlər', 'Upcoming dates') + '</h2><a href="#tasks" data-ttab="dates">' + T('Hamısı', 'All') + ic('chevron-right', 14) + '</a></div><div class="strip">' +
+    var dates = up.length ? '<section class="sec"><div class="sec__h"><h2>' + T('Qarşıdakı tarixlər', 'Upcoming dates') + '</h2><a href="#learn" data-ttab="dates">' + T('Hamısı', 'All') + ic('chevron-right', 14) + '</a></div><div class="strip">' +
       up.map(function (u) {
         return '<a class="dt" href="#' + u.sec + '" data-tab="detail" data-bi="' + u.bi + '">' + leaf(u.date) + '<span class="dt__t">' + esc(stripInline(u.title)) + '</span><span class="dt__s">' + ic(ticon(u.sec), 12) + esc(tname(u.sec)) + '</span></a>';
       }).join('') + '</div></section>' : '';
@@ -2626,8 +2693,31 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     var foot = '<div class="foot"><span>' + T('Şəxsi hazırlıq materialıdır, rəsmi sənəd deyil. Yenilənib: ', 'A personal preparation guide, not an official document. Updated: ') + esc(fmtDate((D.meta || {}).updated || '')) + '.</span>' +
       '<span class="syncst syncst--' + sync.state + '" id="sync-st">' + syncLabel() + '</span></div>';
     var vids = '<section class="sec"><div class="sec__h"><h2>' + T('Qısa videolar', 'Short videos') + '</h2><a href="#videos">' + T('Hamısı', 'All') + ic('chevron-right', 14) + '</a></div><div class="strip strip--vid">' + videosFrom(d < 1 ? 1 : n).slice(0, 6).map(videoThumb).join('') + '</div></section>';
-    return '<div class="col col--wide home"><div class="home__top"><div class="home__l">' + hero + topics + '</div>' + today + '</div>' + todoHomeCard() + focusCard() + vids + installCard() +
-      '<div class="home__mid">' + dailyCard() + myCard() + '</div>' + weeks + dates + facts + refs + foot + '</div>';
+    return homeLite(d, n, W, over, live, foot);
+  }
+  /* «Bu gün»: only what matters today — tasks, the portfolio in one glance, near dates and the week in one line */
+  function homeLite(d, n, W, over, live, foot) {
+    var now = new Date(), WD = EN ? ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] : ['Bazar', 'Bazar ertəsi', 'Çərşənbə axşamı', 'Çərşənbə', 'Cümə axşamı', 'Cümə', 'Şənbə'];
+    var head = '<header class="today"><div><small>' + esc(WD[now.getDay()] + ', ' + fmtDate(today())) + '</small><h1>' + T('Bu gün', 'Today') + '</h1></div>' + ghBanner() + '</header>';
+    var add = '<form class="tdadd" id="td-add" autocomplete="off"><span class="tdadd__ic">' + ic('plus', 18) + '</span><input type="text" id="td-new" enterkeyhint="done" placeholder="' + T('Yeni iş… (#kateqoriya !y 27.11 @ad)', 'New task… (#category !h 27.11 @name)') + '" aria-label="' + T('Yeni iş', 'New task') + '"><button type="submit" class="btn btn--pri">' + T('Əlavə et', 'Add') + '</button></form>';
+    var tasks = todoHomeCard() || '<section class="sec tdhome"><div class="emptybox">' + ic('list-todo', 24) + T('Hələ iş yoxdur. Yuxarıda ilk işinizi yazın.', 'No tasks yet. Type your first one above.') + '</div></section>';
+    var up = upcoming(5);
+    var dates = up.length ? '<section class="sec lite"><div class="sec__h"><h2>' + ic('calendar-days', 17) + T('Yaxın tarixlər', 'Coming up') + '</h2><a href="#learn" data-ttab="dates">' + T('Hamısı', 'All') + ic('chevron-right', 14) + '</a></div><ul class="litelist">' +
+      up.map(function (u) { return '<li><a href="#' + u.sec + '" data-tab="detail" data-bi="' + u.bi + '"><span class="litelist__d">' + esc(fmtDate(u.date).replace(/\s\d{4}$/, '')) + '</span><span>' + esc(stripInline(u.title)) + '</span></a></li>'; }).join('') + '</ul></section>' : '';
+    var nx = W.reads.filter(function (id) { return !isRead(id); });
+    var wkc = over ? '' : '<section class="sec lite"><div class="sec__h"><h2>' + ic('graduation-cap', 17) + (d < 1 ? T('Hazırlıq', 'Preparation') + ' · ' + T((1 - d) + ' gün qalıb', (1 - d) + ' days to go') : wLabel(n) + ' / ' + NW + ' · ' + T('gün ', 'day ') + d) + '</h2><a href="#h' + n + '">' + T('Həftəyə keç', 'Open the week') + ic('chevron-right', 14) + '</a></div>' +
+      '<p class="lite__t">' + esc(W.title) + '</p>' + (nx.length ? '<div class="lite__chips">' + nx.slice(0, 3).map(function (id) { return '<a class="tchip" href="#' + id + '">' + ic(ticon(id), 14) + '<span>' + esc(tname(id)) + '</span></a>'; }).join('') + '</div>' : '<p class="lite__ok">' + ic('circle-check', 15) + T('Bu həftənin mövzuları oxunub.', 'This week’s topics are read.') + '</p>') + '</section>';
+    return '<div class="col col--wide home home--lite">' + head + add + '<div class="home2"><div class="home2__main">' + tasks + '</div><div class="home2__side">' + pfSnapshot() + dates + wkc + '</div></div>' + foot + '</div>';
+  }
+  function pfSnapshot() {
+    var items = areaItems(), late = 0, red = 0, nonext = 0;
+    items.forEach(function (it) { var p = itemPrj(it.no); if (dueInfo(it, p).cls === 'late') late++; if (p && p.r === 'r') red++; if (!p || !String(p.next || '').trim()) nonext++; });
+    var L = chList().list, cr = 0, bl = 0, dc = 0;
+    L.forEach(function (c) { if ((chStatus(c).s || '') === 'r') cr++; bl += chOpen(c, 'block').length; dc += chOpen(c, 'dec').length; });
+    var row = function (href, icn, title, n, bits) { return '<a class="pfrow" href="' + href + '"><span class="pfrow__ic">' + ic(icn, 18) + '</span><span class="pfrow__b"><b>' + esc(title) + ' <em>' + n + '</em></b><span>' + (bits.filter(Boolean).join(' · ') || T('hər şey qaydasındadır', 'all fine')) + '</span></span>' + ic('chevron-right', 16) + '</a>'; };
+    return '<section class="sec lite"><div class="sec__h"><h2>' + ic('folder-kanban', 17) + T('Portfel', 'Portfolio') + '</h2></div>' +
+      row('#my', 'star', T('Tədbirlər', 'Measures'), items.length, [late ? '<i class="hot">' + late + T(' müddəti bitib', ' past due') + '</i>' : '', red ? '<i class="hot">' + red + T(' qırmızı', ' red') + '</i>' : '', nonext ? nonext + T(' növbəti addımsız', ' without a next step') : '']) +
+      row('#charters', 'flag', T('Charterlər', 'Charters'), L.length, L.length ? [cr ? '<i class="hot">' + cr + T(' qırmızı', ' red') + '</i>' : '', bl ? bl + T(' maneə', ' blockers') : '', dc ? dc + T(' qərar gözlənilir', ' decisions pending') : ''] : [T('hələ yüklənməyib', 'not uploaded yet')]) + '</section>';
   }
 
   /* the 13-week plan: months → week cards */
@@ -2668,7 +2758,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     var todo = '<section class="sec"><div class="sec__h"><h2>' + ic('list-checks', 18) + T('Edin', 'Do') + '</h2><span>' + s.done + ' / ' + s.all + '</span></div><div class="tasklist">' + W.todo.map(taskHTML).join('') + '</div></section>';
     var dates = W.dates.length ? '<section class="sec"><div class="sec__h"><h2>' + ic('calendar-clock', 18) + T('Tarixlər', 'Dates') + '</h2></div><div class="drows">' +
       W.dates.map(function (x) { return '<div class="drow">' + leaf(x.d) + '<b>' + esc(x.t) + '</b><span>' + esc(fmtDate(x.d)) + '</span></div>'; }).join('') + '</div></section>' : '';
-    var ask = asks ? '<section class="sec"><div class="sec__h"><h2>' + ic('message-circle-question', 18) + T('Soruşun', 'Ask') + '</h2><a href="#tasks" data-ttab="asks">' + T('Bütün suallar', 'All questions') + ic('chevron-right', 14) + '</a></div><div class="panel panel--asks">' + asks + '</div></section>' : '';
+    var ask = asks ? '<section class="sec"><div class="sec__h"><h2>' + ic('message-circle-question', 18) + T('Soruşun', 'Ask') + '</h2><a href="#learn" data-ttab="asks">' + T('Bütün suallar', 'All questions') + ic('chevron-right', 14) + '</a></div><div class="panel panel--asks">' + asks + '</div></section>' : '';
     var out = '<section class="sec"><div class="sec__h"><h2>' + ic('target', 18) + T('Həftənin sonunda', 'By the end of the week') + '</h2></div><div class="outbox">' + ic('circle-check', 22) + '<p>' + esc(W.out) + '</p></div></section>';
     var nav = '<div class="tfoot">' + (n > 1 ? '<a class="btn" href="#h' + (n - 1) + '">' + ic('arrow-left', 16) + esc(wLabel(n - 1)) + '</a>' : '') +
       (n < NW ? '<a class="btn btn--pri" href="#h' + (n + 1) + '">' + esc(wLabel(n + 1)) + ic('arrow-right', 16) + '</a>' : '<a class="btn btn--pri" href="#tasks">' + T('İşlərimə bax', 'See my tasks') + ic('arrow-right', 16) + '</a>') + '</div>';
@@ -2897,11 +2987,20 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
           '<td data-label="' + esc(cols[6]) + '" class="pjt__t">' + (p.t ? esc(p.t) : '—') + '</td></tr>';
       }).join('') + '</tbody></table></div></div>';
   }
+  function pfTabs(act) {   // one tab bar for the whole portfolio: measures, charters, projects, people
+    var L = chList().list.length;
+    var tabs = [['mx', T('Tədbirlər', 'Measures'), areaIds().length], ['ch', T('Charterlər', 'Charters'), L], ['prj', T('Layihələr', 'Projects'), projects().length], ['ppl', T('Adamlar', 'People'), people().length]];
+    return '<div class="seg seg--pf" role="tablist" data-seg="my">' + tabs.map(function (t) {
+      var on = t[0] === act, inner = esc(t[1]) + (t[2] ? '<span class="n">' + t[2] + '</span>' : '');
+      return t[0] === 'ch' ? '<a role="tab" aria-selected="' + on + '" href="#charters">' + inner + '</a>' : '<button type="button" role="tab" aria-selected="' + on + '" data-mytab="' + t[0] + '">' + inner + '</button>';
+    }).join('') + '</div>';
+  }
   function myView() {
     var tab = ui.myTab === 'ppl' ? 'ppl' : ui.myTab === 'prj' ? 'prj' : 'mx', pj = projects(), pp = people(), s = prjStats(pj), parties = D.parties || [];
     var seg = '<div class="seg" role="tablist" data-seg="my">' + [['mx', T('Tədbirlərim', 'My measures'), areaIds().length], ['prj', T('Layihələr', 'Projects'), pj.length], ['ppl', T('Adamlar', 'People'), pp.length]].map(function (t) {
       return '<button type="button" role="tab" aria-selected="' + (t[0] === tab ? 'true' : 'false') + '" data-mytab="' + t[0] + '">' + esc(t[1]) + (t[2] ? '<span class="n">' + t[2] + '</span>' : '') + '</button>';
     }).join('') + '</div>';
+    seg = pfTabs(tab);
     var body;
     if (tab === 'mx') body = mxView();
     else if (tab === 'prj') {
@@ -2922,7 +3021,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
         parties.map(function (P) {
           var list = pp.filter(function (x) { return x.g === P.id; });
           return '<section class="pgrp"><div class="pgrp__h"><b>' + esc(T(P.az, P.en)) + '</b>' + (list.length ? '<span>' + list.filter(function (x) { return x.m; }).length + ' / ' + list.length + T(' görüşülüb', ' met') + '</span>' : '') +
-            '<a href="#tasks" data-ttab="asks" data-askby="who" data-party="' + P.id + '">' + P.n + T(' sual', ' questions') + ic('chevron-right', 14) + '</a></div>' +
+            '<a href="#learn" data-ttab="asks" data-askby="who" data-party="' + P.id + '">' + P.n + T(' sual', ' questions') + ic('chevron-right', 14) + '</a></div>' +
             '<div class="pplist">' + list.map(pplCard).join('') + '<button type="button" class="pgrp__add" data-ppl-add="' + P.id + '">' + ic('plus', 15) + T('əlavə et', 'add') + '</button></div></section>';
         }).join('') +
         (other.length ? '<section class="pgrp"><div class="pgrp__h"><b>' + T('Digər', 'Other') + '</b></div><div class="pplist">' + other.map(pplCard).join('') + '</div></section>' : '');
@@ -2932,7 +3031,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
       '<div class="mybar"><button type="button" class="btn" data-backup>' + ic('download', 16) + T('Faylı yüklə', 'Download file') + '</button><label class="btn">' + ic('upload', 16) + T('Fayldan bərpa et', 'Restore from file') + '<input type="file" id="restore-file" accept="application/json,.json" hidden></label></div></div></details>' +
       '<p class="hint">' + ic('eye-off', 14) + T('Bura yazdıqlarınız yalnız sizin cihazınızda saxlanılır (şəxsi Claude linkində isə hesabınızla sinxron olur). Məxfi və ya xidməti istifadə üçün olan sənədlərin məzmununu bura yazmayın.', 'What you write here stays on your device (on your private Claude link it syncs with your account). Do not put the content of confidential or internal-use documents here.') + '</p>' +
       '<div class="syncst syncst--' + sync.state + '" id="sync-st">' + syncLabel() + '</div>';
-    return '<div class="col col--wide my">' + pageHead('folder-kanban', T('Portfelim', 'My portfolio'), T('Öz layihələriniz və tanış olduğunuz adamlar. Hər layihəni Planın sətrinə, mərhələyə və statusa bağlayın.', 'Your own projects and the people you meet. Link every project to a Plan row, a stage and a status.')) +
+    return '<div class="col col--wide my">' + pageHead('folder-kanban', T('Portfel', 'Portfolio'), T('Plan tədbirləriniz, proqram charterləri, layihələr və tanış olduğunuz adamlar.', 'Your Plan measures, programme charters, projects and the people you meet.')) +
       seg + '<div class="tabbody" id="tabbody">' + body + '</div>' + foot + '</div>';
   }
   function myCard() {
@@ -3281,6 +3380,28 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
       '<div class="gt__leg"><span><i class="gt__bar--ok"></i>' + T('vaxtında', 'on time') + '</span><span><i class="gt__bar--soon"></i>' + T('60 gün qalıb', 'due within 60 days') + '</span><span><i class="gt__bar--late"></i>' + T('müddət bitib', 'past due') + '</span><span><i class="gt__bar--ongoing"></i>' + T('mütəmadi', 'ongoing') + '</span><span><i class="gt__bar--done"></i>' + T('edilib', 'done') + '</span></div>' +
       '<p class="hint">' + T('Zolaq Planın təsdiqindən (27 fevral 2026) tədbirin son müddətinə qədərdir; içindəki tünd hissə sizin işarələdiyiniz irəliləyişdir.', 'Each bar runs from the Plan’s approval (27 February 2026) to the measure’s deadline; the darker part is the progress you have marked.') + '</p></div>';
   }
+  function libraryView() {
+    var d = dayNo(), n = curWeek(), all = topicIds(), nRead = all.filter(isRead).length;
+    var tile = function (href, icn, cls, title, sub) { return '<a class="libt ' + cls + '" href="' + href + '"><span class="bd">' + ic(icn, 20) + '</span><span><b>' + esc(title) + '</b><small>' + esc(sub) + '</small></span>' + ic('chevron-right', 16) + '</a>'; };
+    var grp = function (title, html) { return '<section class="sec"><div class="sec__h"><h2>' + esc(title) + '</h2></div><div class="libgrid">' + html + '</div></section>'; };
+    return '<div class="col col--wide lib">' + pageHead('library', T('Kitabxana', 'Library'), T('Öyrənmə və arayış: ilk 90 günün planı, mövzular, Plan, aktlar, lüğət, videolar və fayllar.', 'Learning and reference: the 90-day plan, topics, the Plan, acts, glossary, videos and files.')) +
+      grp(T('İlk 90 gün', 'First 90 days'),
+        tile('#h' + n, 'calendar-days', 'ph-w1', d < 1 ? T('Hazırlıq həftəsi', 'Preparation week') : wLabel(n) + ': ' + wk(n).title, T('Bu həftənin məqsədi, mövzuları və işləri', 'This week’s goal, topics and tasks')) +
+        tile('#topics', 'layers', 'ph-m1', T('13 həftəlik plan', 'The 13-week plan'), nRead + ' / ' + all.length + T(' mövzu oxunub', ' topics read')) +
+        tile('#area', 'lightbulb', 'ph-m1', T('Mənim sahəm', 'My area'), T('Sahənin izahı, işləri və Plan tədbirləri; sahəni dəyişmək', 'The area, its tasks and Plan measures; change the area')) +
+        tile('#learn', 'list-checks', 'ph-m2', T('Həftələrin işləri və suallar', 'Weekly tasks and questions'), T('Suallar, qeydlər, tarixlər', 'Questions, notes, dates')) +
+        tile('#quiz', 'graduation-cap', 'ph-m3', T('Özünüyoxlama', 'Self-test'), T('Kartlarla təkrar', 'Review with cards')) +
+        tile('#videos', 'clapperboard', 'ph-rf', T('Videolar', 'Videos'), T('17 qısa izah', '17 short explainers'))) +
+      '<section class="sec"><div class="sec__h"><h2>' + T('Qısa videolar', 'Short videos') + '</h2><a href="#videos">' + T('Hamısı', 'All') + ic('chevron-right', 14) + '</a></div><div class="strip strip--vid">' + videosFrom(d < 1 ? 1 : n).slice(0, 6).map(videoThumb).join('') + '</div></section>' +
+      grp(T('Arayış', 'Reference'),
+        tile('#plantable', 'clipboard-list', 'ph-m1', T('Fəaliyyət Planı', 'Action Plan'), T('74 tədbir, istiqamətlər üzrə cədvəl', '74 measures, by direction')) +
+        tile('#acts', 'scale', 'ph-m3', T('Hüquqi aktlar', 'Legal acts'), T('Reyestr və qısa izahlar', 'Register and short notes')) +
+        tile('#glossary', 'book-a', 'ph-m2', T('Lüğət', 'Glossary'), T('AZ · EN · RU terminlər', 'AZ · EN · RU terms')) +
+        tile('#files', 'files', 'ph-rf', T('Fayllar və şablonlar', 'Files and templates'), T('PDF-lər, Excel və Word şablonları', 'PDFs, Excel and Word templates')) +
+        tile('#sources', 'message-circle-question', 'ph-w1', T('Mənbələr', 'Sources'), T('Hər faktın mənbəyi', 'Where each fact comes from'))) +
+      grp(T('Tənzimləmələr', 'Settings'), tile('#sync', 'cloud', 'ph-m2', T('Sinxron', 'Sync'), syncLabel())) +
+      '<div class="home__mid">' + dailyCard() + installCard() + '</div></div>';
+  }
   function syncView() {
     var inClaude = window.claude && typeof window.claude.use === 'function', c = store.get('gh', null) || {}, on = sync.kind === 'gh';
     var E = sync.ghErr, W = sync.ghWhere;
@@ -3379,14 +3500,14 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
 
   /* my tasks: to-dos, questions, notes, dates */
   function tasksView() {
-    var tab = ui.tasksTab || 'mine', d = dayNo(), cw = curWeek(), live = inPlan() || d < 1;
-    var tabs = [['mine', T('Mənim işlərim', 'My to-dos')], ['todo', T('90 gün planı', '90-day plan')], ['asks', T('Suallar', 'Questions')], ['notes', T('Qeydlər', 'Notes')], ['dates', T('Tarixlər', 'Dates')]];
+    if (current === 'tasks') return '<div class="col col--wide">' + pageHead('list-checks', T('İşlər', 'Tasks'), T('Öz iş siyahınız: bu gün, bu həftə, gözlədikləriniz.', 'Your own to-do list: today, this week and what you wait on.')) + todoView() + '</div>';
+    var tab = ui.tasksTab && ui.tasksTab !== 'mine' ? ui.tasksTab : 'todo', d = dayNo(), cw = curWeek(), live = inPlan() || d < 1;
+    var tabs = [['todo', T('Həftələrin işləri', 'Tasks by week')], ['asks', T('Suallar', 'Questions')], ['notes', T('Qeydlər', 'Notes')], ['dates', T('Tarixlər', 'Dates')]];
     var seg = '<div class="seg" role="tablist" data-seg="tasks">' + tabs.map(function (t) {
       return '<button type="button" role="tab" aria-selected="' + (t[0] === tab ? 'true' : 'false') + '" data-ttab="' + t[0] + '">' + esc(t[1]) + '</button>';
     }).join('') + '</div>';
     var body = '';
-    if (tab === 'mine') body = todoView();
-    else if (tab === 'todo') {
+    if (tab === 'todo') {
       body = '<div class="accs">' + WK.weeks.map(function (b) {
         var W = wk(b.n), s = wStat(W), now = live && b.n === cw;
         return '<details class="acc acc--wk ph-' + W.m + '"' + (now ? ' open' : '') + '><summary><span class="bd bd--sm">' + b.n + '</span><span class="acc__t">' + esc(W.title) + '<small>' + esc(wRange(W, true)) + (now ? ' · ' + nowWord() : '') + '</small></span>' +
@@ -3422,7 +3543,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
         return '<a class="drow" href="#' + u.sec + '" data-tab="detail" data-bi="' + u.bi + '">' + leaf(u.date) + '<b>' + esc(stripInline(u.title)) + '</b><span>' + esc(fmtDate(u.date)) + ' · ' + ic(ticon(u.sec), 12) + esc(tname(u.sec)) + '</span></a>';
       }).join('') : '<div class="emptybox">' + ic('calendar-days', 26) + T('Tarixli hadisə tapılmadı.', 'No dated events found.') + '</div>';
     }
-    return '<div class="col' + (tab === 'mine' ? ' col--wide' : '') + '">' + pageHead('list-checks', T('İşlərim', 'My tasks'), T('Öz iş siyahınız, 90 günlük planın işləri, daxildə soruşulacaq suallar, qeydlər və qarşıdakı tarixlər.', 'Your own to-do list, the 90-day plan tasks, questions to ask inside, notes and upcoming dates.')) +
+    return '<div class="col">' + '<a class="bk libback" href="#library">' + ic('chevron-left', 16) + T('Kitabxana', 'Library') + '</a>' + pageHead('graduation-cap', T('90 gün: işlər və suallar', '90 days: tasks and questions'), T('13 həftənin işləri, daxildə soruşulacaq suallar, mövzu qeydləriniz və qarşıdakı tarixlər.', 'The 13 weeks’ tasks, questions to ask inside, your topic notes and upcoming dates.')) +
       seg + '<div class="tabbody">' + body + '</div><div class="syncst syncst--' + sync.state + '" id="sync-st">' + syncLabel() + '</div></div>';
   }
 
@@ -3435,7 +3556,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     }).join('');
     var legend = '<div class="panel"><h2>' + T('Etibar nişanları', 'Confidence badges') + '</h2><div class="legend">' + ['A', 'B', 'C', 'T'].map(function (k) { return cf(k) + '<span>' + esc(CONF[k].t) + '</span>'; }).join('') + '</div></div>';
     var table = '<div class="tblwrap"><div class="tbltools"><div class="tblcap">' + T('Mövzular üzrə faktların etibar bölgüsü', 'Confidence of facts by topic') + '</div></div><div class="tblscroll"><table><thead><tr><th>' + T('Mövzu', 'Topic') + '</th><th>' + CONF.A.w + '</th><th>' + CONF.B.w + '</th><th>' + CONF.C.w + '</th><th>' + CONF.T.w + '</th></tr></thead><tbody>' + rows + '</tbody></table></div></div>';
-    var link = '<a class="reft ph-rf" href="#tasks" data-ttab="asks"><span class="bd">' + ic('message-circle-question', 20) + '</span><span><b>' + T('Daxildə soruşulacaq suallar', 'Questions to ask inside') + '</b><span>' + T('«İşlərim» bölməsində, mövzular üzrə', 'in “My tasks”, by topic') + '</span></span>' + ic('chevron-right', 18) + '</a>';
+    var link = '<a class="reft ph-rf" href="#learn" data-ttab="asks"><span class="bd">' + ic('message-circle-question', 20) + '</span><span><b>' + T('Daxildə soruşulacaq suallar', 'Questions to ask inside') + '</b><span>' + T('«İşlərim» bölməsində, mövzular üzrə', 'in “My tasks”, by topic') + '</span></span>' + ic('chevron-right', 18) + '</a>';
     return legend + table + link;
   }
   function planStats() {
@@ -4094,7 +4215,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   }
   function chartersView() {
     var L = chList(), list = L.list;
-    var head = '<header class="sh"><div class="sh__eyebrow">' + T('Portfel', 'Portfolio') + '</div><h1>' + T('Charterlər', 'Charters') + '</h1>' +
+    var head = pfTabs('ch') + '<header class="sh"><div class="sh__eyebrow">' + T('Portfel', 'Portfolio') + '</div><h1>' + T('Charterlər', 'Charters') + '</h1>' +
       '<p class="sh__lede">' + T('Proqram charterlərini Excel-də doldurun, CSV kimi yükləyin və burada izləyin: status, KPI, mərhələlər, maneələr və qərarlar.', 'Fill the programme charters in Excel, upload them as CSV and track them here: status, KPIs, milestones, blockers and decisions.') + '</p></header>';
     if (!list.length) {
       return '<div class="col col--wide chpage">' + head + chReport() +
@@ -4571,7 +4692,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     var stat = function (n, label, cls, f) { return '<button type="button" class="tds' + (cls ? ' ' + cls : '') + (n ? '' : ' is-zero') + '" data-tdwho="' + f + '" aria-pressed="' + (tdUi.who === f) + '"><b>' + n + '</b><span>' + esc(label) + '</span></button>'; };
     var head = '<div class="tdstats">' + stat(s.open, T('mənim açıq işim', 'my open tasks'), '', 'me') + stat(s.late, T('gecikir', 'overdue'), s.late ? 'is-hot' : '', 'me') + stat(s.today, T('bu gün', 'today'), s.today ? 'is-warm' : '', 'me') +
       stat(s.week, T('bu həftə', 'this week'), '', 'me') + stat(s.wait, T('gözləyirəm', 'waiting'), s.waitDue ? 'is-warm' : '', 'wait') + '<div class="tds tds--ok"><b>' + s.doneWk + '</b><span>' + T('bu həftə bitdi', 'done this week') + '</span></div></div>';
-    var add = '<form class="tdadd" id="td-add" autocomplete="off"><span class="tdadd__ic">' + ic('plus', 18) + '</span><input type="text" id="td-new" placeholder="' + T('Yeni iş… (məs. «Büdcəni dəqiqləşdir #Maliyyə !y 02.12 @PMO»)', 'New task… (e.g. “Check budgets #Finance !h 02.12 @PMO”)') + '" aria-label="' + T('Yeni iş', 'New task') + '"><button type="submit" class="btn btn--pri">' + T('Əlavə et', 'Add') + '</button></form>' +
+    var add = '<form class="tdadd" id="td-add" autocomplete="off"><span class="tdadd__ic">' + ic('plus', 18) + '</span><input type="text" id="td-new" enterkeyhint="done" placeholder="' + T('Yeni iş… (məs. «Büdcəni dəqiqləşdir #Maliyyə !y 02.12 @PMO»)', 'New task… (e.g. “Check budgets #Finance !h 02.12 @PMO”)') + '" title="' + T('#kateqoriya · !y yüksək prioritet · 27.11, bu gün, sabah — son tarix · @ad — başqasının işi', '#category · !h high priority · 27.11, today, tomorrow — deadline · @name — someone else’s task') + '" aria-label="' + T('Yeni iş', 'New task') + '"><button type="submit" class="btn btn--pri">' + T('Əlavə et', 'Add') + '</button></form>' +
       '<p class="tdadd__h">' + T('Qısa yollar: <b>#kateqoriya</b> · <b>!y</b> yüksək prioritet · <b>27.11</b>, <b>bu gün</b>, <b>sabah</b> son tarix · <b>@ad</b> başqasının işi («Gözləyirəm»).', 'Shortcuts: <b>#category</b> · <b>!h</b> high priority · <b>27.11</b>, <b>today</b>, <b>tomorrow</b> deadline · <b>@name</b> someone else’s task (“Waiting”).') + '</p>';
     var who = [['', T('Hamısı', 'All')], ['me', T('Mənim', 'Mine')], ['wait', T('Gözləyirəm', 'Waiting')]];
     var tools = '<div class="tdtools"><div class="chsearch">' + ic('search', 16) + '<input type="search" id="td-q" placeholder="' + T('İşlərdə axtar', 'Search tasks') + '" value="' + esc(tdUi.q) + '"></div>' +
@@ -4683,11 +4804,11 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     return (id && exists(id)) ? id : 'home';
   }
   function paintRail() {
-    var act = sections[current] || isWeek(current) ? 'topics' : isMeasure(current) ? 'my' : isCharter(current) ? 'charters' : current;
-    var main = [['home', 'house', T('Əsas', 'Home')], ['topics', 'calendar-days', T('Həftələr', 'Weeks')], ['my', 'folder-kanban', T('Portfelim', 'Portfolio')], ['charters', 'flag', T('Charterlər', 'Charters')], ['plantable', 'clipboard-list', T('Plan', 'Plan')], ['tasks', 'list-checks', T('İşlərim', 'My tasks')]];
-    var more = [['glossary', 'book-a', T('Lüğət', 'Glossary')], ['acts', 'scale', T('Hüquqi aktlar', 'Legal acts')], ['quiz', 'graduation-cap', T('Özünüyoxlama', 'Self-test')], ['videos', 'clapperboard', T('Videolar', 'Videos')], ['files', 'files', T('Fayllar', 'Files')], ['sources', 'message-circle-question', T('Mənbələr', 'Sources')]];
+    var act = current === 'home' || current === 'tasks' || current === 'sync' ? current : (current === 'my' || current === 'charters' || isMeasure(current) || isCharter(current)) ? 'my' : 'library';
+    var main = [['home', 'house', T('Bu gün', 'Today')], ['tasks', 'list-checks', T('İşlər', 'Tasks')], ['my', 'folder-kanban', T('Portfel', 'Portfolio')], ['library', 'library', T('Kitabxana', 'Library')]];
+    var more = [];
     var link = function (x, cls) { return '<a href="#' + x[0] + '"' + (cls ? ' class="' + cls + '"' : '') + (x[0] === act ? ' aria-current="page"' : '') + '>' + ic(x[1], 22) + '<span>' + esc(x[2]) + '</span></a>'; };
-    rail.innerHTML = '<div class="side__in">' + main.map(function (x) { return link(x, ''); }).join('') + '<div class="side__sep"></div>' + more.map(function (x) { return link(x, 'is-2'); }).join('') + '</div>' +
+    rail.innerHTML = '<div class="side__in">' + main.map(function (x) { return link(x, ''); }).join('') + '</div>' +
       '<div class="side__foot">' + T('Şəxsi hazırlıq materialıdır, rəsmi sənəd deyil.', 'A personal guide, not an official document.') + '</div>';
   }
   function paint(opts) {
@@ -4699,7 +4820,9 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     var html;
     if (current === 'home') html = homeView();
     else if (current === 'topics') html = topicsView();
-    else if (current === 'tasks') html = tasksView();
+    else if (current === 'tasks' || current === 'learn') html = tasksView();
+    else if (current === 'library') html = libraryView();
+    else if (current === 'area') html = '<div class="col col--wide"><a class="bk libback" href="#library">' + ic('chevron-left', 16) + T('Kitabxana', 'Library') + '</a>' + focusCard() + '</div>';
     else if (isWeek(current)) html = weekView(isWeek(current));
     else if (current === 'my') html = myView();
     else if (current === 'charters') html = chartersView();
@@ -4716,7 +4839,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     if (current === 'plantable') paintPlan();
     if (current === 'glossary') paintGlossary();
     if (current === 'quiz') paintQuiz();
-    var tl = current === 'home' ? '' : current === 'topics' ? T('13 həftə', '13 weeks') : isWeek(current) ? wLabel(isWeek(current)) : current === 'my' ? T('Portfelim', 'My portfolio') : current === 'charters' ? T('Charterlər', 'Charters') : isCharter(current) ? (chGet(current.slice(2)) || {}).name : isMeasure(current) ? current.slice(2) + ' · ' + T('Tədbir', 'Measure') : current === 'files' ? T('Fayllar', 'Files') : current === 'sync' ? T('Sinxron', 'Sync') : current === 'videos' ? T('Videolar', 'Videos') : current === 'tasks' ? T('İşlərim', 'My tasks') : sections[current] ? tname(current) : (secMeta(current) || {}).title;
+    var tl = current === 'home' ? '' : current === 'topics' ? T('13 həftə', '13 weeks') : isWeek(current) ? wLabel(isWeek(current)) : current === 'my' ? T('Portfelim', 'My portfolio') : current === 'charters' ? T('Charterlər', 'Charters') : isCharter(current) ? (chGet(current.slice(2)) || {}).name : isMeasure(current) ? current.slice(2) + ' · ' + T('Tədbir', 'Measure') : current === 'files' ? T('Fayllar', 'Files') : current === 'sync' ? T('Sinxron', 'Sync') : current === 'videos' ? T('Videolar', 'Videos') : current === 'tasks' ? T('İşlər', 'Tasks') : current === 'learn' ? T('90 gün: işlər və suallar', '90 days: tasks and questions') : current === 'library' ? T('Kitabxana', 'Library') : current === 'area' ? T('Mənim sahəm', 'My area') : sections[current] ? tname(current) : (secMeta(current) || {}).title;
     document.title = (tl ? tl + ' · ' : '') + 'İRİA Bələdçisi';
     if (!opts.keepScroll) window.scrollTo(0, 0);
     Array.prototype.forEach.call(document.querySelectorAll('.gt__scroll'), function (g) { g.scrollLeft = Math.max(0, +g.dataset.today - g.clientWidth * 0.35); });
@@ -4852,7 +4975,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     if (t.closest('[data-prj-copy]')) { copyText(prjTSV(), T('Kopyalandı. İş dəftərinin «Reyestr» vərəqində nümunə sətirlərini silin və B4 xanasına yapışdırın.', 'Copied. On the workbook’s “Register” sheet, delete the example rows and paste into cell B4.')); return; }
     if (t.closest('[data-backup]')) { saveFile('iria-ehtiyat-' + today() + '.json', backupData()); return; }
     var gm = t.closest('[data-go-measure]'); if (gm && !gm.classList.contains('hit')) { openMeasure(gm.dataset.goMeasure, gm.dataset.parent); return; }
-    var mt = t.closest('.seg [data-mytab]'); if (mt) { ui.myTab = mt.dataset.mytab; paint({ keepScroll: true, then: segTop }); return; }
+    var mt = t.closest('.seg [data-mytab]'); if (mt) { ui.myTab = mt.dataset.mytab; if (current !== 'my') go('my'); else paint({ keepScroll: true, then: segTop }); return; }
     var dq = t.closest('[data-daily]'); if (dq) { dailyAct(dq.dataset.daily); return; }
     if (t.closest('[data-pwa-hide]')) { store.set('pwa:hide', true); var pc = document.getElementById('pwa-card'); if (pc) pc.remove(); return; }
     if (t.closest('[data-pwa-install]') && deferredInstall) { deferredInstall.prompt(); deferredInstall = null; return; }
@@ -4958,7 +5081,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     }
     if (t.matches && t.matches('input[data-chk]')) {
       store.set(t.dataset.chk, t.checked); var li = t.closest('li, .task'); if (li) li.classList.toggle('is-done', t.checked);
-      if (current === 'tasks' || (sections[current] && ui.tab[current] === 'ask')) { var op = document.querySelector('.acc--who[open]'); if (op) ui.askParty = op.dataset.party; paint({ keepScroll: true }); }
+      if (current === 'tasks' || current === 'learn' || (sections[current] && ui.tab[current] === 'ask')) { var op = document.querySelector('.acc--who[open]'); if (op) ui.askParty = op.dataset.party; paint({ keepScroll: true }); }
       return;
     }
     if (t.id === 'acts-type') { actsState.type = t.value; paintActs(); }
