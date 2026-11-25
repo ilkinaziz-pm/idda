@@ -1580,6 +1580,50 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
   .seg--pf a{font-size:12.5px;padding:11px 2px}
 }
 
+/* measures: one line each */
+.mrows{display:flex;flex-direction:column;gap:6px}
+.mrow{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--surface);box-shadow:var(--card);text-decoration:none;color:var(--text);border-left:4px solid transparent}
+.mrow:hover{box-shadow:var(--shadow)}
+.mrow.due--late{border-left-color:var(--warn)}
+.mrow.due--soon{border-left-color:var(--mid)}
+.mrow.due--done{opacity:.75}
+.mrow__no{font:700 14px/1 var(--font-display);color:var(--accent-ink)}
+.mrow__b{display:flex;flex-direction:column;gap:4px;min-width:0}
+.mrow__t{font-weight:600;font-size:14.5px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrow__m{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:12.5px;color:var(--muted);min-width:0}
+.mrow__due{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.mrow.due--late .mrow__due{color:var(--warn);font-weight:700}
+.mrow.due--soon .mrow__due{color:var(--mid);font-weight:700}
+.mrow.due--done .mrow__due{color:var(--ok)}
+.mrow__res{display:inline-flex;gap:3px}
+.mrow__res i{width:8px;height:8px;border-radius:50%;background:var(--bg-2);border:1.5px solid var(--line)}
+.mrow__res i.rp1{background:var(--mid);border-color:var(--mid)}
+.mrow__res i.rp2{background:var(--ok-bg);border-color:var(--ok)}
+.mrow__res i.rp3{background:var(--ok);border-color:var(--ok)}
+.mrow__nx{display:inline-flex;align-items:center;gap:4px;color:var(--text-soft);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.mrow__nx.is-empty{color:var(--muted);font-style:italic}
+.mrow__st{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.mrows+.acc{margin-top:14px}
+@media (max-width:640px){
+  .mrow{grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}
+  .mrow__no{grid-column:1/-1;font-size:12.5px}
+  .mrow__t{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+}
+
+/* a task opened from the board: a sheet over it */
+.tdsheet{position:fixed;inset:0;z-index:80;background:rgba(10,10,16,.38);display:flex;justify-content:flex-end;animation:tdfade .15s ease}
+.tdsheet__in{width:min(520px,100%);height:100%;overflow-y:auto;background:var(--surface);box-shadow:var(--shadow);padding:14px 4px 24px;animation:tdslide .18s ease}
+.tdsheet__h{display:flex;align-items:center;gap:8px;padding:4px 14px 10px;position:sticky;top:-14px;background:var(--surface);z-index:1}
+.tdsheet__x{margin-left:auto}
+.tdsheet .td__ed{grid-template-columns:repeat(2,minmax(0,1fr));padding:10px 14px 4px;border-top:1px solid var(--line-2)}
+@keyframes tdfade{from{opacity:0}to{opacity:1}}
+@keyframes tdslide{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}
+@media (max-width:640px){
+  .tdsheet{align-items:flex-end}
+  .tdsheet__in{height:auto;max-height:88vh;border-radius:22px 22px 0 0;padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+  .tdsheet .td__ed{grid-template-columns:minmax(0,1fr)}
+}
+
 </style>
 <header class="bar">
   <a class="brand" href="#home" aria-label="İRİA Bələdçisi, ana səhifə">
@@ -3431,15 +3475,28 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     return '<p class="mxhint">' + ic('info', 15) + '<span>' + T('Burada yazdıqlarınız hələ yalnız bu cihazda qalır və cümə e-poçtuna düşmür. ', 'What you enter here stays on this device for now and does not reach the Friday email. ') + '<a href="#sync">' + T('GitHub sinxronunu qoşun', 'Connect GitHub sync') + '</a>.</span></p>';
   }
 
+  function mrow(it) {   // one measure in one line: number, short title, status, deadline, next step
+    var p = itemPrj(it.no), du = dueInfo(it, p), r = resOf(p), nx = p && String(p.next || '').trim();
+    return '<a class="mrow due--' + du.cls + '" href="#t-' + esc(it.no) + '"><span class="mrow__no">' + esc(it.no) + '</span>' +
+      '<span class="mrow__b"><span class="mrow__t">' + esc(shortTitle(it.title, 90)) + '</span>' +
+      '<span class="mrow__m"><span class="mrow__due">' + ic('calendar-clock', 12) + esc(du.cls === 'ongoing' ? T('mütəmadi', 'ongoing') : du.txt) + '</span>' +
+      '<span class="mrow__res" title="' + T('İlkin · aralıq · yekun nəticə', 'Initial · interim · final result') + '">' + r.map(function (v) { return '<i class="rp' + v + '"></i>'; }).join('') + '</span>' +
+      (nx ? '<span class="mrow__nx">' + ic('arrow-right', 12) + esc(shortTitle(nx, 70)) + '</span>' : '<span class="mrow__nx is-empty">' + T('növbəti addım yoxdur', 'no next step') + '</span>') + '</span></span>' +
+      '<span class="mrow__st">' + (p && p.r ? '<span class="ragdot rag-' + p.r + '" title="' + esc(ragName(p.r)) + '"></span>' : '<span class="ragdot rag-x" title="' + T('status yoxdur', 'no status') + '"></span>') + ic('chevron-right', 16) + '</span></a>';
+  }
   function mxView() {
     var items = areaItems(), done = 0, late = 0;
     items.forEach(function (it) { var du = dueInfo(it, itemPrj(it.no)); if (du.cls === 'done') done++; if (du.cls === 'late') late++; });
     if (!items.length) return '<div class="emptybox">' + ic('star', 26) + T('Sahənizdə tədbir yoxdur. Plan cədvəlində «Sahəmdə» qutusu ilə əlavə edin.', 'No measures in your area. Add them with the «My area» tick in the Plan table.') + '</div>';
+    var rank = function (it) { var p = itemPrj(it.no), du = dueInfo(it, p); return (du.cls === 'late' ? 0 : p && p.r === 'r' ? 1 : du.cls === 'soon' ? 2 : du.cls === 'done' ? 5 : 3); };
+    var sorted = items.slice().sort(function (a, b) { var ea = dueInfo(a, itemPrj(a.no)).e, eb = dueInfo(b, itemPrj(b.no)).e; return (rank(a) - rank(b)) || ((ea ? +ea : 9e15) - (eb ? +eb : 9e15)); });
     return '<div class="mxsum"><span><b>' + items.length + '</b>' + T(' tədbir', ' measures') + '</span><span><b>' + done + '</b>' + T(' yekunu edilib', ' finished') + '</span>' + (late ? '<span class="is-late"><b>' + late + '</b>' + T(' müddəti bitib', ' past due') + '</span>' : '') +
-      '<a href="#plantable" data-pdir="area">' + ic('table-2', 14) + T('Plan cədvəlində', 'In the Plan table') + '</a></div>' + syncHint() + mcarousel(items) +
-      '<section class="sec"><div class="sec__h"><h2>' + ic('calendar-days', 18) + T('Zaman şkalası', 'Timeline') + '</h2><span>' + ic('chevrons-left-right', 13) + T('yana sürüşür', 'scrolls sideways') + '</span></div>' + gantt(items) + '</section>' +
+      '<a href="#plantable" data-pdir="area">' + ic('table-2', 14) + T('Plan cədvəlində', 'In the Plan table') + '</a></div>' + syncHint() +
+      '<div class="mrows">' + sorted.map(mrow).join('') + '</div>' +
+      '<details class="acc"><summary><span class="bd bd--sm ph-m1">' + ic('calendar-days', 16) + '</span><span class="acc__t">' + T('Zaman şkalası', 'Timeline') + '</span>' + ic('chevron-down', 18, 'chev') + '</summary><div class="acc__b">' + gantt(items) + '</div></details>' +
       '<details class="acc"><summary><span class="bd bd--sm ph-rf">' + ic('table-2', 16) + '</span><span class="acc__t">' + T('Cədvəl: icraçılar və nəticələr', 'Table: executors and results') + '</span>' + ic('chevron-down', 18, 'chev') + '</summary><div class="acc__b">' + mtable(items, { compact: true }) + '</div></details>';
   }
+
 
   /* one measure: the Plan's text, my tracking, and what the guide says about it */
   function measureItem(id) { return areaItem(id) || null; }
@@ -4673,6 +4730,13 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
       '<div class="tdk__m">' + (x.due ? '<span class="td__due b-' + (x.st === 'done' ? 'done' : tdBucket(x)) + '">' + ic('calendar-clock', 12) + esc(tdDueTxt(x)) + '</span>' : '') + (!mine ? '<span class="tdk__who">' + ic('user-check', 12) + esc(x.who) + '</span>' : '') +
       (nx ? '<button type="button" class="tdk__nx" data-tdnext="' + x.id + '" title="' + esc(T('Növbəti status', 'Next status')) + '">' + ic('arrow-right', 14) + '</button>' : '') + '</div></div>';
   }
+  function tdSheet() {   // the open task as a sheet over the board (right side on a laptop, from the bottom on a phone)
+    var x = tdUi.open && tdGet(tdUi.open); if (!x) return '';
+    return '<div class="tdsheet" role="dialog" aria-modal="true" aria-label="' + esc(x.t) + '"><div class="tdsheet__in">' +
+      '<div class="tdsheet__h"><span class="td__no">' + esc(x.no) + '</span><select class="td__st st-' + x.st + '" data-tdst="' + x.id + '" aria-label="Status">' + TD_ST.map(function (s) { return '<option value="' + s[0] + '"' + (s[0] === x.st ? ' selected' : '') + '>' + esc(T(s[1], s[2])) + '</option>'; }).join('') + '</select>' +
+      '<label class="td__due b-' + (x.st === 'done' ? 'done' : tdBucket(x)) + '">' + ic('calendar-clock', 13) + '<span>' + (x.due ? esc(tdDueTxt(x)) : T('tarix', 'date')) + '</span><input type="date" data-tddue="' + x.id + '" value="' + esc(x.due || '') + '" aria-label="' + T('Son tarix', 'Deadline') + '"></label>' +
+      '<button type="button" class="iconbtn tdsheet__x" data-tdsheetx aria-label="' + T('Bağla', 'Close') + '">' + ic('x', 18) + '</button></div>' + tdEdit(x) + '</div></div>';
+  }
   function tdBoardView(items) {
     var cols = [['todo', 'To Do', 'list-todo'], ['doing', 'In Progress', 'timer'], ['wait', T('Gözləyirəm', 'Waiting'), 'user-check'], ['done', 'Done', 'circle-check']];
     var wkAgo = tdAdd(today(), -14);
@@ -4685,7 +4749,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
       return '<section class="tdcol tdcol--' + c[0] + '" data-tddrop="' + (c[0] === 'wait' ? '' : c[0]) + '"><h3 class="tdcol__h">' + ic(c[2], 16) + esc(c[1]) + '<span class="tdg__n">' + list.length + '</span></h3>' +
         '<div class="tdcol__b">' + (list.map(tdCard).join('') || '<div class="tdcol__e">' + (c[0] === 'wait' ? T('Başqasından gözlənilən iş yoxdur', 'Nothing waiting on others') : T('Kartı bura sürüşdürün', 'Drag a card here')) + '</div>') + '</div>' +
         (c[0] === 'done' ? '<p class="tdcol__f">' + T('son 14 gün', 'last 14 days') + '</p>' : '') + '</section>';
-    }).join('') + '</div>';
+    }).join('') + '</div>' + tdSheet();
   }
   function todoView() {
     var all = tdAll(), items = tdFilter(all), s = tdStats(all), cats = tdCats();
@@ -4744,10 +4808,11 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     var t = ev.target; if (!(t instanceof Element)) return;
     var b;
     if ((b = t.closest('[data-tdopen]'))) { tdUi.open = tdUi.open === b.dataset.tdopen ? '' : b.dataset.tdopen; tdRepaint(); return; }
-    if ((b = t.closest('[data-tdboardopen]'))) { tdUi.open = b.dataset.tdboardopen; tdUi.view = 'list'; store.set('td:view', 'list'); tdUi.cat = ''; tdUi.who = ''; tdUi.showDone = true; paint({ keepScroll: false, then: function () { var el = document.querySelector('[data-tdid="' + tdUi.open + '"]'); if (el) { el.scrollIntoView({ block: 'center' }); flash(el); } } }); return; }
+    if ((b = t.closest('[data-tdboardopen]'))) { tdUi.open = b.dataset.tdboardopen; tdRepaint(); return; }   // the board stays; the task opens in a sheet over it
+    if (t.closest('[data-tdsheetx]') || (t.classList && t.classList.contains('tdsheet'))) { tdUi.open = ''; tdRepaint(); return; }
     if ((b = t.closest('[data-tdwho]'))) { tdUi.who = tdUi.who === b.dataset.tdwho ? '' : b.dataset.tdwho; tdRepaint(); return; }
     if ((b = t.closest('[data-tdcat]'))) { tdUi.cat = b.dataset.tdcat; tdRepaint(); return; }
-    if ((b = t.closest('[data-tdview]'))) { tdUi.view = b.dataset.tdview; store.set('td:view', tdUi.view); tdRepaint(); return; }
+    if ((b = t.closest('[data-tdview]'))) { tdUi.open = ''; tdUi.view = b.dataset.tdview; store.set('td:view', tdUi.view); tdRepaint(); return; }
     if (t.closest('[data-tdshowdone]')) { tdUi.showDone = !tdUi.showDone; tdRepaint(); return; }
     if ((b = t.closest('[data-tdnext]'))) { var it = tdGet(b.dataset.tdnext); if (it) tdPatch(it.id, { st: it.st === 'todo' ? 'doing' : 'done' }); tdRepaint(); return; }
     if ((b = t.closest('[data-tddel]'))) { var x = tdGet(b.dataset.tddel); if (x && window.confirm(T('Bu iş silinsin?\n', 'Delete this task?\n') + x.t)) { var dl = tdDel(); dl[x.id] = Date.now(); tdSave(tdAll().filter(function (y) { return y.id !== x.id; }), dl); tdUi.open = ''; tdRepaint(); } return; }
@@ -4778,6 +4843,7 @@ td.mt__area,th.mt__area,td.mt__add,th.mt__add{width:1%;text-align:center;white-s
     }
   });
   document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && tdUi.open && document.querySelector('.tdsheet')) { tdUi.open = ''; tdRepaint(); return; }
     var t = ev.target; if (!(t instanceof Element) || ev.key !== 'Enter') return;
     if (t.dataset && t.dataset.tdf === 't') { ev.preventDefault(); t.blur(); }
   });
